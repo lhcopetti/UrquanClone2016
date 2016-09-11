@@ -12,18 +12,19 @@ namespace GameObjects
 
 GameObject::GameObject()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 GameObject::~GameObject()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void GameObject::draw(sf::RenderWindow& window) const
 {
 	_drawingComponent->draw(window);
+}
+
+void GameObject::update(const sf::Time& deltaTime)
+{
 }
 
 void GameObject::setDrawing(Components::DrawingComponent* drawing)

@@ -8,6 +8,7 @@
 #ifndef INCLUDES_GAMEMACHINE_GAMESTATECONTROLLER_H_
 #define INCLUDES_GAMEMACHINE_GAMESTATECONTROLLER_H_
 
+#include <GameMachine/GameObjects/UpdatableFromTime.h>
 #include "GameMachine/GameState/GameState.h"
 #include <memory>
 
@@ -19,7 +20,7 @@ class Time;
 namespace GameMachine
 {
 
-class GameStateController
+class GameStateController : public UpdatableFromTime
 {
 public:
 	GameStateController();
@@ -28,7 +29,7 @@ public:
 	bool init(GameState::GameState* initialState);
 	void deinit();
 
-	void update(const sf::Time& time);
+	virtual void update(const sf::Time& time);
 	void draw(sf::RenderWindow& window);
 
 private:

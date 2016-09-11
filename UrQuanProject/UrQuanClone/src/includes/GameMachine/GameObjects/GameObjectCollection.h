@@ -8,19 +8,22 @@
 #ifndef INCLUDES_GAMEMACHINE_GAMEOBJECTS_GAMEOBJECTCOLLECTION_H_
 #define INCLUDES_GAMEMACHINE_GAMEOBJECTS_GAMEOBJECTCOLLECTION_H_
 
+#include <GameMachine/GameObjects/UpdatableFromTime.h>
 #include <vector>
 #include "GameObject.h"
 
 namespace GameObjects
 {
 
-class GameObjectCollection
+class GameObjectCollection : public UpdatableFromTime
 {
 public:
 	GameObjectCollection();
 	virtual ~GameObjectCollection();
 
 	void push(GameObjects::GameObject* gameObject);
+
+	virtual void update(const sf::Time& deltaTime);
 	void draw(sf::RenderWindow& window) const;
 
 private:

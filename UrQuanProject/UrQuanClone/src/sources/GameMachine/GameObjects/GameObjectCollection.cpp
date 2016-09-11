@@ -36,4 +36,10 @@ void GameObjectCollection::draw(sf::RenderWindow& window) const
 	}
 }
 
+void GameObjectCollection::update(const sf::Time& deltaTime)
+{
+	for (auto const& gO : _gObjects)
+		gO->update(deltaTime);
+}
+
 } /* namespace Components */
