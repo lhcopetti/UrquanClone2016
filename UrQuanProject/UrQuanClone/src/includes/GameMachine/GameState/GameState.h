@@ -8,8 +8,11 @@
 #ifndef INCLUDES_GAMEMACHINE_GAMESTATE_GAMESTATE_H_
 #define INCLUDES_GAMEMACHINE_GAMESTATE_GAMESTATE_H_
 
+#include <GameMachine/GameObjects/GameObjectCollection.h>
 #include "SFML/System/Time.hpp"
 #include "SFML/Graphics.hpp"
+
+#include <vector>
 
 namespace GameState
 {
@@ -20,8 +23,14 @@ public:
 	GameState();
 	virtual ~GameState();
 
+	virtual void onEnter() {}
+	virtual void onExit() {}
+
 	virtual void update(const sf::Time& deltaTime) = 0;
 	virtual void draw(sf::RenderWindow& window) = 0;
+
+protected:
+	GameObjects::GameObjectCollection _goCollection;
 };
 
 } /* namespace GameState */

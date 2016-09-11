@@ -19,6 +19,9 @@ public:
 	MainMenuState();
 	virtual ~MainMenuState();
 
+	virtual void onEnter();
+	virtual void onExit();
+
 	virtual void update(const sf::Time& deltaTime);
 	virtual void draw(sf::RenderWindow& window);
 

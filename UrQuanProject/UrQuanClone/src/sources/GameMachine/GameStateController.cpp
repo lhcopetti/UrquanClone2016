@@ -30,6 +30,8 @@ bool GameStateController::init(GameState::GameState* initialState)
 	}
 
 	_currentState = std::unique_ptr<GameState::GameState>(initialState);
+	_currentState->onEnter();
+
 	return true;
 }
 

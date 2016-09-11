@@ -7,6 +7,8 @@
 
 #include <GameMachine/GameState/MainMenuState.h>
 
+#include "GameMachine/GameObjects/Factory/BlueCircle.h"
+
 namespace GameState
 {
 
@@ -27,7 +29,20 @@ void MainMenuState::update(const sf::Time& deltaTime)
 
 void MainMenuState::draw(sf::RenderWindow& window)
 {
+
 	window.clear(sf::Color::Red);
+
+	_goCollection.draw(window);
+}
+
+
+void MainMenuState::onEnter()
+{
+	_goCollection.push(Components::BlueCircle::newBlueCircle());
+}
+
+void MainMenuState::onExit()
+{
 }
 
 } /* namespace GameState */
