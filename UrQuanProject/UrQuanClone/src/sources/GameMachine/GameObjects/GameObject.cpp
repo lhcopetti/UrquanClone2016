@@ -16,7 +16,8 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 		sf::Vector2f pos) :
 		_drawingComponent(
 				std::unique_ptr<Components::DrawingComponent>(
-						drawingComponent)), _alive(true), _pos(pos)
+						drawingComponent)), _alive(true), _pos(pos), _orientation(
+				false)
 {
 }
 
@@ -34,10 +35,17 @@ void GameObject::draw(sf::RenderWindow& window) const
 
 void GameObject::update(const sf::Time& deltaTime)
 {
+	doUpdate(deltaTime);
+
 	if (nullptr == _drawingComponent)
 		return;
 
 	_drawingComponent->update(*this);
+}
+
+void GameObject::doUpdate(const sf::Time& deltaTime)
+{
+	/* Default Empty Implementation */
 }
 
 void GameObject::setPosition(const sf::Vector2f& newPos)
@@ -57,6 +65,16 @@ void GameObject::handleInput(int userData)
 bool GameObject::isAlive() const
 {
 	return _alive;
+}
+
+void GameObject::setOrientation(float newOrientation)
+{
+	_orientation = newOrientation;
+}
+
+float GameObject::getOrientation() const
+{
+	return _orientation;
 }
 
 } /* namespace GameState */

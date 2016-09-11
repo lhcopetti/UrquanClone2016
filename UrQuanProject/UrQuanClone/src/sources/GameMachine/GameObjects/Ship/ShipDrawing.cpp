@@ -24,6 +24,10 @@ ShipDrawing::ShipDrawing(const std::string& resourcePath)
 	}
 
 	_sprite = sf::Sprite(_texture);
+
+	sf::IntRect rect = _sprite.getTextureRect();
+	sf::Vector2f newOrigin(rect.width / 2, rect.height / 2);
+	_sprite.setOrigin(newOrigin);
 }
 
 ShipDrawing::~ShipDrawing()
@@ -33,6 +37,7 @@ ShipDrawing::~ShipDrawing()
 void GameObjects::ShipDrawing::update(const GameObjects::GameObject& gameObject)
 {
 	_sprite.setPosition(gameObject.getPosition());
+	_sprite.setRotation(gameObject.getOrientation());
 }
 
 void GameObjects::ShipDrawing::draw(const GameObjects::GameObject& gameObject,

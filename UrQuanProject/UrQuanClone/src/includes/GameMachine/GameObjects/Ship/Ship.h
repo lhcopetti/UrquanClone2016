@@ -28,6 +28,8 @@ class Ship : public GameObject
 public:
 	Ship(Components::DrawingComponent* drawingComponent);
 	virtual ~Ship();
+
+	virtual void doUpdate(const sf::Time& deltaTime);
 };
 
 } /* namespace GameObjects */

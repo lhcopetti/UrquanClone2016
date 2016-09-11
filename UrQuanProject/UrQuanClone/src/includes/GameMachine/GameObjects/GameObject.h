@@ -14,7 +14,7 @@
 
 namespace Components
 {
-	class DrawingComponent;
+class DrawingComponent;
 }
 
 namespace GameObjects
@@ -27,22 +27,29 @@ public:
 			sf::Vector2f pos = sf::Vector2f(0.f, 0.f));
 	virtual ~GameObject();
 
-	virtual void update(const sf::Time& deltaTime);
+	void update(const sf::Time& deltaTime);
+	virtual void doUpdate(const sf::Time& deltaTime);
+
 	void draw(sf::RenderWindow& window) const;
 
 	void setPosition(const sf::Vector2f& newPos);
 	const sf::Vector2f& getPosition() const;
+
+	void setOrientation(float newOrientation);
+	float getOrientation() const;
 
 	void handleInput(int userData);
 
 	bool isAlive() const;
 
 protected:
+
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
 	bool _alive;
+	sf::Vector2f _pos;
+	float _orientation;
 
 private:
-	sf::Vector2f _pos;
 };
 
 } /* namespace GameState */

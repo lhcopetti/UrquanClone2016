@@ -19,4 +19,10 @@ Ship::~Ship()
 {
 }
 
+
+void GameObjects::Ship::doUpdate(const sf::Time& deltaTime)
+{
+	_orientation += 1;
+}
+
 } /* namespace GameObjects */
