@@ -10,6 +10,8 @@
 
 #include "SFML/System/Clock.hpp"
 
+#include "GameClone/GameController.h"
+
 namespace GameClone
 {
 
@@ -19,17 +21,20 @@ public:
 	UrquanClone();
 	virtual ~UrquanClone();
 
-	void start();
-	void shutdown();
+	bool init();
+	void deinit();
 
-	void update(const sf::Time& deltaTime);
-	void render();
+	void execute();
+
+	bool update(const sf::Time& deltaTime);
+	bool render();
 
 private:
-	void run(const sf::Time& elapsedTime, sf::Time& accumulator);
+	bool run(const sf::Time& elapsedTime, sf::Time& accumulator);
 	bool _running;
 
 	sf::Clock _clock;
+	GameClone::GameController _gameController;
 };
 
 } /* namespace GameClone */

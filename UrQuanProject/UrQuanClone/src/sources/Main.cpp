@@ -5,13 +5,10 @@
  *      Author: Pichau
  */
 
-
-
 #include <iostream>
 //#include "SFML/Graphics.hpp"
 
 #include "GameClone/UrquanClone.h"
-
 
 int main()
 {
@@ -19,9 +16,12 @@ int main()
 
 	GameClone::UrquanClone game;
 
-	game.start();
+	if (!game.init())
+		goto end;
 
-	game.shutdown();
+	game.execute();
+
+	game.deinit();
 
 //    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 //    sf::CircleShape shape(100.f);
@@ -41,5 +41,7 @@ int main()
 //        window.display();
 //    }
 
-    return 0;
+	end: std::cout << "This is the end! " << std::endl;
+
+	return 0;
 }

@@ -26,24 +26,36 @@ UrquanClone::~UrquanClone()
 {
 }
 
-void UrquanClone::start()
+bool UrquanClone::init()
 {
-	_running = true;
+	if (!_gameController.init())
+	{
+		std::cout << "Game Controller failed to initialize properly" << std::endl;
+		return false;
+	}
 
+	return true;
+}
+
+void UrquanClone::execute()
+{
 	sf::Time elapsedTime = sf::Time::Zero;
 	sf::Time accumulator = sf::Time::Zero;
 
 	_clock.restart();
 
+	_running = true;
 	while (_running)
 	{
-		run(elapsedTime, accumulator);
+		if (!run(elapsedTime, accumulator))
+			return;
+
 		elapsedTime = _clock.getElapsedTime();
 		_clock.restart();
 	}
 }
 
-void UrquanClone::run(const sf::Time& elapsedTime, sf::Time& accumulator)
+bool UrquanClone::run(const sf::Time& elapsedTime, sf::Time& accumulator)
 {
 	const sf::Time frameTime =
 			elapsedTime > sf::seconds(MAX_FRAME_UPDATE_INTERVAL) ?
@@ -53,30 +65,35 @@ void UrquanClone::run(const sf::Time& elapsedTime, sf::Time& accumulator)
 
 	while (accumulator.asSeconds() >= DELTA_TIME)
 	{
-		update(sf::seconds(DELTA_TIME));
+		if (!update(sf::seconds(DELTA_TIME)))
+			return false;
+
 		accumulator -= sf::seconds(DELTA_TIME);
 	}
 
-	render();
+	if (!render())
+		return false;
 
-	std::cout << "Elapsed time: " << elapsedTime.asSeconds() << " seconds"
-			<< std::endl;
-	sleep(0.15);
+	return true;
 }
 
-void UrquanClone::shutdown()
+void UrquanClone::deinit()
 {
 	std::cout << "Game shutdown!" << std::endl;
 }
 
-void UrquanClone::update(const sf::Time& deltaTime)
+bool UrquanClone::update(const sf::Time& deltaTime)
 {
-	std::cout << "Calling update!  - " << deltaTime.asMilliseconds() << std::endl;
+	if (!_gameController.update(deltaTime))
+		return false;
+
+	return true;
 }
 
-void UrquanClone::render()
+bool UrquanClone::render()
 {
-	std::cout << "Calling Render!  - " << std::endl;
+	return true;
 }
 
 } /* namespace GameClone */
+
