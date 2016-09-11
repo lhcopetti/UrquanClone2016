@@ -8,6 +8,8 @@
 #include "GameClone/GameController.h"
 #include "SFML/System/Time.hpp"
 
+#include "GameMachine/GameState/MainMenuState.h"
+
 namespace GameClone
 {
 
@@ -25,7 +27,8 @@ bool GameController::init()
 	_window.create(sf::VideoMode(1366, 768), "Urquan Clone");
 	_window.clear(sf::Color::Blue);
 
-//	if (!_stateController.init())
+	if (!_stateController.init(new GameState::MainMenuState))
+		return false;
 
 	return true;
 }
@@ -48,6 +51,9 @@ bool GameController::update(const sf::Time& elapsedTime)
 
 bool GameController::draw()
 {
+	_window.clear(sf::Color::Black);
+	_stateController.draw(_window);
+	_window.display();
 	return true;
 }
 

@@ -9,6 +9,7 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATE_GAMESTATE_H_
 
 #include "SFML/System/Time.hpp"
+#include "SFML/Graphics.hpp"
 
 namespace GameState
 {
@@ -20,7 +21,7 @@ public:
 	virtual ~GameState();
 
 	virtual void update(const sf::Time& deltaTime) = 0;
-	virtual void draw() = 0;
+	virtual void draw(sf::RenderWindow& window) = 0;
 };
 
 } /* namespace GameState */

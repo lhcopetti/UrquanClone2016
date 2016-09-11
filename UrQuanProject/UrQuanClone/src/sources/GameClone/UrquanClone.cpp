@@ -92,7 +92,7 @@ bool UrquanClone::update(const sf::Time& deltaTime)
 
 bool UrquanClone::render()
 {
-	return true;
+	return _gameController.draw();
 }
 
 } /* namespace GameClone */

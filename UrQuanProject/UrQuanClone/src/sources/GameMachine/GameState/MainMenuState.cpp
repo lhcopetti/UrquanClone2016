@@ -25,9 +25,9 @@ void MainMenuState::update(const sf::Time& deltaTime)
 {
 }
 
-void MainMenuState::draw()
+void MainMenuState::draw(sf::RenderWindow& window)
 {
-
+	window.clear(sf::Color::Red);
 }
 
 } /* namespace GameState */

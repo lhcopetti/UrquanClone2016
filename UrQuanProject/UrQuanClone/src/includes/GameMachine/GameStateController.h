@@ -9,6 +9,7 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATECONTROLLER_H_
 
 #include "GameMachine/GameState/GameState.h"
+#include <memory>
 
 namespace sf
 {
@@ -28,10 +29,11 @@ public:
 	void deinit();
 
 	void update(const sf::Time& time);
-	void draw();
+	void draw(sf::RenderWindow& window);
 
 private:
 
+	std::unique_ptr<GameState::GameState> _currentState;
 };
 
 } /* namespace GameMachine */

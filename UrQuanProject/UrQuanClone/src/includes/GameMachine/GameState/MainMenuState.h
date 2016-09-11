@@ -20,7 +20,7 @@ public:
 	virtual ~MainMenuState();
 
 	virtual void update(const sf::Time& deltaTime);
-	virtual void draw();
+	virtual void draw(sf::RenderWindow& window);
 
 };
 
