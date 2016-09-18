@@ -21,7 +21,12 @@ BlueDotComponent::~BlueDotComponent()
 	// TODO Auto-generated destructor stub
 }
 
-void BlueDotComponent::draw(sf::RenderWindow& window) const
+void BlueDotComponent::update(const GameObjects::GameObject& gameObject)
+{
+
+}
+
+void BlueDotComponent::draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const
 {
 	sf::CircleShape circle(10);
 	circle.setFillColor(sf::Color::White);

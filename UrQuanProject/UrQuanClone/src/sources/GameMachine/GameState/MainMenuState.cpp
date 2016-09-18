@@ -8,14 +8,14 @@
 #include <GameMachine/GameState/MainMenuState.h>
 
 #include "GameMachine/GameObjects/Factory/BlueCircle.h"
+#include "GameMachine/Components/UI/ColorBoard.h"
 
 namespace GameState
 {
 
-MainMenuState::MainMenuState()
+MainMenuState::MainMenuState(const sf::Font& font) :
+		_defaultFont(font)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 MainMenuState::~MainMenuState()
@@ -25,6 +25,7 @@ MainMenuState::~MainMenuState()
 
 void MainMenuState::update(const sf::Time& deltaTime)
 {
+	_goCollection.update(deltaTime);
 }
 
 void MainMenuState::draw(sf::RenderWindow& window)
@@ -35,14 +36,30 @@ void MainMenuState::draw(sf::RenderWindow& window)
 	_goCollection.draw(window);
 }
 
-
 void MainMenuState::onEnter()
 {
 	_goCollection.push(Components::BlueCircle::newBlueCircle());
+
+	sf::Text text;
+	text.setFont(getDefaultFont());
+	text.setFillColor(sf::Color::Black);
+	text.setString("Start Game");
+	Components::DrawingComponent* drawing = new Components::ColorBoard(
+			text);
+
+	GameObjects::GameObject* board = new GameObjects::GameObject(drawing);
+	board->setPosition(sf::Vector2f(100.f, 100.f));
+
+	_goCollection.push(board);
 }
 
 void MainMenuState::onExit()
 {
 }
 
+const sf::Font& MainMenuState::getDefaultFont() const
+{
+	return _defaultFont;
+}
 } /* namespace GameState */
+

@@ -41,6 +41,7 @@ private:
 	GameMachine::InputController _inputController;
 
 	sf::RenderWindow _window;
+	sf::Font _defaultFont;
 };
 
 } /* namespace GameClone */

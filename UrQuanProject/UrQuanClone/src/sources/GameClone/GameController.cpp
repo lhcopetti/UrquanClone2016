@@ -5,6 +5,8 @@
  *      Author: Pichau
  */
 
+#include <iostream>
+
 #include "GameClone/GameController.h"
 #include "SFML/System/Time.hpp"
 
@@ -27,8 +29,15 @@ bool GameController::init()
 	_window.create(sf::VideoMode(1366, 768), "Urquan Clone");
 	_window.clear(sf::Color::Blue);
 
-	if (!_stateController.init(new GameState::MainMenuState))
+	if (!_defaultFont.loadFromFile("ARIAL.TTF"))
+	{
+		std::cout << "Failed to load font Arial.ttf" << std::endl;
 		return false;
+	}
+
+	if (!_stateController.init(new GameState::MainMenuState(_defaultFont)))
+		return false;
+
 
 	return true;
 }
@@ -48,6 +57,8 @@ bool GameController::update(const sf::Time& elapsedTime)
 
 	if (!_inputController.update(elapsedTime))
 		return false;
+
+	_stateController.update(elapsedTime);
 
 	return true;
 }

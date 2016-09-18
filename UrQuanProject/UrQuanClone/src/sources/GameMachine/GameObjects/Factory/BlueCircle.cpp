@@ -24,8 +24,7 @@ BlueCircle::~BlueCircle()
 
 GameObjects::GameObject* BlueCircle::newBlueCircle()
 {
-	GameObjects::GameObject* gameObject = new GameObjects::GameObject();
-	gameObject->setDrawing(new BlueDotComponent);
+	GameObjects::GameObject* gameObject = new GameObjects::GameObject(new BlueDotComponent);
 	return gameObject;
 }
 

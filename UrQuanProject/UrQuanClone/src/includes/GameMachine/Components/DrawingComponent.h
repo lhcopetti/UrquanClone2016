@@ -10,6 +10,11 @@
 
 #include "SFML/Graphics.hpp"
 
+namespace GameObjects
+{
+	class GameObject;
+}
+
 namespace Components
 {
 
@@ -19,7 +24,8 @@ public:
 	DrawingComponent();
 	virtual ~DrawingComponent();
 
-	virtual void draw(sf::RenderWindow& window) const;
+	virtual void update(const GameObjects::GameObject& gameObject) = 0;
+	virtual void draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const = 0;
 };
 
 } /* namespace Components */

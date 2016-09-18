@@ -57,6 +57,8 @@ void UrquanClone::execute()
 
 bool UrquanClone::run(const sf::Time& elapsedTime, sf::Time& accumulator)
 {
+	bool updatedThisFrame = false;
+
 	const sf::Time frameTime =
 			elapsedTime > sf::seconds(MAX_FRAME_UPDATE_INTERVAL) ?
 					sf::seconds(MAX_FRAME_UPDATE_INTERVAL) : elapsedTime;
@@ -69,7 +71,14 @@ bool UrquanClone::run(const sf::Time& elapsedTime, sf::Time& accumulator)
 			return false;
 
 		accumulator -= sf::seconds(DELTA_TIME);
+
+		updatedThisFrame = true;
 	}
+
+	/* Do not draw until there is a new update */
+	/* Draw methods cannot be called before the first update */
+	if (!updatedThisFrame)
+		return true;
 
 	if (!render())
 		return false;

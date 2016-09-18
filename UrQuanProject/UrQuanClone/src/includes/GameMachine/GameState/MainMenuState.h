@@ -13,10 +13,10 @@
 namespace GameState
 {
 
-class MainMenuState : public GameState
+class MainMenuState: public GameState
 {
 public:
-	MainMenuState();
+	MainMenuState(const sf::Font& font);
 	virtual ~MainMenuState();
 
 	virtual void onEnter();
@@ -24,6 +24,10 @@ public:
 
 	virtual void update(const sf::Time& deltaTime);
 	virtual void draw(sf::RenderWindow& window);
+
+	const sf::Font& getDefaultFont() const;
+private:
+	const sf::Font& _defaultFont;
 
 };
 

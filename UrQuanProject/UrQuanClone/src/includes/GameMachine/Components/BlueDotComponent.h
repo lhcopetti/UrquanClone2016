@@ -19,7 +19,8 @@ public:
 	BlueDotComponent();
 	virtual ~BlueDotComponent();
 
-	virtual void draw(sf::RenderWindow& window) const;
+	virtual void update(const GameObjects::GameObject& gameObject);
+	virtual void draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const;
 };
 
 } /* namespace Components */

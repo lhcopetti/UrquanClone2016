@@ -22,7 +22,3 @@ DrawingComponent::~DrawingComponent()
 }
 
 } /* namespace Components */
-
-void Components::DrawingComponent::draw(sf::RenderWindow& window) const
-{
-}
