@@ -36,6 +36,15 @@ void MainMenuState::draw(sf::RenderWindow& window)
 	_goCollection.draw(window);
 }
 
+sf::Text MainMenuState::getDefaultSfText(const std::string& text)
+{
+	sf::Text sfText;
+	sfText.setFont(getDefaultFont());
+	sfText.setFillColor(sf::Color::Black);
+	sfText.setString(text);
+	return sfText;
+}
+
 void MainMenuState::onEnter()
 {
 	_goCollection.push(Components::BlueCircle::newBlueCircle());
@@ -44,13 +53,20 @@ void MainMenuState::onEnter()
 	text.setFont(getDefaultFont());
 	text.setFillColor(sf::Color::Black);
 	text.setString("Start Game");
-	Components::DrawingComponent* drawing = new Components::ColorBoard(
-			text);
+	GameObjects::GameObject* startMenu = new GameObjects::GameObject(
+			new Components::ColorBoard(getDefaultSfText("Start Game")));
+	startMenu->setPosition(sf::Vector2f(100.f, 100.f));
+	_goCollection.push(startMenu);
 
-	GameObjects::GameObject* board = new GameObjects::GameObject(drawing);
-	board->setPosition(sf::Vector2f(100.f, 100.f));
+	GameObjects::GameObject* creditsMenu = new GameObjects::GameObject(
+			new Components::ColorBoard(getDefaultSfText("Credits")));
+	creditsMenu->setPosition(sf::Vector2f(100.f, 200.f));
+	_goCollection.push(creditsMenu);
 
-	_goCollection.push(board);
+	GameObjects::GameObject* quitMenu = new GameObjects::GameObject(
+			new Components::ColorBoard(getDefaultSfText("Quit Game")));
+	quitMenu->setPosition(sf::Vector2f(100.f, 300.f));
+	_goCollection.push(quitMenu);
 }
 
 void MainMenuState::onExit()

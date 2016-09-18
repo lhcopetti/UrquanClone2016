@@ -25,6 +25,7 @@ public:
 	virtual void update(const sf::Time& deltaTime);
 	virtual void draw(sf::RenderWindow& window);
 
+	sf::Text getDefaultSfText(const std::string& text);
 	const sf::Font& getDefaultFont() const;
 private:
 	const sf::Font& _defaultFont;
