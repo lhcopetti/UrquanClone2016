@@ -50,8 +50,7 @@ void UrquanClone::execute()
 		if (!run(elapsedTime, accumulator))
 			return;
 
-		elapsedTime = _clock.getElapsedTime();
-		_clock.restart();
+		elapsedTime = _clock.restart();
 	}
 }
 
@@ -60,7 +59,7 @@ bool UrquanClone::run(const sf::Time& elapsedTime, sf::Time& accumulator)
 	bool updatedThisFrame = false;
 
 	const sf::Time frameTime =
-			elapsedTime > sf::seconds(MAX_FRAME_UPDATE_INTERVAL) ?
+			elapsedTime.asSeconds() > MAX_FRAME_UPDATE_INTERVAL ?
 					sf::seconds(MAX_FRAME_UPDATE_INTERVAL) : elapsedTime;
 
 	accumulator += frameTime;
