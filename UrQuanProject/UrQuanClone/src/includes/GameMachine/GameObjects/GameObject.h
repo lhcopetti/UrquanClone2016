@@ -9,6 +9,7 @@
 #define SOURCES_GAMEMACHINE_GAMEOBJECT_GAMEOBJECT_H_
 
 #include <GameMachine/GameObjects/UpdatableFromTime.h>
+#include <GameMachine/GameObjects/Inputs/InputHandler.h>
 #include "SFML/Graphics.hpp"
 
 namespace Components
@@ -19,7 +20,7 @@ namespace Components
 namespace GameObjects
 {
 
-class GameObject: public UpdatableFromTime
+class GameObject: public UpdatableFromTime, public Inputs::InputHandler
 {
 public:
 	GameObject(Components::DrawingComponent* drawingComponent = nullptr,
@@ -30,7 +31,10 @@ public:
 	void draw(sf::RenderWindow& window) const;
 
 	void setPosition(const sf::Vector2f& newPos);
-	const sf::Vector2f getPosition() const { return _pos; }
+	const sf::Vector2f getPosition() const;
+
+	void handleInput(Inputs::InputAction inputAction);
+
 
 private:
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;

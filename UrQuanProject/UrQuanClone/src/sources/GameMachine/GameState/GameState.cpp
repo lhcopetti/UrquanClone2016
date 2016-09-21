@@ -21,4 +21,11 @@ GameState::~GameState()
 	// TODO Auto-generated destructor stub
 }
 
+void GameState::update(const sf::Time& deltaTime)
+{
+	_goCollection.update(deltaTime);
+	_inputController.update(deltaTime);
+	doUpdate(deltaTime);
+}
+
 } /* namespace GameState */

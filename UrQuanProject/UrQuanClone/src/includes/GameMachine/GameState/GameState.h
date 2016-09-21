@@ -9,6 +9,9 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATE_GAMESTATE_H_
 
 #include <GameMachine/GameObjects/GameObjectCollection.h>
+#include <GameMachine/InputController.h>
+#include <GameMachine/GameStateController.h>
+
 #include "SFML/System/Time.hpp"
 #include "SFML/Graphics.hpp"
 
@@ -19,6 +22,8 @@ namespace GameState
 
 class GameState
 {
+	friend GameMachine::GameStateController;
+
 public:
 	GameState();
 	virtual ~GameState();
@@ -26,11 +31,17 @@ public:
 	virtual void onEnter() {}
 	virtual void onExit() {}
 
-	virtual void update(const sf::Time& deltaTime) = 0;
+	virtual void doUpdate(const sf::Time& deltaTime) = 0;
+
 	virtual void draw(sf::RenderWindow& window) = 0;
 
 protected:
 	GameObjects::GameObjectCollection _goCollection;
+	GameMachine::InputController _inputController;
+
+private:
+	void update(const sf::Time& deltaTime);
+
 };
 
 } /* namespace GameState */

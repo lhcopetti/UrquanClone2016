@@ -55,9 +55,6 @@ bool GameController::update(const sf::Time& elapsedTime)
 	if (!pollWindowEvents())
 		return false;
 
-	if (!_inputController.update(elapsedTime))
-		return false;
-
 	_stateController.update(elapsedTime);
 
 	return true;

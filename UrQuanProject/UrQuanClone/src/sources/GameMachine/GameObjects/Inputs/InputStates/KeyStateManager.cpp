@@ -14,7 +14,6 @@ namespace Inputs
 KeyStateManager::KeyStateManager(sf::Keyboard::Key key) :
 		_currentState(new Inputs::ReleasedState(key))
 {
-	_currentState->onEnter();
 }
 
 KeyStateManager::~KeyStateManager()

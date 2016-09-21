@@ -23,6 +23,8 @@ public:
 
 private:
 	KeyState* _currentState;
+
+//	std::map<>
 };
 
 } /* namespace GameMachine */

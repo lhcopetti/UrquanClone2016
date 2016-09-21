@@ -6,26 +6,48 @@
  */
 
 #include <GameMachine/GameState/MainMenuState.h>
+#include <GameMachine/GameObjects/Inputs/InputAction.h>
 
 #include "GameMachine/GameObjects/Factory/BlueCircle.h"
 #include "GameMachine/Components/UI/ColorBoard.h"
+#include <iostream>
 
 namespace GameState
 {
 
 MainMenuState::MainMenuState(const sf::Font& font) :
-		_defaultFont(font)
+		_defaultFont(font),
+		_startMenu(nullptr),
+		_testCounter(0),
+		_registered(false)
 {
 }
 
 MainMenuState::~MainMenuState()
 {
-	// TODO Auto-generated destructor stub
 }
 
-void MainMenuState::update(const sf::Time& deltaTime)
+void MainMenuState::doUpdate(const sf::Time& deltaTime)
 {
-	_goCollection.update(deltaTime);
+	_testCounter += deltaTime.asMilliseconds();
+			Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::PRESS);
+
+	if (_testCounter > 5 * 1000) // 20 Seconds
+	{
+		if (!_registered)
+		{
+			std::cout << "Registering" << std::endl;
+
+			_inputController.registerAsListener(inpA, this);
+		}
+		else
+		{
+			std::cout << "Unregistering" << std::endl;
+			_inputController.unregisterAsListener(inpA, this);
+		}
+		_testCounter = 0;
+		_registered ^= true;
+	}
 }
 
 void MainMenuState::draw(sf::RenderWindow& window)
@@ -53,10 +75,10 @@ void MainMenuState::onEnter()
 	text.setFont(getDefaultFont());
 	text.setFillColor(sf::Color::Black);
 	text.setString("Start Game");
-	GameObjects::GameObject* startMenu = new GameObjects::GameObject(
+	_startMenu = new GameObjects::GameObject(
 			new Components::ColorBoard(getDefaultSfText("Start Game")));
-	startMenu->setPosition(sf::Vector2f(100.f, 100.f));
-	_goCollection.push(startMenu);
+	_startMenu->setPosition(sf::Vector2f(100.f, 100.f));
+	_goCollection.push(_startMenu);
 
 	GameObjects::GameObject* creditsMenu = new GameObjects::GameObject(
 			new Components::ColorBoard(getDefaultSfText("Credits")));
@@ -77,5 +99,11 @@ const sf::Font& MainMenuState::getDefaultFont() const
 {
 	return _defaultFont;
 }
+
+void MainMenuState::handleInput(Inputs::InputAction inputAction)
+{
+	std::cout << "Handling event: Key: " << inputAction.key() << " Type: " << inputAction.inputType() << std::endl;
+}
+
 } /* namespace GameState */
 

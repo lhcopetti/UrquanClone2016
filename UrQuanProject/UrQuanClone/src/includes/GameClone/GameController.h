@@ -38,7 +38,6 @@ public:
 private:
 
 	GameMachine::GameStateController _stateController;
-	GameMachine::InputController _inputController;
 
 	sf::RenderWindow _window;
 	sf::Font _defaultFont;

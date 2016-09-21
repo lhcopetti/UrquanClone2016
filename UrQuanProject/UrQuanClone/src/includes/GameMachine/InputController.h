@@ -10,8 +10,17 @@
 
 #include <GameMachine/GameObjects/Inputs/InputStates/KeyStateManager.h>
 #include <GameMachine/GameObjects/Inputs/KeyInput.h>
+#include "GameMachine/GameObjects/Inputs/InputType.h"
+#include "GameMachine/GameObjects/Inputs/InputAction.h"
+#include "GameMachine/GameObjects/Inputs/InputHandler.h"
+#include <vector>
 
 using Inputs::KeyStateManager;
+
+namespace GameObjects
+{
+class GameObject;
+}
 
 namespace GameMachine
 {
@@ -25,10 +34,13 @@ public:
 
 	virtual ~InputController();
 
+	void registerAsListener(Inputs::InputAction inputAction,
+			Inputs::InputHandler* inpHandler);
+	void unregisterAsListener(Inputs::InputAction inputAction, Inputs::InputHandler* inpHandler);
+
 private:
 
-	Inputs::KeyInput _inputKey;
-
+	std::vector<Inputs::KeyInput*> _inputKeys;
 };
 
 } /* namespace GameMachine */

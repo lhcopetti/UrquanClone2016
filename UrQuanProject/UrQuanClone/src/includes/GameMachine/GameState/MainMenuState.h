@@ -9,11 +9,13 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATE_MAINMENUSTATE_H_
 
 #include <GameMachine/GameState/GameState.h>
+#include <GameMachine/Components/UI/GameMenu.h>
+#include <GameMachine/GameObjects/Inputs/InputHandler.h>
 
 namespace GameState
 {
 
-class MainMenuState: public GameState
+class MainMenuState: public GameState, public Inputs::InputHandler
 {
 public:
 	MainMenuState(const sf::Font& font);
@@ -22,13 +24,25 @@ public:
 	virtual void onEnter();
 	virtual void onExit();
 
-	virtual void update(const sf::Time& deltaTime);
+	virtual void doUpdate(const sf::Time& deltaTime);
 	virtual void draw(sf::RenderWindow& window);
 
 	sf::Text getDefaultSfText(const std::string& text);
 	const sf::Font& getDefaultFont() const;
+
+	virtual void handleInput(Inputs::InputAction inputAction);
+
 private:
+
+	enum GameOptions { START_GAME, SHOW_CREDITS, QUIT_GAME };
+
+	Components::GameMenu<GameOptions> t;
+
 	const sf::Font& _defaultFont;
+	GameObjects::GameObject* _startMenu;
+
+	int _testCounter;
+	bool _registered;
 
 };
 

@@ -6,6 +6,7 @@
  */
 
 #include <GameMachine/GameStateController.h>
+#include <GameMachine/GameState/GameState.h>
 #include "SFML/System/Time.hpp"
 #include <iostream>
 

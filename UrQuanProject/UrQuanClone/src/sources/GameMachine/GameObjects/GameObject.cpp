@@ -6,7 +6,9 @@
  */
 
 #include <GameMachine/GameObjects/GameObject.h>
+#include <GameMachine/GameObjects/Inputs/InputAction.h>
 #include "GameMachine/Components/DrawingComponent.h"
+
 
 namespace GameObjects
 {
@@ -40,6 +42,15 @@ void GameObject::update(const sf::Time& deltaTime)
 void GameObject::setPosition(const sf::Vector2f& newPos)
 {
 	_pos = newPos;
+}
+
+const sf::Vector2f GameObject::getPosition() const
+{
+	return _pos;
+}
+
+void GameObject::handleInput(Inputs::InputAction inputAction)
+{
 }
 
 } /* namespace GameState */

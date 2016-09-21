@@ -9,10 +9,15 @@
 #define INCLUDES_GAMEMACHINE_GAMEOBJECTS_INPUTS_KEYINPUT_H_
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/system/Time.hpp>
+
 #include "GameMachine/GameObjects/Inputs/InputStates/KeyStateManager.h"
+#include <GameMachine/GameObjects/Inputs/InputType.h>
+
 
 namespace Inputs
 {
+
+class InputHandler;
 
 class KeyInput
 {
@@ -22,10 +27,18 @@ public:
 
 	void update(const sf::Time& deltaTime);
 
+	const sf::Keyboard::Key key() const;
+
+	void registerListener(Inputs::InputType type, Inputs::InputHandler* handler);
+	void unregisterListener(Inputs::InputType type, Inputs::InputHandler* handler);
 
 private:
 	sf::Keyboard::Key _key;
 	KeyStateManager _stateManager;
+
+
+	Inputs::InputType _inputType;
+	Inputs::InputHandler* _inputHandler;
 
 };
 

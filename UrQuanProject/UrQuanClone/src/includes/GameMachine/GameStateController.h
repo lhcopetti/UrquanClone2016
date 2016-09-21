@@ -9,12 +9,17 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATECONTROLLER_H_
 
 #include <GameMachine/GameObjects/UpdatableFromTime.h>
-#include "GameMachine/GameState/GameState.h"
 #include <memory>
 
 namespace sf
 {
 class Time;
+class RenderWindow;
+}
+
+namespace GameState
+{
+class GameState;
 }
 
 namespace GameMachine
