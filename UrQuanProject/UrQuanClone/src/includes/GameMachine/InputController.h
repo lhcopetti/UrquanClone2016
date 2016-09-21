@@ -40,6 +40,8 @@ public:
 
 private:
 
+	Inputs::KeyInput* retrieveOrNew(const Inputs::InputAction& inputAction, bool* isNew = nullptr);
+
 	std::vector<Inputs::KeyInput*> _inputKeys;
 };
 

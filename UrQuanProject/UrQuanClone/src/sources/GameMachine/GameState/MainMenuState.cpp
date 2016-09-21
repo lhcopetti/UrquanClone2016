@@ -30,20 +30,21 @@ MainMenuState::~MainMenuState()
 void MainMenuState::doUpdate(const sf::Time& deltaTime)
 {
 	_testCounter += deltaTime.asMilliseconds();
-			Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::PRESS);
+
+	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::PRESS);
+	Inputs::InputAction inpB(sf::Keyboard::F, Inputs::InputType::RELEASE);
 
 	if (_testCounter > 5 * 1000) // 20 Seconds
 	{
 		if (!_registered)
 		{
-			std::cout << "Registering" << std::endl;
-
 			_inputController.registerAsListener(inpA, this);
+			_inputController.registerAsListener(inpB, this);
 		}
 		else
 		{
-			std::cout << "Unregistering" << std::endl;
 			_inputController.unregisterAsListener(inpA, this);
+			_inputController.unregisterAsListener(inpB, this);
 		}
 		_testCounter = 0;
 		_registered ^= true;

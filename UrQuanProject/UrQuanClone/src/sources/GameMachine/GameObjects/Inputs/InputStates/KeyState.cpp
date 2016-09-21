@@ -10,13 +10,24 @@
 namespace Inputs
 {
 
-KeyState::KeyState(sf::Keyboard::Key key) :
-		_key(key)
+KeyState::KeyState(sf::Keyboard::Key key, InputType type) :
+		_key(key),
+		_type(type)
 {
 }
 
 KeyState::~KeyState()
 {
+}
+
+InputType KeyState::type() const
+{
+	return _type;
+}
+
+sf::Keyboard::Key KeyState::key() const
+{
+	return _key;
 }
 
 } /* namespace GameMachine */

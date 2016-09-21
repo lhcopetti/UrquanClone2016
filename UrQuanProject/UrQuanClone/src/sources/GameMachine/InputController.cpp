@@ -7,16 +7,14 @@
 
 #include <GameMachine/InputController.h>
 
+#include <algorithm>
+#include <iostream>
+
 namespace GameMachine
 {
 
 InputController::InputController()
 {
-	_inputKeys.push_back(new Inputs::KeyInput(sf::Keyboard::Key::W));
-//	_inputKeys.push_back(Inputs::KeyInput(sf::Keyboard::Key::A));
-//	_inputKeys.push_back(Inputs::KeyInput(sf::Keyboard::Key::S));
-//	_inputKeys.push_back(Inputs::KeyInput(sf::Keyboard::Key::D));
-//	_inputKeys.push_back(Inputs::KeyInput(sf::Keyboard::Key::BackSpace));
 }
 
 bool InputController::update(const sf::Time& deltaTime)
@@ -33,17 +31,47 @@ InputController::~InputController()
 void InputController::registerAsListener(Inputs::InputAction inputAction,
 		Inputs::InputHandler* inpHandler)
 {
-	for (auto* inpKey : _inputKeys)
-		if (inpKey->key() == inputAction.key())
-			inpKey->registerListener(inputAction.inputType(), inpHandler);
+	bool isNew = false;
+	Inputs::KeyInput* inputKey = retrieveOrNew(inputAction, &isNew);
+
+	if (isNew)
+		_inputKeys.push_back(inputKey);
+
+	inputKey->registerListener(inputAction.inputType(), inpHandler);
 }
 
 void InputController::unregisterAsListener(Inputs::InputAction inputAction,
 		Inputs::InputHandler* inpHandler)
 {
 	for (auto* inpKey : _inputKeys)
+	{
 		if (inpKey->key() == inputAction.key())
+		{
 			inpKey->unregisterListener(inputAction.inputType(), inpHandler);
+			return;
+		}
+	}
+
+	std::cout << "Attempt to unregister a Listener Failed. Input: "
+			<< inputAction.key() << " Type: " << inputAction.inputType()
+			<< std::endl;
+}
+
+Inputs::KeyInput* InputController::retrieveOrNew(
+		const Inputs::InputAction& inputAction, bool* isNew)
+{
+	auto found = std::find_if(_inputKeys.begin(), _inputKeys.end(),
+				[&, inputAction] (Inputs::KeyInput* kI)
+				{	return kI->key() == inputAction.key();});
+
+	if (found == _inputKeys.end() && nullptr != isNew)
+	{
+		*isNew = true;
+		return new Inputs::KeyInput(inputAction.key());
+	}
+
+	*isNew = false;
+	return *found;
 }
 
 } /* namespace GameMachine */

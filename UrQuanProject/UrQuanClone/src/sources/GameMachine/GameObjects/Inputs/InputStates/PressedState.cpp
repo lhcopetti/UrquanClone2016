@@ -13,9 +13,8 @@ namespace Inputs
 {
 
 PressedState::PressedState(sf::Keyboard::Key key) :
-		KeyState(key)
+		KeyState(key, InputType::PRESS)
 {
-	// TODO Auto-generated constructor stub
 
 }
 
@@ -42,5 +41,6 @@ void PressedState::onEnter()
 void PressedState::onExit()
 {
 }
+
 
 } /* namespace Inputs */
