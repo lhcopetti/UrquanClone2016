@@ -13,7 +13,7 @@ namespace Inputs
 {
 
 PressedState::PressedState(sf::Keyboard::Key key) :
-		KeyState(key, InputType::PRESS)
+		KeyState(key, InputType::INPUT_PRESS)
 {
 
 }

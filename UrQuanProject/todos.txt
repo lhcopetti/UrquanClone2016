@@ -1,0 +1,3 @@
+Use typedefs for std::vector<Inputs::InputHandler*> ex
+
+Use HighOrderMacro to print on screen the name of InputTypes (Press, Release, etc)

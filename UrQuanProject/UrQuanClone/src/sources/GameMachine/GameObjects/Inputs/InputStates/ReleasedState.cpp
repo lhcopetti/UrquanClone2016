@@ -14,7 +14,7 @@ namespace Inputs
 {
 
 ReleasedState::ReleasedState(sf::Keyboard::Key key) :
-		KeyState(key, InputType::RELEASE)
+		KeyState(key, InputType::INPUT_RELEASE)
 {
 
 }

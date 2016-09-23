@@ -31,8 +31,8 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 {
 	_testCounter += deltaTime.asMilliseconds();
 
-	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::PRESS);
-	Inputs::InputAction inpB(sf::Keyboard::F, Inputs::InputType::RELEASE);
+	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::INPUT_PRESS);
+	Inputs::InputAction inpB(sf::Keyboard::F, Inputs::InputType::INPUT_RELEASE);
 
 	if (_testCounter > 5 * 1000) // 20 Seconds
 	{
@@ -103,7 +103,7 @@ const sf::Font& MainMenuState::getDefaultFont() const
 
 void MainMenuState::handleInput(Inputs::InputAction inputAction)
 {
-	std::cout << "Handling event: Key: " << inputAction.key() << " Type: " << inputAction.inputType() << std::endl;
+	std::cout << "Handling event: Key: " << inputAction.key() << " Type: " << Inputs::stringInputType(inputAction.inputType()) << std::endl;
 }
 
 } /* namespace GameState */
