@@ -43,14 +43,28 @@ void InputController::registerAsListener(Inputs::InputAction inputAction,
 void InputController::unregisterAsListener(Inputs::InputAction inputAction,
 		Inputs::InputHandler* inpHandler)
 {
-	for (auto* inpKey : _inputKeys)
-	{
-		if (inpKey->key() == inputAction.key())
+	std::vector<Inputs::KeyInput*>::iterator it = _inputKeys.begin();
+
+	for (auto it = _inputKeys.begin(); it != _inputKeys.end(); ++it)
+		if ((*it)->key() == inputAction.key())
 		{
-			inpKey->unregisterListener(inputAction.inputType(), inpHandler);
-			return;
+			if ((*it)->unregisterListener(inputAction.inputType(), inpHandler) && (*it)->getNumListeners() == 0)
+			{
+				delete *it;
+				_inputKeys.erase(it);
+				return;
+			}
 		}
-	}
+
+//	for (auto* inpKey : _inputKeys)
+//	{
+//		if (inpKey->key() == inputAction.key())
+//		{
+//			if (inpKey->unregisterListener(inputAction.inputType(), inpHandler) && inpKey->getNumListeners() == 0)
+//
+//			return;
+//		}
+//	}
 
 	std::cout << "Attempt to unregister a Listener Failed. Input: "
 			<< inputAction.key() << " Type: " << inputAction.inputType()

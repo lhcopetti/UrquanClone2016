@@ -32,12 +32,19 @@ public:
 
 	const sf::Keyboard::Key key() const;
 
-	void registerListener(Inputs::InputType type, Inputs::InputHandler* handler);
-	void unregisterListener(Inputs::InputType type, Inputs::InputHandler* handler);
+	bool registerListener(const Inputs::InputType type, Inputs::InputHandler* handler);
+	bool unregisterListener(Inputs::InputType type, Inputs::InputHandler* handler);
+
+	int getNumListeners() const;
 
 private:
+
+	bool doRegister(const Inputs::InputType& type, Inputs::InputHandler* handler);
+	bool doUnregister(const Inputs::InputType& type, Inputs::InputHandler* handler);
+
 	sf::Keyboard::Key _key;
 	KeyStateManager _stateManager;
+	int _numListeners;
 
 	std::map<Inputs::InputType, std::vector<Inputs::InputHandler*>> _actionHandlers;
 };

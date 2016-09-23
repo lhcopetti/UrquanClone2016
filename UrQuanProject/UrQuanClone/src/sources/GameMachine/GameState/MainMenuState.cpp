@@ -21,6 +21,13 @@ MainMenuState::MainMenuState(const sf::Font& font) :
 		_testCounter(0),
 		_registered(false)
 {
+	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::INPUT_PRESS);
+	_inputController.unregisterAsListener(inpA, this);
+
+	_inputController.registerAsListener(inpA, this);
+	_inputController.registerAsListener(inpA, this);
+
+	_inputController.unregisterAsListener(inpA, this);
 }
 
 MainMenuState::~MainMenuState()

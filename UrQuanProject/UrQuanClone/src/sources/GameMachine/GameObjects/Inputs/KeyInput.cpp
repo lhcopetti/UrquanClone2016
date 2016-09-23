@@ -18,9 +18,8 @@ namespace Inputs
 
 KeyInput::KeyInput(sf::Keyboard::Key key) :
 	_key(key),
-	_stateManager(key)//,
-//	_inputType(Inputs::InputType::PRESS),
-//	_inputHandler(nullptr)
+	_stateManager(key),
+	_numListeners(0)
 {
 
 }
@@ -41,40 +40,70 @@ const sf::Keyboard::Key Inputs::KeyInput::key() const
 	return _key;
 }
 
-void KeyInput::registerListener(Inputs::InputType type,
+bool KeyInput::registerListener(Inputs::InputType type,
 		Inputs::InputHandler* handler)
 {
 	if (nullptr == handler)
-		return;
+		return false;
 
-	std::cout << "Registering a Listener for key: " << _key << " Type: " << type << std::endl;
-	std::vector<Inputs::InputHandler*>& handlers = _actionHandlers[type];
-	handlers.push_back(handler);
+	if (!doRegister(type, handler))
+		return false;
 
-
-//	_inputType = type;
-//	_inputHandler = handler;
+	std::cout << "Registered Listener. Key: " << _key << " Type: " << Inputs::stringInputType(type) << std::endl;
+	_numListeners++;
+	return true;
 }
 
-void KeyInput::unregisterListener(Inputs::InputType type,
+bool KeyInput::doRegister(const Inputs::InputType& type,
+		Inputs::InputHandler* handler)
+{
+	std::vector<Inputs::InputHandler*>& handlers = _actionHandlers[type];
+
+	if (std::find(handlers.begin(), handlers.end(), handler) != handlers.end())
+	{
+		std::cout << "Listener already registered. Aborting operation!" << std::endl;
+		return false;
+	}
+
+	handlers.push_back(handler);
+	return true;
+}
+
+bool KeyInput::unregisterListener(Inputs::InputType type,
 		Inputs::InputHandler* listener)
 {
-//	if (nullptr == _inputHandler)
-//		return;
-
 	if (nullptr == listener)
-		return;
+		return false;
 
-//	if (handler != _inputHandler)
-//		return;
+	if (!doUnregister(type, listener))
+		return false;
 
-	std::cout << "UNRegistering a Listener for key: " << _key << " Type: " << type << std::endl;
-	std::vector<Inputs::InputHandler*>& handlers = _actionHandlers[type];
-	auto it = std::find(handlers.begin(), handlers.end(), listener);
-	if (it != handlers.end())
-		handlers.erase(it);
-
-//	_inputHandler = nullptr;
+	std::cout << "Unregistered Listener. Key: " << _key << " Type: " << Inputs::stringInputType(type) << std::endl;
+	_numListeners--;
+	return true;
 }
+
+bool KeyInput::doUnregister(const Inputs::InputType& type,
+		Inputs::InputHandler* handler)
+{
+	std::vector<Inputs::InputHandler*>& handlers = _actionHandlers[type];
+
+	auto it = std::find(handlers.begin(), handlers.end(), handler);
+
+	if (it == handlers.end())
+	{
+		std::cout << "It was not possible to unregister a listener of type: " << Inputs::stringInputType(type) << std::endl;
+		return false;
+	}
+
+	handlers.erase(it);
+	return true;
+}
+
+int KeyInput::getNumListeners() const
+{
+	return _numListeners;
+}
+
 
 } /* namespace GameMachine */
