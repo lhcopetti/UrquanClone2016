@@ -21,4 +21,10 @@ DrawingComponent::~DrawingComponent()
 	// TODO Auto-generated destructor stub
 }
 
+void DrawingComponent::sendMessage(const std::string& msg)
+{
+	/* Default empty implementation */
+}
+
 } /* namespace Components */
+

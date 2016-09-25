@@ -23,8 +23,12 @@ public:
 	virtual void update(const GameObjects::GameObject& gameObject);
 	virtual void draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const;
 
+	virtual void sendMessage(const std::string& msg);
+
 private:
 	sf::RectangleShape _board;
+	sf::RectangleShape _outlineHighlight;
+	sf::RectangleShape _outlineSelect;
 	sf::Text _text;
 };
 

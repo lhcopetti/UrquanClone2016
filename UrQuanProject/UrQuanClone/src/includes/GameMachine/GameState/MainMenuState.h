@@ -12,6 +12,13 @@
 #include <GameMachine/Components/UI/GameMenu.h>
 #include <GameMachine/GameObjects/Inputs/InputHandler.h>
 
+#include <GameMachine/Components/UI/MenuComponent.h>
+
+namespace UI
+{
+	class AbstractOption;
+}
+
 namespace GameState
 {
 
@@ -44,6 +51,11 @@ private:
 	int _testCounter;
 	bool _registered;
 
+	UI::AbstractOption* _optionStart;
+	UI::AbstractOption* _optionCredits;
+	UI::AbstractOption* _optionQuitGame;
+
+	UI::MenuComponent* _menuComponent;
 };
 
 } /* namespace GameState */
