@@ -7,14 +7,16 @@
 
 #include <GameMachine/GameObjects/Inputs/InputStates/ReleasedState.h>
 #include <GameMachine/GameObjects/Inputs/InputStates/PressedState.h>
+#include <GameMachine/GameObjects/Inputs/InputStates/DoubleTapState.h>
 #include <iostream>
 
 
 namespace Inputs
 {
 
-ReleasedState::ReleasedState(sf::Keyboard::Key key) :
-		KeyState(key, InputType::INPUT_RELEASE)
+ReleasedState::ReleasedState(sf::Keyboard::Key key, bool doubleTap) :
+		KeyState(key, InputType::INPUT_RELEASE),
+		_doubleTap(doubleTap)
 {
 
 }
@@ -23,14 +25,15 @@ ReleasedState::~ReleasedState()
 {
 }
 
-KeyState* ReleasedState::update(const sf::Time& deltaTime)
+KeyState* ReleasedState::doUpdate(const sf::Time& deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(_key))
-	{
-		return new PressedState(_key);
-	}
+	if (!sf::Keyboard::isKeyPressed(_key))
+		return nullptr;
 
-	return nullptr;
+	if (_timeElapsed.asMilliseconds() < DOUBLE_TAP_KEY_INTERVAL_MS && _doubleTap)
+		return new DoubleTapState(_key);
+
+	return new PressedState(_key);
 }
 
 void ReleasedState::onEnter()

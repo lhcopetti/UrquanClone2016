@@ -21,7 +21,7 @@ public:
 
 	virtual void onEnter();
 	virtual void onExit();
-	virtual KeyState* update(const sf::Time& deltaTime);
+	virtual KeyState* doUpdate(const sf::Time& deltaTime);
 
 
 };

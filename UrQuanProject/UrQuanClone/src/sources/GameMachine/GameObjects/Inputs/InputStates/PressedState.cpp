@@ -23,11 +23,11 @@ PressedState::~PressedState()
 	// TODO Auto-generated destructor stub
 }
 
-KeyState* PressedState::update(const sf::Time& deltaTime)
+KeyState* PressedState::doUpdate(const sf::Time& deltaTime)
 {
 	if (!sf::Keyboard::isKeyPressed(_key))
 	{
-		return new ReleasedState(_key);
+		return new ReleasedState(_key, _timeElapsed.asMilliseconds() < DOUBLE_TAP_KEY_INTERVAL_MS);
 	}
 
 	return nullptr;

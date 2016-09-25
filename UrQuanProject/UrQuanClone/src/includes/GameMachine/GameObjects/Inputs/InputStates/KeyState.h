@@ -13,6 +13,8 @@
 
 #include <GameMachine/GameObjects/Inputs/InputType.h>
 
+#define DOUBLE_TAP_KEY_INTERVAL_MS 150
+
 namespace Inputs
 {
 
@@ -24,13 +26,16 @@ public:
 
 	virtual void onEnter() {}
 	virtual void onExit() {}
-	virtual KeyState* update(const sf::Time& deltaTime) = 0;
+	KeyState* update(const sf::Time& deltaTime);
+	virtual KeyState* doUpdate(const sf::Time& deltaTime) = 0;
 
 	InputType type() const;
 	sf::Keyboard::Key key() const;
+	const sf::Time& getTimeElapsed() const;
 
 protected:
 	const sf::Keyboard::Key _key;
+	sf::Time _timeElapsed;
 
 private:
 	const InputType _type;
