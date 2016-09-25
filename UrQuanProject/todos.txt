@@ -9,3 +9,5 @@ Use typedefs for std::vector<Inputs::InputHandler*> ex (25-09-2016)
 Adicionar método init para os estados, exemplo: init das AbstractOption do tipo imagem (pode dar errado!) (25-09-2016)
 Adicionar mais um estado: Pressing. Para armas que tenham efeitos diferentes dependendo do tempo em que estão pressionadas (carregadas)
 Acredito que as mensagens que DrawingComponents poderia receber deveriam ser parametrizadas (Enum enforced talvez) e não apenas String.
+Abstrair o registro do listener para as ações. Exemplo: register(K, UP_ACTION, SHOOT); O shoot seria passado para o método handleInput (25-09-2016)
+	Lugar ótimo para se testar essa implementação é o MenuComponent

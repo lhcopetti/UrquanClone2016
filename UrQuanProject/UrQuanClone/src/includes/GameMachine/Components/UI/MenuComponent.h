@@ -28,10 +28,24 @@ public:
 
 	virtual void handleInput(Inputs::InputAction inputAction);
 
+	bool isMenuFinished() const;
+	AbstractOption* getSelected();
+
 private:
+
+	void updateOptions(const unsigned int currentIndex, const unsigned int index);
+
 	GameMachine::InputController& _inputController;
+
 	std::vector<AbstractOption*> _options;
+
 	sf::Vector2f _pos;
+
+	unsigned int _currentIndex;
+
+	bool _menuFinished;
+	AbstractOption* _selectedOption;
+
 
 };
 
