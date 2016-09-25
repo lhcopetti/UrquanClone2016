@@ -16,13 +16,16 @@ namespace Inputs
 class ReleasedState : public KeyState
 {
 public:
-	ReleasedState(sf::Keyboard::Key key);
+	ReleasedState(sf::Keyboard::Key key, bool doubleTap = false);
 	virtual ~ReleasedState();
 
-	virtual KeyState* update(const sf::Time& deltaTime);
+	virtual KeyState* doUpdate(const sf::Time& deltaTime);
 
 	virtual void onEnter();
 	virtual void onExit();
+
+private:
+	bool _doubleTap;
 
 };
 

@@ -21,7 +21,7 @@ MainMenuState::MainMenuState(const sf::Font& font) :
 		_testCounter(0),
 		_registered(false)
 {
-	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::INPUT_PRESS);
+	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::INPUT_DOUBLE_TAP);
 	_inputController.unregisterAsListener(inpA, this);
 
 	_inputController.registerAsListener(inpA, this);
@@ -38,10 +38,10 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 {
 	_testCounter += deltaTime.asMilliseconds();
 
-	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::INPUT_PRESS);
+	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::INPUT_DOUBLE_TAP);
 	Inputs::InputAction inpB(sf::Keyboard::F, Inputs::InputType::INPUT_RELEASE);
 
-	if (_testCounter > 5 * 1000) // 20 Seconds
+	if (_testCounter > 15 * 1000) // 20 Seconds
 	{
 		if (!_registered)
 		{
