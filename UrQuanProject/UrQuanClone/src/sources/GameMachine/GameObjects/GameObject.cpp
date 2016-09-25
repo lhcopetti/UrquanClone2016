@@ -44,7 +44,7 @@ void GameObject::setPosition(const sf::Vector2f& newPos)
 	_pos = newPos;
 }
 
-const sf::Vector2f GameObject::getPosition() const
+const sf::Vector2f& GameObject::getPosition() const
 {
 	return _pos;
 }

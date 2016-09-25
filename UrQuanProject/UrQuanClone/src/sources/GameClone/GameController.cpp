@@ -11,6 +11,7 @@
 #include "SFML/System/Time.hpp"
 
 #include "GameMachine/GameState/MainMenuState.h"
+#include "GameClone/Defs.h"
 
 namespace GameClone
 {
@@ -26,7 +27,7 @@ GameController::~GameController()
 
 bool GameController::init()
 {
-	_window.create(sf::VideoMode(1366, 768), "Urquan Clone");
+	_window.create(sf::VideoMode(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT), "Urquan Clone");
 	_window.clear(sf::Color::Blue);
 
 	if (!_defaultFont.loadFromFile("ARIAL.TTF"))

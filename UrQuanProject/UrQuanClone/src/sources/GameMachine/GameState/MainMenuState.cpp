@@ -10,7 +10,15 @@
 
 #include "GameMachine/GameObjects/Factory/BlueCircle.h"
 #include "GameMachine/Components/UI/ColorBoard.h"
+
+#include <GameMachine/Components/UI/Options/AbstractOptionFactory.h>
+#include <GameMachine/Components/UI/Options/AbstractOption.h>
+
+#include <GameClone/Defs.h>
+
 #include <iostream>
+
+
 
 namespace GameState
 {
@@ -19,7 +27,12 @@ MainMenuState::MainMenuState(const sf::Font& font) :
 		_defaultFont(font),
 		_startMenu(nullptr),
 		_testCounter(0),
-		_registered(false)
+		_registered(false),
+		_optionStart(nullptr),
+		_optionCredits(nullptr),
+		_optionQuitGame(nullptr),
+		_menuComponent(nullptr)
+
 {
 	Inputs::InputAction inpA(sf::Keyboard::W, Inputs::InputType::INPUT_DOUBLE_TAP);
 	_inputController.unregisterAsListener(inpA, this);
@@ -28,6 +41,7 @@ MainMenuState::MainMenuState(const sf::Font& font) :
 	_inputController.registerAsListener(inpA, this);
 
 	_inputController.unregisterAsListener(inpA, this);
+
 }
 
 MainMenuState::~MainMenuState()
@@ -77,26 +91,39 @@ sf::Text MainMenuState::getDefaultSfText(const std::string& text)
 
 void MainMenuState::onEnter()
 {
-	_goCollection.push(Components::BlueCircle::newBlueCircle());
+	UI::AbstractOptionFactory factory(sf::Vector2f(200.f, 100.f), getDefaultSfText(""));
+	_optionStart 	= factory.newOption("Start Game!");
+	_optionCredits 	= factory.newOption("Credits");
+	_optionQuitGame = factory.newOption("Quit Game!");
 
-	sf::Text text;
-	text.setFont(getDefaultFont());
-	text.setFillColor(sf::Color::Black);
-	text.setString("Start Game");
-	_startMenu = new GameObjects::GameObject(
-			new Components::ColorBoard(getDefaultSfText("Start Game")));
-	_startMenu->setPosition(sf::Vector2f(100.f, 100.f));
-	_goCollection.push(_startMenu);
+	_goCollection.push(_optionStart);
+	_goCollection.push(_optionCredits);
+	_goCollection.push(_optionQuitGame);
 
-	GameObjects::GameObject* creditsMenu = new GameObjects::GameObject(
-			new Components::ColorBoard(getDefaultSfText("Credits")));
-	creditsMenu->setPosition(sf::Vector2f(100.f, 200.f));
-	_goCollection.push(creditsMenu);
+	std::vector<UI::AbstractOption*> _options = {_optionStart, _optionCredits, _optionQuitGame };
+	_menuComponent = new UI::MenuComponent(_inputController, _options, GAME_SCREEN_CENTER_VECTOR);
 
-	GameObjects::GameObject* quitMenu = new GameObjects::GameObject(
-			new Components::ColorBoard(getDefaultSfText("Quit Game")));
-	quitMenu->setPosition(sf::Vector2f(100.f, 300.f));
-	_goCollection.push(quitMenu);
+
+//	_goCollection.push(Components::BlueCircle::newBlueCircle());
+//
+//	sf::Text text;
+//	text.setFont(getDefaultFont());
+//	text.setFillColor(sf::Color::Black);
+//	text.setString("Start Game");
+//	_startMenu = new GameObjects::GameObject(
+//			new Components::ColorBoard(getDefaultSfText("Start Game")));
+//	_startMenu->setPosition(sf::Vector2f(100.f, 100.f));
+//	_goCollection.push(_startMenu);
+//
+//	GameObjects::GameObject* creditsMenu = new GameObjects::GameObject(
+//			new Components::ColorBoard(getDefaultSfText("Credits")));
+//	creditsMenu->setPosition(sf::Vector2f(100.f, 200.f));
+//	_goCollection.push(creditsMenu);
+//
+//	GameObjects::GameObject* quitMenu = new GameObjects::GameObject(
+//			new Components::ColorBoard(getDefaultSfText("Quit Game")));
+//	quitMenu->setPosition(sf::Vector2f(100.f, 300.f));
+//	_goCollection.push(quitMenu);
 }
 
 void MainMenuState::onExit()

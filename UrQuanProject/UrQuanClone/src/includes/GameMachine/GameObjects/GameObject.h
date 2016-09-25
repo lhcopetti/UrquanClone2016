@@ -31,13 +31,14 @@ public:
 	void draw(sf::RenderWindow& window) const;
 
 	void setPosition(const sf::Vector2f& newPos);
-	const sf::Vector2f getPosition() const;
+	const sf::Vector2f& getPosition() const;
 
 	void handleInput(Inputs::InputAction inputAction);
 
+protected:
+	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
 
 private:
-	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
 	sf::Vector2f _pos;
 };
 
