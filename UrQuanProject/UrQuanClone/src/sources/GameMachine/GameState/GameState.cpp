@@ -29,8 +29,13 @@ void GameState::update(const sf::Time& deltaTime)
 
 void GameState::draw(sf::RenderWindow& window)
 {
+	doBeforeDraw(window);
 	_goCollection.draw(window);
 	doDraw(window);
+}
+
+void GameState::doBeforeDraw(sf::RenderWindow& window) const
+{
 }
 
 } /* namespace GameState */

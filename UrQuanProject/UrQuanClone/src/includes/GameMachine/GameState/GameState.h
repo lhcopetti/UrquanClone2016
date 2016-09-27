@@ -35,6 +35,8 @@ public:
 	virtual void doUpdate(const sf::Time& deltaTime) = 0;
 
 	void draw(sf::RenderWindow& window);
+
+	virtual void doBeforeDraw(sf::RenderWindow& window) const;
 	virtual void doDraw(sf::RenderWindow& window) = 0;
 
 protected:

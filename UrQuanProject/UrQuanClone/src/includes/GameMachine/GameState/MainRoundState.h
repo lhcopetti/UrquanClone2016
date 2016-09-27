@@ -23,6 +23,7 @@ public:
 	virtual void onExit();
 
 	virtual void doUpdate(const sf::Time& deltaTime);
+	virtual void doBeforeDraw(sf::RenderWindow& window) const;
 	virtual void doDraw(sf::RenderWindow& window);
 };
 
