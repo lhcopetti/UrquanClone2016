@@ -51,7 +51,10 @@ void GameStateController::update(const sf::Time& time)
 		return;
 
 	for (auto it = _stackCommands.begin(); it != _stackCommands.end(); ++it)
+	{
 		(*it)->execute(_states);
+		delete *it;
+	}
 
 	_stackCommands.clear();
 }

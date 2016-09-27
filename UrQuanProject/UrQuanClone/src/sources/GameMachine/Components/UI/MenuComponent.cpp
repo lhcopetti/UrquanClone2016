@@ -104,6 +104,20 @@ AbstractOption* MenuComponent::getSelected()
 	return _menuFinished ? _selectedOption : nullptr;
 }
 
+void MenuComponent::reset()
+{
+	_menuFinished = false;
+	_selectedOption = nullptr;
+
+	for (auto it = _options.begin(); it != _options.end(); ++it)
+	{
+		(*it)->unhighlight();
+		(*it)->deselect();
+	}
+
+	_options[_currentIndex]->hightlight();
+}
+
 void MenuComponent::updateOptions(const unsigned int currentIndex, const unsigned int newIndex)
 {
 	_options[currentIndex]->unhighlight();

@@ -28,6 +28,8 @@ public:
 
 	virtual void handleInput(Inputs::InputAction inputAction);
 
+	void reset();
+
 	bool isMenuFinished() const;
 	AbstractOption* getSelected();
 

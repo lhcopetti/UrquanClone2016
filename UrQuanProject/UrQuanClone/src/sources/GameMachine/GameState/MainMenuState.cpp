@@ -49,6 +49,19 @@ MainMenuState::MainMenuState(GameMachine::GameStateController& controller, const
 
 	_inputController.unregisterAsListener(inpA, this);
 
+	UI::AbstractOptionFactory factory(sf::Vector2f(200.f, 100.f), getDefaultSfText(""));
+	_optionStart 	= factory.newOption("Start Game!");
+	_optionCredits 	= factory.newOption("Credits");
+	_optionQuitGame = factory.newOption("Quit Game!");
+
+	_goCollection.push(_optionStart);
+	_goCollection.push(_optionCredits);
+	_goCollection.push(_optionQuitGame);
+
+	std::vector<UI::AbstractOption*> _options = {_optionStart, _optionCredits, _optionQuitGame };
+	_menuComponent = new UI::MenuComponent(_inputController, _options, GAME_SCREEN_CENTER_VECTOR);
+
+
 }
 
 MainMenuState::~MainMenuState()
@@ -90,10 +103,12 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 	}
 	else if (selectedOption == _optionCredits)
 	{
-		_controller.addCommand(new GameMachine::PopStackCommand());
 		_controller.addCommand(new GameMachine::PushStackCommand(new CreditsState(_controller)));
 	}
+	else
+	{
 		std::cout << "Ainda não foi implementado outros tipos de opções!" << std::endl;
+	}
 }
 
 void MainMenuState::doDraw(sf::RenderWindow& window)
@@ -112,19 +127,6 @@ sf::Text MainMenuState::getDefaultSfText(const std::string& text)
 void MainMenuState::onEnter()
 {
 	std::cout << "Entering MainMenuState" << std::endl;
-
-	UI::AbstractOptionFactory factory(sf::Vector2f(200.f, 100.f), getDefaultSfText(""));
-	_optionStart 	= factory.newOption("Start Game!");
-	_optionCredits 	= factory.newOption("Credits");
-	_optionQuitGame = factory.newOption("Quit Game!");
-
-	_goCollection.push(_optionStart);
-	_goCollection.push(_optionCredits);
-	_goCollection.push(_optionQuitGame);
-
-	std::vector<UI::AbstractOption*> _options = {_optionStart, _optionCredits, _optionQuitGame };
-	_menuComponent = new UI::MenuComponent(_inputController, _options, GAME_SCREEN_CENTER_VECTOR);
-
 
 //	_goCollection.push(Components::BlueCircle::newBlueCircle());
 //
@@ -151,6 +153,7 @@ void MainMenuState::onEnter()
 void MainMenuState::onExit()
 {
 	std::cout << "Leaving MainMenuState! " << std::endl;
+	_menuComponent->reset();
 }
 
 const sf::Font& MainMenuState::getDefaultFont() const

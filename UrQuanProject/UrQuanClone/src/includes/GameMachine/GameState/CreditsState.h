@@ -13,11 +13,16 @@
 namespace GameState
 {
 
-class CreditsState: public GameState::GameState
+class CreditsState: public GameState::GameState, public Inputs::InputHandler
 {
 public:
 	CreditsState(GameMachine::GameStateController& controller);
 	virtual ~CreditsState();
+
+	virtual void onEnter();
+	virtual void onExit();
+
+	virtual void handleInput(Inputs::InputAction inputAction);
 
 	virtual void doUpdate(const sf::Time& deltaTime);
 	virtual void doBeforeDraw(sf::RenderWindow& window) const;
