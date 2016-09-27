@@ -23,7 +23,7 @@ public:
 	virtual void onExit();
 
 	virtual void doUpdate(const sf::Time& deltaTime);
-	virtual void draw(sf::RenderWindow& window);
+	virtual void doDraw(sf::RenderWindow& window);
 };
 
 } /* namespace GameState */

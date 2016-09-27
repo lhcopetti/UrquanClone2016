@@ -34,12 +34,10 @@ public:
 	void update(const sf::Time& deltaTime);
 	virtual void doUpdate(const sf::Time& deltaTime) = 0;
 
-	virtual void draw(sf::RenderWindow& window) = 0;
+	void draw(sf::RenderWindow& window);
+	virtual void doDraw(sf::RenderWindow& window) = 0;
 
 protected:
-	bool popState();
-	bool pushState(GameState* gameState);
-
 	GameMachine::GameStateController& _controller;
 
 	GameObjects::GameObjectCollection _goCollection;

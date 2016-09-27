@@ -41,9 +41,8 @@ void MainRoundState::doUpdate(const sf::Time& deltaTime)
 
 }
 
-void MainRoundState::draw(sf::RenderWindow& window)
+void MainRoundState::doDraw(sf::RenderWindow& window)
 {
-	_goCollection.draw(window);
 }
 
 } /* namespace GameState */

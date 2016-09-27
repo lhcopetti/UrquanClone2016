@@ -18,7 +18,6 @@ GameState::GameState(GameMachine::GameStateController& controller) :
 
 GameState::~GameState()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void GameState::update(const sf::Time& deltaTime)
@@ -28,24 +27,11 @@ void GameState::update(const sf::Time& deltaTime)
 	doUpdate(deltaTime);
 }
 
-//bool GameState::pushState(GameState* gameState)
-//{
-//	std::stack<GameState*> stateStack = _controller.getStack();
-//	stateStack.push(gameState);
-//
-//	return true;
-//}
-//
-//bool GameState::popState()
-//{
-//	std::stack<GameState*> stateStack = _controller.getStack();
-//
-//	GameState* lastState = stateStack.top();
-//	stateStack.pop();
-//	delete lastState;
-//
-//	return true;
-//}
+void GameState::draw(sf::RenderWindow& window)
+{
+	_goCollection.draw(window);
+	doDraw(window);
+}
 
 } /* namespace GameState */
 

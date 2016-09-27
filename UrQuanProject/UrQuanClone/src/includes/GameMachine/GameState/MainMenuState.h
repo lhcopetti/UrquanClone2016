@@ -32,7 +32,7 @@ public:
 	virtual void onExit();
 
 	virtual void doUpdate(const sf::Time& deltaTime);
-	virtual void draw(sf::RenderWindow& window);
+	virtual void doDraw(sf::RenderWindow& window);
 
 	sf::Text getDefaultSfText(const std::string& text);
 	const sf::Font& getDefaultFont() const;

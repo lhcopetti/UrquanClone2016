@@ -91,10 +91,8 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 		std::cout << "Ainda não foi implementado outros tipos de opções!" << std::endl;
 }
 
-void MainMenuState::draw(sf::RenderWindow& window)
+void MainMenuState::doDraw(sf::RenderWindow& window)
 {
-	window.clear(sf::Color::Red);
-	_goCollection.draw(window);
 }
 
 sf::Text MainMenuState::getDefaultSfText(const std::string& text)
