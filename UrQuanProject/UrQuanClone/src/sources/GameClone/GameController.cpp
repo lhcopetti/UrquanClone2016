@@ -36,7 +36,7 @@ bool GameController::init()
 		return false;
 	}
 
-	if (!_stateController.init(new GameState::MainMenuState(_defaultFont)))
+	if (!_stateController.init(new GameState::MainMenuState(_stateController, _defaultFont)))
 		return false;
 
 

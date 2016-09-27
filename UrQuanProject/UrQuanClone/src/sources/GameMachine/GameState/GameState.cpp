@@ -6,14 +6,14 @@
  */
 
 #include <GameMachine/GameState/GameState.h>
+#include <iostream>
 
 namespace GameState
 {
 
-GameState::GameState()
+GameState::GameState(GameMachine::GameStateController& controller) :
+		_controller(controller)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 GameState::~GameState()
@@ -28,4 +28,24 @@ void GameState::update(const sf::Time& deltaTime)
 	doUpdate(deltaTime);
 }
 
+//bool GameState::pushState(GameState* gameState)
+//{
+//	std::stack<GameState*> stateStack = _controller.getStack();
+//	stateStack.push(gameState);
+//
+//	return true;
+//}
+//
+//bool GameState::popState()
+//{
+//	std::stack<GameState*> stateStack = _controller.getStack();
+//
+//	GameState* lastState = stateStack.top();
+//	stateStack.pop();
+//	delete lastState;
+//
+//	return true;
+//}
+
 } /* namespace GameState */
+
