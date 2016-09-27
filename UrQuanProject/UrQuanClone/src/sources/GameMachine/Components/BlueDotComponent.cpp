@@ -7,32 +7,29 @@
 
 #include "GameMachine/Components/BlueDotComponent.h"
 
+#include <GameMachine/GameObjects/GameObject.h>
+
 namespace Components
 {
 
-BlueDotComponent::BlueDotComponent()
+BlueDotComponent::BlueDotComponent() :
+		_circle(10)
 {
-	// TODO Auto-generated constructor stub
-
+	_circle.setFillColor(sf::Color::Red);
 }
 
 BlueDotComponent::~BlueDotComponent()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void BlueDotComponent::update(const GameObjects::GameObject& gameObject)
 {
-
+	_circle.setPosition(gameObject.getPosition());
 }
 
 void BlueDotComponent::draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const
 {
-	sf::CircleShape circle(10);
-	circle.setFillColor(sf::Color::Blue);
-	circle.setPosition(sf::Vector2f(50.f, 50.f));
-
-	window.draw(circle);
+	window.draw(_circle);
 }
 
 } /* namespace Components */

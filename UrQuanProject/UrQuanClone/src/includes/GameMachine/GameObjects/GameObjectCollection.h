@@ -26,6 +26,8 @@ public:
 	virtual void update(const sf::Time& deltaTime);
 	void draw(sf::RenderWindow& window) const;
 
+	const unsigned int size() const;
+
 private:
 	std::vector<std::unique_ptr<GameObject>> _gObjects;
 };

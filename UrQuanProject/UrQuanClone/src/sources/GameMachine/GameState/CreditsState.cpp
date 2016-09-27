@@ -8,6 +8,9 @@
 #include <GameMachine/GameState/CreditsState.h>
 
 #include <GameMachine/StackControl/PopStackCommand.h>
+#include <GameMachine/Components/Geometry/TimeBomb.h>
+
+#include <GameMachine/Components/BlueDotComponent.h>
 
 namespace GameState
 {
@@ -23,6 +26,16 @@ CreditsState::~CreditsState()
 
 void CreditsState::doUpdate(const sf::Time& deltaTime)
 {
+	if (_goCollection.size() > 0)
+		return;
+
+	_counter += deltaTime;
+	if (_counter < sf::seconds(5.0f))
+		return;
+
+	_counter = sf::Time::Zero;
+
+	_goCollection.push(new Geometry::TimeBomb(new Components::BlueDotComponent, sf::seconds(5.0f)));
 }
 
 void CreditsState::onEnter()

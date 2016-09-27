@@ -9,13 +9,14 @@
 #include <GameMachine/GameObjects/Inputs/InputAction.h>
 #include "GameMachine/Components/DrawingComponent.h"
 
-
 namespace GameObjects
 {
 
-GameObject::GameObject(Components::DrawingComponent* drawingComponent, sf::Vector2f pos) :
-		_drawingComponent(std::unique_ptr<Components::DrawingComponent>(drawingComponent)),
-		_pos(pos)
+GameObject::GameObject(Components::DrawingComponent* drawingComponent,
+		sf::Vector2f pos) :
+		_drawingComponent(
+				std::unique_ptr<Components::DrawingComponent>(
+						drawingComponent)), _alive(true), _pos(pos)
 {
 }
 
@@ -53,4 +54,10 @@ void GameObject::handleInput(Inputs::InputAction inputAction)
 {
 }
 
+bool GameObject::isAlive() const
+{
+	return _alive;
+}
+
 } /* namespace GameState */
+

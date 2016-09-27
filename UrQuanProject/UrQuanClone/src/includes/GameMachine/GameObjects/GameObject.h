@@ -35,8 +35,11 @@ public:
 
 	void handleInput(Inputs::InputAction inputAction);
 
+	bool isAlive() const;
+
 protected:
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
+	bool _alive;
 
 private:
 	sf::Vector2f _pos;

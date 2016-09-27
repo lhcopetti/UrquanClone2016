@@ -25,6 +25,7 @@ BlueCircle::~BlueCircle()
 GameObjects::GameObject* BlueCircle::newBlueCircle()
 {
 	GameObjects::GameObject* gameObject = new GameObjects::GameObject(new BlueDotComponent);
+	gameObject->setPosition(sf::Vector2f(50.f, 50.f));
 	return gameObject;
 }
 

@@ -13,7 +13,6 @@ namespace GameObjects
 GameObjectCollection::GameObjectCollection()
 {
 	// TODO Auto-generated constructor stub
-
 }
 
 GameObjectCollection::~GameObjectCollection()
@@ -38,8 +37,31 @@ void GameObjectCollection::draw(sf::RenderWindow& window) const
 
 void GameObjectCollection::update(const sf::Time& deltaTime)
 {
-	for (auto const& gO : _gObjects)
-		gO->update(deltaTime);
+	auto it = _gObjects.begin();
+
+	while(it != _gObjects.end())
+	{
+		(*it)->update(deltaTime);
+
+		if (!(*it)->isAlive())
+			it = _gObjects.erase(it);
+		else
+			++it;
+	}
+	for (auto it = _gObjects.begin(); it != _gObjects.end(); ++it)
+	{
+		if (!(*it)->isAlive())
+			_gObjects.erase(it);
+	}
+//	for (auto const& gO : _gObjects)
+//	{
+//		gO->update(deltaTime);
+//	}
+}
+
+const unsigned int GameObjectCollection::size() const
+{
+	return _gObjects.size();
 }
 
 } /* namespace Components */

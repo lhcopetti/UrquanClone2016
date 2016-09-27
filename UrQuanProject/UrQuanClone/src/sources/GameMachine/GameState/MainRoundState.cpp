@@ -43,7 +43,7 @@ void MainRoundState::doUpdate(const sf::Time& deltaTime)
 
 void MainRoundState::doBeforeDraw(sf::RenderWindow& window) const
 {
-	window.clear(sf::Color::White);
+	window.clear(sf::Color::Blue);
 }
 
 void MainRoundState::doDraw(sf::RenderWindow& window)

@@ -9,6 +9,7 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATE_CREDITSSTATE_H_
 
 #include <GameMachine/GameState/GameState.h>
+#include <SFML/System/Time.hpp>
 
 namespace GameState
 {
@@ -26,6 +27,9 @@ public:
 
 	virtual void doUpdate(const sf::Time& deltaTime);
 	virtual void doBeforeDraw(sf::RenderWindow& window) const;
+
+private:
+	sf::Time _counter;
 };
 
 } /* namespace GameMachine */

@@ -9,6 +9,7 @@
 #define SOURCES_GAMEMACHINE_COMPONENTS_BLUEDOTCOMPONENT_H_
 
 #include <GameMachine/Components/DrawingComponent.h>
+#include <SFML/Graphics.hpp>
 
 namespace Components
 {
@@ -21,6 +22,9 @@ public:
 
 	virtual void update(const GameObjects::GameObject& gameObject);
 	virtual void draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const;
+
+private:
+	sf::CircleShape _circle;
 };
 
 } /* namespace Components */
