@@ -37,7 +37,7 @@ public:
 	void draw(sf::RenderWindow& window);
 
 	virtual void doBeforeDraw(sf::RenderWindow& window) const;
-	virtual void doDraw(sf::RenderWindow& window) = 0;
+	virtual void doDraw(sf::RenderWindow& window);
 
 protected:
 	GameMachine::GameStateController& _controller;

@@ -38,5 +38,9 @@ void GameState::doBeforeDraw(sf::RenderWindow& window) const
 {
 }
 
+void GameState::GameState::doDraw(sf::RenderWindow& window)
+{
+}
+
 } /* namespace GameState */
 

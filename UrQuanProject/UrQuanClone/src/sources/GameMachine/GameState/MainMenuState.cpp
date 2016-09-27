@@ -7,6 +7,7 @@
 
 #include <GameMachine/GameState/MainMenuState.h>
 #include <GameMachine/GameState/MainRoundState.h>
+#include <GameMachine/GameState/CreditsState.h>
 
 #include <GameMachine/GameObjects/Inputs/InputAction.h>
 
@@ -87,7 +88,11 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 		_controller.addCommand(new GameMachine::PopStackCommand());
 		_controller.addCommand(new GameMachine::PushStackCommand(new MainRoundState(_controller)));
 	}
-	else
+	else if (selectedOption == _optionCredits)
+	{
+		_controller.addCommand(new GameMachine::PopStackCommand());
+		_controller.addCommand(new GameMachine::PushStackCommand(new CreditsState(_controller)));
+	}
 		std::cout << "Ainda não foi implementado outros tipos de opções!" << std::endl;
 }
 
