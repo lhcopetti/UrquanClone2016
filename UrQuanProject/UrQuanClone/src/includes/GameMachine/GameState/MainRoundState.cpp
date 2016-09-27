@@ -8,6 +8,8 @@
 #include <GameMachine/GameState/MainRoundState.h>
 #include <GameMachine/GameObjects/Factory/BlueCircle.h>
 
+#include <iostream>
+
 namespace GameState
 {
 
@@ -25,12 +27,13 @@ MainRoundState::~MainRoundState()
 
 void MainRoundState::onEnter()
 {
+	std::cout << "Entering MainRoundState" << std::endl;
 	_goCollection.push(Components::BlueCircle::newBlueCircle());
 }
 
 void MainRoundState::onExit()
 {
-
+	std::cout << "Leaving MainRoundState" << std::endl;
 }
 
 void MainRoundState::doUpdate(const sf::Time& deltaTime)
@@ -40,6 +43,7 @@ void MainRoundState::doUpdate(const sf::Time& deltaTime)
 
 void MainRoundState::draw(sf::RenderWindow& window)
 {
+	_goCollection.draw(window);
 }
 
 } /* namespace GameState */

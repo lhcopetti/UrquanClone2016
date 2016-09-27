@@ -93,7 +93,6 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 
 void MainMenuState::draw(sf::RenderWindow& window)
 {
-
 	window.clear(sf::Color::Red);
 	_goCollection.draw(window);
 }
@@ -109,6 +108,8 @@ sf::Text MainMenuState::getDefaultSfText(const std::string& text)
 
 void MainMenuState::onEnter()
 {
+	std::cout << "Entering MainMenuState" << std::endl;
+
 	UI::AbstractOptionFactory factory(sf::Vector2f(200.f, 100.f), getDefaultSfText(""));
 	_optionStart 	= factory.newOption("Start Game!");
 	_optionCredits 	= factory.newOption("Credits");
@@ -146,6 +147,7 @@ void MainMenuState::onEnter()
 
 void MainMenuState::onExit()
 {
+	std::cout << "Leaving MainMenuState! " << std::endl;
 }
 
 const sf::Font& MainMenuState::getDefaultFont() const

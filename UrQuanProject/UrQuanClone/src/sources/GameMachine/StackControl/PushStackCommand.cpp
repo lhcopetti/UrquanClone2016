@@ -22,7 +22,11 @@ PushStackCommand::~PushStackCommand()
 
 void PushStackCommand::execute(std::stack<GameState::GameState*>& stack)
 {
+	if (stack.size() > 0)
+		stack.top()->onExit();
+
 	stack.push(_gameState);
+	_gameState->onEnter();
 }
 
 } /* namespace GameMachine */

@@ -29,6 +29,7 @@ void PopStackCommand::execute(std::stack<GameState::GameState*>& stack)
 	}
 
 	GameState::GameState* gameState = stack.top();
+	gameState->onExit();
 	stack.pop();
 	delete gameState;
 }
