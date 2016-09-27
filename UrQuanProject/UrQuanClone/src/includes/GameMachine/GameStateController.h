@@ -9,7 +9,8 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATECONTROLLER_H_
 
 #include <GameMachine/GameObjects/UpdatableFromTime.h>
-#include <memory>
+#include <stack>
+#include <vector>
 
 namespace sf
 {
@@ -24,6 +25,7 @@ class GameState;
 
 namespace GameMachine
 {
+class StackControlCommand;
 
 class GameStateController : public UpdatableFromTime
 {
@@ -37,9 +39,11 @@ public:
 	virtual void update(const sf::Time& time);
 	void draw(sf::RenderWindow& window);
 
-private:
+	void addCommand(StackControlCommand* command);
 
-	std::unique_ptr<GameState::GameState> _currentState;
+private:
+	std::stack<GameState::GameState*> _states;
+	std::vector<StackControlCommand*> _stackCommands;
 };
 
 } /* namespace GameMachine */

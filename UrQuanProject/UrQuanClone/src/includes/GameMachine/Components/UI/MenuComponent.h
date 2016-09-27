@@ -41,7 +41,7 @@ private:
 
 	sf::Vector2f _pos;
 
-	unsigned int _currentIndex;
+	int _currentIndex;
 
 	bool _menuFinished;
 	AbstractOption* _selectedOption;

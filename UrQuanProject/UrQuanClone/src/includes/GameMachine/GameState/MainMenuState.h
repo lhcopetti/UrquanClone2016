@@ -25,7 +25,7 @@ namespace GameState
 class MainMenuState: public GameState, public Inputs::InputHandler
 {
 public:
-	MainMenuState(const sf::Font& font);
+	MainMenuState(GameMachine::GameStateController& controller, const sf::Font& font);
 	virtual ~MainMenuState();
 
 	virtual void onEnter();
@@ -40,9 +40,7 @@ public:
 	virtual void handleInput(Inputs::InputAction inputAction);
 
 private:
-
 	enum GameOptions { START_GAME, SHOW_CREDITS, QUIT_GAME };
-
 	Components::GameMenu<GameOptions> t;
 
 	const sf::Font& _defaultFont;

@@ -22,25 +22,30 @@ namespace GameState
 
 class GameState
 {
-	friend GameMachine::GameStateController;
+//	friend GameMachine::GameStateController;
 
 public:
-	GameState();
+	GameState(GameMachine::GameStateController& controller);
 	virtual ~GameState();
 
 	virtual void onEnter() {}
 	virtual void onExit() {}
 
+	void update(const sf::Time& deltaTime);
 	virtual void doUpdate(const sf::Time& deltaTime) = 0;
 
 	virtual void draw(sf::RenderWindow& window) = 0;
 
 protected:
+	bool popState();
+	bool pushState(GameState* gameState);
+
+	GameMachine::GameStateController& _controller;
+
 	GameObjects::GameObjectCollection _goCollection;
 	GameMachine::InputController _inputController;
 
 private:
-	void update(const sf::Time& deltaTime);
 
 };
 

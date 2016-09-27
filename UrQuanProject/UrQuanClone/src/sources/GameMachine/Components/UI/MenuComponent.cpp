@@ -68,7 +68,7 @@ void MenuComponent::handleInput(Inputs::InputAction inputAction)
 		return;
 	}
 
-	unsigned int newIndex = _currentIndex;
+	int newIndex = _currentIndex;
 
 	if (inputAction.key() == sf::Keyboard::Up)
 		newIndex--;
@@ -82,7 +82,7 @@ void MenuComponent::handleInput(Inputs::InputAction inputAction)
 	}
 
 	newIndex = newIndex < 0 ? 0 :
-				newIndex > _options.size() - 1 ? _options.size() - 1 : newIndex;
+				newIndex > (signed) _options.size() - 1 ? _options.size() - 1 : newIndex;
 
 	if (newIndex != _currentIndex)
 	{

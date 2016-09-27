@@ -6,6 +6,8 @@
  */
 
 #include <GameMachine/GameState/MainMenuState.h>
+#include <GameMachine/GameState/MainRoundState.h>
+
 #include <GameMachine/GameObjects/Inputs/InputAction.h>
 
 #include "GameMachine/GameObjects/Factory/BlueCircle.h"
@@ -13,6 +15,9 @@
 
 #include <GameMachine/Components/UI/Options/AbstractOptionFactory.h>
 #include <GameMachine/Components/UI/Options/AbstractOption.h>
+
+#include <GameMachine/StackControl/PopStackCommand.h>
+#include <GameMachine/StackControl/PushStackCommand.h>
 
 #include <GameClone/Defs.h>
 
@@ -23,7 +28,8 @@
 namespace GameState
 {
 
-MainMenuState::MainMenuState(const sf::Font& font) :
+MainMenuState::MainMenuState(GameMachine::GameStateController& controller, const sf::Font& font) :
+		GameState(controller),
 		_defaultFont(font),
 		_startMenu(nullptr),
 		_testCounter(0),
@@ -70,13 +76,24 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 		_testCounter = 0;
 		_registered ^= true;
 	}
+
+	if (!_menuComponent->isMenuFinished())
+		return;
+
+	UI::AbstractOption* selectedOption = _menuComponent->getSelected();
+
+	if (selectedOption == _optionStart)
+	{
+		_controller.addCommand(new GameMachine::PopStackCommand());
+		_controller.addCommand(new GameMachine::PushStackCommand(new MainRoundState(_controller)));
+	}
+	else
+		std::cout << "Ainda não foi implementado outros tipos de opções!" << std::endl;
 }
 
 void MainMenuState::draw(sf::RenderWindow& window)
 {
-
 	window.clear(sf::Color::Red);
-
 	_goCollection.draw(window);
 }
 
@@ -91,6 +108,8 @@ sf::Text MainMenuState::getDefaultSfText(const std::string& text)
 
 void MainMenuState::onEnter()
 {
+	std::cout << "Entering MainMenuState" << std::endl;
+
 	UI::AbstractOptionFactory factory(sf::Vector2f(200.f, 100.f), getDefaultSfText(""));
 	_optionStart 	= factory.newOption("Start Game!");
 	_optionCredits 	= factory.newOption("Credits");
@@ -128,6 +147,7 @@ void MainMenuState::onEnter()
 
 void MainMenuState::onExit()
 {
+	std::cout << "Leaving MainMenuState! " << std::endl;
 }
 
 const sf::Font& MainMenuState::getDefaultFont() const
