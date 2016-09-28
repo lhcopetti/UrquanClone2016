@@ -8,6 +8,9 @@
 #include <GameMachine/GameState/MainRoundState.h>
 #include <GameMachine/GameObjects/Factory/BlueCircle.h>
 
+#include <GameMachine/GameObjects/Factory/ShipFactory.h>
+#include <GameClone/Defs.h>
+
 #include <iostream>
 
 namespace GameState
@@ -16,13 +19,15 @@ namespace GameState
 MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 		GameState(controller)
 {
-	// TODO Auto-generated constructor stub
+	Components::ShipFactory shipFactory;
 
+	GameObjects::GameObject* ship = shipFactory.createNew("PLAYER1");
+	ship->setPosition(GAME_SCREEN_CENTER_VECTOR);
+	_goCollection.push(ship);
 }
 
 MainRoundState::~MainRoundState()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void MainRoundState::onEnter()
