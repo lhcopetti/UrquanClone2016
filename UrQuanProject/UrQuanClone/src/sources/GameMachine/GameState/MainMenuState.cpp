@@ -105,9 +105,11 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 	{
 		_controller.addCommand(new GameMachine::PushStackCommand(new CreditsState(_controller)));
 	}
-	else
+	else if (selectedOption == _optionQuitGame)
 	{
-		std::cout << "Ainda não foi implementado outros tipos de opções!" << std::endl;
+		/* O jogo termina quando não há mais nenhum estado disponível */
+		_controller.addCommand(new GameMachine::PopStackCommand());
+		std::cout << "Finalizando Jogo. Volte em breve!" << std::endl;
 	}
 }
 

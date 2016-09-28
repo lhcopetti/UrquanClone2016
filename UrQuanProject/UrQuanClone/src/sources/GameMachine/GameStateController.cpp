@@ -43,20 +43,13 @@ void GameStateController::deinit()
 {
 }
 
-void GameStateController::update(const sf::Time& time)
+bool GameStateController::update(const sf::Time& time)
 {
 	_states.top()->update(time);
 
-	if (_stackCommands.size() == 0)
-		return;
+	executeCommands();
 
-	for (auto it = _stackCommands.begin(); it != _stackCommands.end(); ++it)
-	{
-		(*it)->execute(_states);
-		delete *it;
-	}
-
-	_stackCommands.clear();
+	return _states.size() > 0;
 }
 
 void GameStateController::draw(sf::RenderWindow& window)
@@ -69,6 +62,16 @@ void GameStateController::draw(sf::RenderWindow& window)
 void GameStateController::addCommand(StackControlCommand* command)
 {
 	_stackCommands.push_back(command);
+}
+
+void GameStateController::executeCommands()
+{
+	for (auto it = _stackCommands.begin(); it != _stackCommands.end(); ++it)
+	{
+		(*it)->execute(_states);
+		delete *it;
+	}
+	_stackCommands.clear();
 }
 
 } /* namespace GameMachine */

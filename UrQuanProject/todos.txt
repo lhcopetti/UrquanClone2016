@@ -11,3 +11,9 @@ Adicionar mais um estado: Pressing. Para armas que tenham efeitos diferentes dep
 Acredito que as mensagens que DrawingComponents poderia receber deveriam ser parametrizadas (Enum enforced talvez) e não apenas String.
 Abstrair o registro do listener para as ações. Exemplo: register(K, UP_ACTION, SHOOT); O shoot seria passado para o método handleInput (25-09-2016)
 	Lugar ótimo para se testar essa implementação é o MenuComponent
+
+
+27-09-2016
+	- Implementar a funcionalidade do Menu exit do Jogo
+	- Desenhar a primeira nave na tela MainRoundState (Drawing Component para o Ship).
+	- 
