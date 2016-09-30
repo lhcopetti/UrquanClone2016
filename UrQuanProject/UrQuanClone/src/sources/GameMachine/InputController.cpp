@@ -29,7 +29,7 @@ InputController::~InputController()
 }
 
 void InputController::registerAsListener(Inputs::InputAction inputAction,
-		Inputs::InputHandler* inpHandler)
+		Inputs::InputHandler* inpHandler, int handlerData)
 {
 	bool isNew = false;
 	Inputs::KeyInput* inputKey = retrieveOrNew(inputAction, &isNew);
@@ -37,7 +37,7 @@ void InputController::registerAsListener(Inputs::InputAction inputAction,
 	if (isNew)
 		_inputKeys.push_back(inputKey);
 
-	inputKey->registerListener(inputAction.inputType(), inpHandler);
+	inputKey->registerListener(inputAction.inputType(), inpHandler, handlerData);
 }
 
 void InputController::unregisterAsListener(Inputs::InputAction inputAction,

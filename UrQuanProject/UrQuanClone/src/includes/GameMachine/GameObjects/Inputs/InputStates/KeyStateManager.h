@@ -11,11 +11,10 @@
 #include "KeyState.h"
 #include <map>
 #include <vector>
-#include <GameMachine/GameObjects/Inputs/InputHandler.h>
 
 namespace Inputs
 {
-class InputHandler;
+class InputHandlerParam;
 
 class KeyStateManager
 {
@@ -24,10 +23,9 @@ public:
 	virtual ~KeyStateManager();
 
 	void update(const sf::Time& deltaTime,
-			std::map<Inputs::InputType, std::vector<Inputs::InputHandler*>>& handlers);
+			std::map<Inputs::InputType, std::vector<Inputs::InputHandlerParam>>& handlers);
 
-	void notifyListeners(std::vector<Inputs::InputHandler*>& handlers,
-			const Inputs::InputAction& inputAction);
+	void notifyListeners(std::vector<InputHandlerParam>& handlers);
 
 private:
 	KeyState* _currentState;

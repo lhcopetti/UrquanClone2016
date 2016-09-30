@@ -50,7 +50,7 @@ const sf::Vector2f& GameObject::getPosition() const
 	return _pos;
 }
 
-void GameObject::handleInput(Inputs::InputAction inputAction)
+void GameObject::handleInput(int userData)
 {
 }
 
