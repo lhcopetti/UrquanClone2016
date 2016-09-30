@@ -40,7 +40,7 @@ void CreditsState::doUpdate(const sf::Time& deltaTime)
 
 void CreditsState::onEnter()
 {
-	_inputController.registerAsListener(Inputs::InputAction(sf::Keyboard::Escape, Inputs::INPUT_RELEASE), this);
+	_inputController.registerAsListener(Inputs::InputAction(sf::Keyboard::Escape, Inputs::INPUT_RELEASE), this, 2);
 }
 
 void CreditsState::onExit()
@@ -52,6 +52,12 @@ void CreditsState::handleInput(Inputs::InputAction inputAction)
 {
 	if (inputAction.key() == sf::Keyboard::Escape)
 		_controller.addCommand(new GameMachine::PopStackCommand);
+}
+
+void CreditsState::handleInput(int data)
+{
+//	if (inputAction.key() == sf::Keyboard::Escape)
+//		_controller.addCommand(new GameMachine::PopStackCommand);
 }
 
 void CreditsState::doBeforeDraw(sf::RenderWindow& window) const

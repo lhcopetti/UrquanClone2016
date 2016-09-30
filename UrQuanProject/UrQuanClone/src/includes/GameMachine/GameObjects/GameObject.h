@@ -33,7 +33,7 @@ public:
 	void setPosition(const sf::Vector2f& newPos);
 	const sf::Vector2f& getPosition() const;
 
-	void handleInput(Inputs::InputAction inputAction);
+	void handleInput(int userData);
 
 	bool isAlive() const;
 

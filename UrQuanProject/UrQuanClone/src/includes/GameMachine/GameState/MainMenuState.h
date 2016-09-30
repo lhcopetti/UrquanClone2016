@@ -37,7 +37,8 @@ public:
 	sf::Text getDefaultSfText(const std::string& text);
 	const sf::Font& getDefaultFont() const;
 
-	virtual void handleInput(Inputs::InputAction inputAction);
+	//virtual void handleInput(Inputs::InputAction inputAction);
+	virtual void handleInput(int handlerData);
 
 private:
 	enum GameOptions { START_GAME, SHOW_CREDITS, QUIT_GAME };

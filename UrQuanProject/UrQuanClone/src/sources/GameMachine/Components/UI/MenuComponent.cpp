@@ -12,6 +12,13 @@
 namespace UI
 {
 
+enum INPUT_MENU_COMMANDS
+{
+	START,
+	CREDITS,
+	QUIT
+};
+
 MenuComponent::MenuComponent(GameMachine::InputController& inputController,
 		std::vector<AbstractOption*> options, sf::Vector2f pos) :
 		_inputController(inputController), _options(options), _pos(pos), _currentIndex(
@@ -36,19 +43,24 @@ MenuComponent::MenuComponent(GameMachine::InputController& inputController,
 
 	_inputController.registerAsListener(
 			Inputs::InputAction(sf::Keyboard::Key::Up,
-					Inputs::InputType::INPUT_RELEASE), this);
+					Inputs::InputType::INPUT_RELEASE), this, START);
 	_inputController.registerAsListener(
 			Inputs::InputAction(sf::Keyboard::Key::Down,
-					Inputs::InputType::INPUT_RELEASE), this);
+					Inputs::InputType::INPUT_RELEASE), this, CREDITS);
 	_inputController.registerAsListener(
 			Inputs::InputAction(sf::Keyboard::Key::Return,
-					Inputs::InputType::INPUT_RELEASE), this);
+					Inputs::InputType::INPUT_RELEASE), this, QUIT);
 
 	_options[_currentIndex]->hightlight();
 }
 
 MenuComponent::~MenuComponent()
 {
+}
+
+void MenuComponent::handleInput(int data)
+{
+	std::cout << "Handling: " << data << std::endl;
 }
 
 void MenuComponent::handleInput(Inputs::InputAction inputAction)

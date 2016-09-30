@@ -24,6 +24,7 @@ public:
 	virtual void onExit();
 
 	virtual void handleInput(Inputs::InputAction inputAction);
+	virtual void handleInput(int data);
 
 	virtual void doUpdate(const sf::Time& deltaTime);
 	virtual void doBeforeDraw(sf::RenderWindow& window) const;

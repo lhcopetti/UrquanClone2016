@@ -21,6 +21,7 @@ namespace Inputs
 {
 
 class InputHandler;
+class InputHandlerParam;
 
 class KeyInput
 {
@@ -32,21 +33,21 @@ public:
 
 	const sf::Keyboard::Key key() const;
 
-	bool registerListener(const Inputs::InputType type, Inputs::InputHandler* handler);
-	bool unregisterListener(Inputs::InputType type, Inputs::InputHandler* handler);
+	bool registerListener(const InputType type, InputHandler* handler, int handlerData);
+	bool unregisterListener(InputType type, InputHandler* handler);
 
 	int getNumListeners() const;
 
 private:
 
-	bool doRegister(const Inputs::InputType& type, Inputs::InputHandler* handler);
-	bool doUnregister(const Inputs::InputType& type, Inputs::InputHandler* handler);
+	bool doRegister(const InputType& type, InputHandler* handler, int handlerData);
+	bool doUnregister(const InputType& type, InputHandler* handler);
 
 	sf::Keyboard::Key _key;
 	KeyStateManager _stateManager;
 	int _numListeners;
 
-	std::map<Inputs::InputType, std::vector<Inputs::InputHandler*>> _actionHandlers;
+	std::map<InputType, std::vector<InputHandlerParam>> _actionHandlers;
 };
 
 } /* namespace GameMachine */

@@ -27,6 +27,7 @@ public:
 	virtual ~MenuComponent();
 
 	virtual void handleInput(Inputs::InputAction inputAction);
+	virtual void handleInput(int handlerData);
 
 	void reset();
 

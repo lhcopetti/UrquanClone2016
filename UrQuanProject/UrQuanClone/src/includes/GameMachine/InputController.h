@@ -35,7 +35,7 @@ public:
 	virtual ~InputController();
 
 	void registerAsListener(Inputs::InputAction inputAction,
-			Inputs::InputHandler* inpHandler);
+			Inputs::InputHandler* inpHandler, int handlerData);
 	void unregisterAsListener(Inputs::InputAction inputAction, Inputs::InputHandler* inpHandler);
 
 private:

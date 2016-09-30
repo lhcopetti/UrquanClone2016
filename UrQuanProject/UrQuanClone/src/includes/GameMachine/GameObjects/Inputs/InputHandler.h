@@ -17,7 +17,7 @@ class InputHandler
 {
 public:
 	virtual ~InputHandler() {}
-	virtual void handleInput(Inputs::InputAction inputAction) = 0;
+	virtual void handleInput(int data) = 0;
 };
 
 } /* namespace Inputs */
