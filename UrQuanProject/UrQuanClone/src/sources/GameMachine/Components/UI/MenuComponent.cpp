@@ -14,9 +14,7 @@ namespace UI
 
 enum INPUT_MENU_COMMANDS
 {
-	START,
-	CREDITS,
-	QUIT
+	UP_COMMAND, DOWN_COMMAND, ENTER_COMMAND
 };
 
 MenuComponent::MenuComponent(GameMachine::InputController& inputController,
@@ -43,13 +41,13 @@ MenuComponent::MenuComponent(GameMachine::InputController& inputController,
 
 	_inputController.registerAsListener(
 			Inputs::InputAction(sf::Keyboard::Key::Up,
-					Inputs::InputType::INPUT_RELEASE), this, START);
+					Inputs::InputType::INPUT_RELEASE), this, UP_COMMAND);
 	_inputController.registerAsListener(
 			Inputs::InputAction(sf::Keyboard::Key::Down,
-					Inputs::InputType::INPUT_RELEASE), this, CREDITS);
+					Inputs::InputType::INPUT_RELEASE), this, DOWN_COMMAND);
 	_inputController.registerAsListener(
 			Inputs::InputAction(sf::Keyboard::Key::Return,
-					Inputs::InputType::INPUT_RELEASE), this, QUIT);
+					Inputs::InputType::INPUT_RELEASE), this, ENTER_COMMAND);
 
 	_options[_currentIndex]->hightlight();
 }
@@ -60,11 +58,6 @@ MenuComponent::~MenuComponent()
 
 void MenuComponent::handleInput(int data)
 {
-	std::cout << "Handling: " << data << std::endl;
-}
-
-void MenuComponent::handleInput(Inputs::InputAction inputAction)
-{
 	if (_menuFinished)
 	{
 		std::cout << "O menu já foi selecionado e não pode ser mais alterado!"
@@ -72,7 +65,7 @@ void MenuComponent::handleInput(Inputs::InputAction inputAction)
 		return;
 	}
 
-	if (inputAction.key() == sf::Keyboard::Return)
+	if (data == ENTER_COMMAND)
 	{
 		_menuFinished = true;
 		_selectedOption = _options[_currentIndex];
@@ -82,19 +75,21 @@ void MenuComponent::handleInput(Inputs::InputAction inputAction)
 
 	int newIndex = _currentIndex;
 
-	if (inputAction.key() == sf::Keyboard::Up)
+	if (data == UP_COMMAND)
 		newIndex--;
-	else if (inputAction.key() == sf::Keyboard::Down)
+	else if (DOWN_COMMAND)
 		newIndex++;
 	else
 	{
-		std::cout << "Key: " << inputAction.key() << " não foi mapeada!"
+		std::cout << "Evento de valor: " << data << " não foi mapeado!"
 				<< std::endl;
 		return;
 	}
 
-	newIndex = newIndex < 0 ? 0 :
-				newIndex > (signed) _options.size() - 1 ? _options.size() - 1 : newIndex;
+	newIndex =
+			newIndex < 0 ? 0 :
+			newIndex > (signed) _options.size() - 1 ?
+					_options.size() - 1 : newIndex;
 
 	if (newIndex != _currentIndex)
 	{
@@ -102,8 +97,7 @@ void MenuComponent::handleInput(Inputs::InputAction inputAction)
 		_currentIndex = newIndex;
 	}
 
-	std::cout << "Handling -> Key: " << inputAction.key() << " Action: "
-			<< inputAction.inputType() << std::endl;
+	std::cout << "Menu Component handling signal: " << data << std::endl;
 }
 
 bool MenuComponent::isMenuFinished() const
@@ -130,7 +124,8 @@ void MenuComponent::reset()
 	_options[_currentIndex]->hightlight();
 }
 
-void MenuComponent::updateOptions(const unsigned int currentIndex, const unsigned int newIndex)
+void MenuComponent::updateOptions(const unsigned int currentIndex,
+		const unsigned int newIndex)
 {
 	_options[currentIndex]->unhighlight();
 	_options[newIndex]->hightlight();

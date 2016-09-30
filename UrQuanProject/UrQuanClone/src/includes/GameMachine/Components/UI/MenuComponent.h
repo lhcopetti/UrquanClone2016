@@ -26,7 +26,6 @@ public:
 	MenuComponent(GameMachine::InputController& inputController, std::vector<AbstractOption*> options, sf::Vector2f pos);
 	virtual ~MenuComponent();
 
-	virtual void handleInput(Inputs::InputAction inputAction);
 	virtual void handleInput(int handlerData);
 
 	void reset();

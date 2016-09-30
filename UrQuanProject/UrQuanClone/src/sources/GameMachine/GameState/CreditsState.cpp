@@ -12,11 +12,18 @@
 
 #include <GameMachine/Components/BlueDotComponent.h>
 
+#include <iostream>
+
 namespace GameState
 {
 
+enum CREDITS_INPUT
+{
+	ESCAPE
+};
+
 CreditsState::CreditsState(GameMachine::GameStateController& controller) :
-	GameState(controller)
+		GameState(controller)
 {
 }
 
@@ -35,29 +42,34 @@ void CreditsState::doUpdate(const sf::Time& deltaTime)
 
 	_counter = sf::Time::Zero;
 
-	_goCollection.push(new Geometry::TimeBomb(new Components::BlueDotComponent, sf::seconds(5.0f)));
+	_goCollection.push(
+			new Geometry::TimeBomb(new Components::BlueDotComponent,
+					sf::seconds(5.0f)));
 }
 
 void CreditsState::onEnter()
 {
-	_inputController.registerAsListener(Inputs::InputAction(sf::Keyboard::Escape, Inputs::INPUT_RELEASE), this, 2);
+	_inputController.registerAsListener(
+			Inputs::InputAction(sf::Keyboard::Escape, Inputs::INPUT_RELEASE),
+			this, ESCAPE);
 }
 
 void CreditsState::onExit()
 {
-	_inputController.unregisterAsListener(Inputs::InputAction(sf::Keyboard::Escape, Inputs::INPUT_RELEASE), this);
-}
-
-void CreditsState::handleInput(Inputs::InputAction inputAction)
-{
-	if (inputAction.key() == sf::Keyboard::Escape)
-		_controller.addCommand(new GameMachine::PopStackCommand);
+	_inputController.unregisterAsListener(
+			Inputs::InputAction(sf::Keyboard::Escape, Inputs::INPUT_RELEASE),
+			this);
 }
 
 void CreditsState::handleInput(int data)
 {
-//	if (inputAction.key() == sf::Keyboard::Escape)
-//		_controller.addCommand(new GameMachine::PopStackCommand);
+	if (data != ESCAPE)
+	{
+		std::cout << "No handling routine for this data: " << data << std::endl;
+		return;
+	}
+
+	_controller.addCommand(new GameMachine::PopStackCommand);
 }
 
 void CreditsState::doBeforeDraw(sf::RenderWindow& window) const
