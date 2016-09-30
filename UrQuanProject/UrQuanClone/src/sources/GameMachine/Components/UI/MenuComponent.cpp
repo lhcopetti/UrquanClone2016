@@ -8,6 +8,7 @@
 #include <GameMachine/Components/UI/MenuComponent.h>
 
 #include <iostream>
+#include <algorithm>
 
 namespace UI
 {
@@ -86,10 +87,7 @@ void MenuComponent::handleInput(int data)
 		return;
 	}
 
-	newIndex =
-			newIndex < 0 ? 0 :
-			newIndex > (signed) _options.size() - 1 ?
-					_options.size() - 1 : newIndex;
+	newIndex = std::min((signed)_options.size() - 1, std::max(0, newIndex));
 
 	if (newIndex != _currentIndex)
 	{
