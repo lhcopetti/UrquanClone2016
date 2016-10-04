@@ -18,6 +18,11 @@ class DrawingComponent;
 namespace GameObjects
 {
 
+enum ShipType
+{
+	SHIP_Soldier74, SHIP_GAIJIN
+};
+
 class Ship : public GameObject
 {
 public:

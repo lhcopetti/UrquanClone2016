@@ -8,6 +8,7 @@
 #ifndef SOURCES_GAMEMACHINE_GAMEOBJECTS_FACTORY_SHIPFACTORY_H_
 #define SOURCES_GAMEMACHINE_GAMEOBJECTS_FACTORY_SHIPFACTORY_H_
 
+#include <GameMachine/GameObjects/Ship/Ship.h>
 #include <string>
 
 namespace GameObjects
@@ -25,7 +26,7 @@ public:
 	ShipFactory();
 	virtual ~ShipFactory();
 
-	GameObjects::GameObject* createNew(const std::string& shipType);
+	GameObjects::GameObject* createNew(const GameObjects::ShipType shipType);
 
 };
 
