@@ -15,6 +15,7 @@
 namespace Components
 {
 class DrawingComponent;
+class PhysicsComponent;
 }
 
 namespace GameObjects
@@ -42,9 +43,13 @@ public:
 
 	bool isAlive() const;
 
+	void setPhysicsComponent(Components::PhysicsComponent* physics);
+
 protected:
 
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
+	std::unique_ptr<Components::PhysicsComponent> _physicsComponent;
+
 	bool _alive;
 	sf::Vector2f _pos;
 	float _orientation;

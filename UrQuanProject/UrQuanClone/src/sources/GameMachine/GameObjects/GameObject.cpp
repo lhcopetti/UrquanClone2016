@@ -7,7 +7,9 @@
 
 #include <GameMachine/GameObjects/GameObject.h>
 #include <GameMachine/GameObjects/Inputs/InputAction.h>
+
 #include "GameMachine/Components/DrawingComponent.h"
+#include <GameMachine/Components/PhysicsComponent.h>
 
 namespace GameObjects
 {
@@ -41,6 +43,11 @@ void GameObject::update(const sf::Time& deltaTime)
 		return;
 
 	_drawingComponent->update(*this);
+
+	if (nullptr == _physicsComponent)
+		return;
+
+	_physicsComponent->update(*this);
 }
 
 void GameObject::doUpdate(const sf::Time& deltaTime)
@@ -75,6 +82,11 @@ void GameObject::setOrientation(float newOrientation)
 float GameObject::getOrientation() const
 {
 	return _orientation;
+}
+
+void GameObject::setPhysicsComponent(Components::PhysicsComponent* physics)
+{
+	_physicsComponent = std::unique_ptr<Components::PhysicsComponent>(physics);
 }
 
 } /* namespace GameState */

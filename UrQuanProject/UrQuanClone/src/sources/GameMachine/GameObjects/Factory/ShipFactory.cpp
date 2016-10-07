@@ -8,6 +8,8 @@
 #include <GameMachine/GameObjects/Factory/ShipFactory.h>
 
 #include <GameMachine/Components/DrawingComponent.h>
+#include <GameMachine/Components/PhysicsComponent.h>
+
 #include <GameMachine/GameObjects/Ship/ShipDrawing.h>
 
 #include <GameMachine/GameObjects/GameObject.h>
@@ -36,6 +38,8 @@ GameObjects::GameObject* ShipFactory::createNew(const GameObjects::ShipType ship
 		drawing = new GameObjects::ShipDrawing("./resources/playerShip2_blue.png");
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
+	ship->setPhysicsComponent(new Components::PhysicsComponent);
+
 	return ship;
 }
 
