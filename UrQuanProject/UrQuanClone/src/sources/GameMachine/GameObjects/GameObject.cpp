@@ -18,8 +18,8 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 		sf::Vector2f pos) :
 		_drawingComponent(
 				std::unique_ptr<Components::DrawingComponent>(
-						drawingComponent)), _alive(true), _pos(pos), _orientation(
-				false)
+						drawingComponent)), _physicsComponent(nullptr), _alive(
+				true), _pos(pos), _orientation(false)
 {
 }
 
@@ -37,17 +37,17 @@ void GameObject::draw(sf::RenderWindow& window) const
 
 void GameObject::update(const sf::Time& deltaTime)
 {
+
+	_executor.update(*this);
+
+	if (nullptr != _physicsComponent)
+		_physicsComponent->update(*this);
+
 	doUpdate(deltaTime);
 
-	if (nullptr == _drawingComponent)
-		return;
+	if (nullptr != _drawingComponent)
+		_drawingComponent->update(*this);
 
-	_drawingComponent->update(*this);
-
-	if (nullptr == _physicsComponent)
-		return;
-
-	_physicsComponent->update(*this);
 }
 
 void GameObject::doUpdate(const sf::Time& deltaTime)
@@ -86,7 +86,17 @@ float GameObject::getOrientation() const
 
 void GameObject::setPhysicsComponent(Components::PhysicsComponent* physics)
 {
-	_physicsComponent = std::unique_ptr<Components::PhysicsComponent>(physics);
+	_physicsComponent = physics;
+}
+
+Components::PhysicsComponent* GameObject::getPhysicsComponent()
+{
+	return _physicsComponent;
+}
+
+void GameObject::pushAction(Actions::Action* action)
+{
+	_executor.push(action);
 }
 
 } /* namespace GameState */

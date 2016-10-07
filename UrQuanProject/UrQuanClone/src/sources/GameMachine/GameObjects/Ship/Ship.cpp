@@ -29,7 +29,7 @@ void GameObjects::Ship::doUpdate(const sf::Time& deltaTime)
 	if (nullptr == _physicsComponent)
 			return;
 
-	_physicsComponent->setVelocity(sf::Vector2f(2.f, 0.f));
+//	_physicsComponent->setVelocity(sf::Vector2f(2.f, 0.f));
 }
 
 } /* namespace GameObjects */

@@ -10,6 +10,8 @@
 
 #include <GameMachine/GameObjects/UpdatableFromTime.h>
 #include <GameMachine/GameObjects/Inputs/InputHandler.h>
+#include <GameMachine/GameObjects/Actions/ActionExecutor.h>
+
 #include "SFML/Graphics.hpp"
 
 namespace Components
@@ -44,17 +46,21 @@ public:
 	bool isAlive() const;
 
 	void setPhysicsComponent(Components::PhysicsComponent* physics);
+	Components::PhysicsComponent* getPhysicsComponent();
+
+	void pushAction(Actions::Action* action);
 
 protected:
 
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
-	std::unique_ptr<Components::PhysicsComponent> _physicsComponent;
+	Components::PhysicsComponent* _physicsComponent;
 
 	bool _alive;
 	sf::Vector2f _pos;
 	float _orientation;
 
 private:
+	Actions::ActionExecutor _executor;
 };
 
 } /* namespace GameState */
