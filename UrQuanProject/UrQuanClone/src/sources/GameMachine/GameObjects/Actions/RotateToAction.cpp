@@ -12,7 +12,7 @@ namespace Actions
 {
 
 RotateToAction::RotateToAction(float angle) :
-				RotateAction(angle)
+		RotateAction(angle)
 {
 }
 
@@ -20,10 +20,9 @@ RotateToAction::~RotateToAction()
 {
 }
 
-bool RotateToAction::execute(GameObjects::GameObject& gameObject)
+float RotateToAction::execute(float gameObjectAngle)
 {
-	gameObject.setOrientation(_angle);
-	return true;
+	return _angle;
 }
 
 } /* namespace Actions */

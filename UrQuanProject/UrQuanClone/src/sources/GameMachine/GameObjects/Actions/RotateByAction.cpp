@@ -20,17 +20,9 @@ RotateByAction::~RotateByAction()
 {
 }
 
-bool RotateByAction::execute(GameObjects::GameObject& gameObject)
+float RotateByAction::execute(float gameObjectAngle)
 {
-	float newAngle = (gameObject.getOrientation() + _angle);
-
-	if (newAngle > 360.f)
-		newAngle -= 360.f;
-	else if (newAngle < 0.f)
-		newAngle += 360.f;
-
-	gameObject.setOrientation(newAngle);
-	return true;
+	return gameObjectAngle + _angle;
 }
 
 } /* namespace Actions */

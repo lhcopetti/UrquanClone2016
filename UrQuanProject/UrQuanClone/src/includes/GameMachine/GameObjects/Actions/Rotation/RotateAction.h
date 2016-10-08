@@ -24,7 +24,8 @@ public:
 	RotateAction(float angle);
 	virtual ~RotateAction();
 
-	virtual bool execute(GameObjects::GameObject& gameObject) = 0;
+	virtual float execute(float gameObjectAngle) = 0;
+	virtual bool execute(GameObjects::GameObject& gameObject);
 
 protected:
 	float _angle;

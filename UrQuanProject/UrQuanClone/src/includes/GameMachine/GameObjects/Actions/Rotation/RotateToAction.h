@@ -19,7 +19,7 @@ public:
 	RotateToAction(float angle);
 	virtual ~RotateToAction();
 
-	virtual bool execute(GameObjects::GameObject& gameObject);
+	virtual float execute(float gameObjectAngle);
 };
 
 } /* namespace Actions */
