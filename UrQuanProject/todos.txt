@@ -17,3 +17,7 @@ Abstrair o registro do listener para as ações. Exemplo: register(K, UP_ACTION,
 	- Implementar a funcionalidade do Menu exit do Jogo
 	- Desenhar a primeira nave na tela MainRoundState (Drawing Component para o Ship).
 	- 
+	
+	
+Mover a Lógica do minimax do 360 graus para a action RotateAction
+Fire Pressing events

@@ -41,8 +41,6 @@ GameObjects::GameObject* ShipFactory::createNew(const GameObjects::ShipType ship
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
 	ship->setPhysicsComponent(new Components::PhysicsComponent);
-	ship->pushAction(new Actions::SetVelocityAction({2.0f, 0.f}));
-
 	return ship;
 }
 

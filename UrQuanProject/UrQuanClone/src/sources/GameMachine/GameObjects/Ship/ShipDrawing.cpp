@@ -37,7 +37,7 @@ ShipDrawing::~ShipDrawing()
 void GameObjects::ShipDrawing::update(const GameObjects::GameObject& gameObject)
 {
 	_sprite.setPosition(gameObject.getPosition());
-	_sprite.setRotation(gameObject.getOrientation());
+	_sprite.setRotation(gameObject.getOrientation() + 90.f);
 }
 
 void GameObjects::ShipDrawing::draw(const GameObjects::GameObject& gameObject,

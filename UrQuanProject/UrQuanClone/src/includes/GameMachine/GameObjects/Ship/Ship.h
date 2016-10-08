@@ -30,6 +30,8 @@ public:
 	virtual ~Ship();
 
 	virtual void doUpdate(const sf::Time& deltaTime);
+
+	virtual void handleInput(int userData);
 };
 
 } /* namespace GameObjects */

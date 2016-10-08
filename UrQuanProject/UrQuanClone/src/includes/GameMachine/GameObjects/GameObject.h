@@ -41,7 +41,7 @@ public:
 	void setOrientation(float newOrientation);
 	float getOrientation() const;
 
-	void handleInput(int userData);
+	virtual void handleInput(int userData);
 
 	bool isAlive() const;
 
