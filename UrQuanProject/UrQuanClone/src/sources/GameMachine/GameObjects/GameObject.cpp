@@ -8,8 +8,9 @@
 #include <GameMachine/GameObjects/GameObject.h>
 #include <GameMachine/GameObjects/Inputs/InputAction.h>
 
-#include "GameMachine/Components/DrawingComponent.h"
+#include <GameMachine/Components/DrawingComponent.h>
 #include <GameMachine/Components/PhysicsComponent.h>
+#include <GameMachine/Components/ShooterComponent.h>
 
 namespace GameObjects
 {
@@ -20,7 +21,7 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 				std::unique_ptr<Components::DrawingComponent>(
 						drawingComponent)), //
 		_physicsComponent(nullptr),  //
-		_alive(true), //
+		_shooterComponent(nullptr), _alive(true), //
 		_pos(pos), //
 		_orientation(false) //
 {
@@ -28,6 +29,17 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 
 GameObject::~GameObject()
 {
+	if (nullptr != _physicsComponent)
+	{
+		delete _physicsComponent;
+		_physicsComponent = nullptr;
+	}
+
+	if (nullptr != _shooterComponent)
+	{
+		delete _shooterComponent;
+		_shooterComponent = nullptr;
+	}
 }
 
 void GameObject::draw(sf::RenderWindow& window) const
@@ -44,6 +56,9 @@ void GameObject::update(const sf::Time& deltaTime)
 		_physicsComponent->resetForces();
 
 	_executor.update(*this);
+
+	if (nullptr != _shooterComponent)
+		_shooterComponent->update(deltaTime, *this);
 
 	if (nullptr != _physicsComponent)
 		_physicsComponent->update(deltaTime, *this);
@@ -109,5 +124,25 @@ void GameObject::pushAction(Actions::Action* action)
 	_executor.push(action);
 }
 
-} /* namespace GameState */
+void GameObjects::GameObject::setShooterComponent(
+		Components::ShooterComponent* shooter)
+{
+	_shooterComponent = shooter;
+}
 
+Components::ShooterComponent* GameObjects::GameObject::getShooterComponent()
+{
+	return _shooterComponent;
+}
+
+void GameObject::reproduce(GameObject* gameObject)
+{
+	_reproduction.push_back(gameObject);
+}
+
+std::vector<GameObject*>& GameObject::getProduced()
+{
+	return _reproduction;
+}
+
+} /* namespace GameState */

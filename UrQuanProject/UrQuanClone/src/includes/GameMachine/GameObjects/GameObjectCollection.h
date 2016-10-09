@@ -30,6 +30,8 @@ public:
 
 private:
 	std::vector<std::unique_ptr<GameObject>> _gObjects;
+
+	std::vector<GameObject*> _reproduction;
 };
 
 } /* namespace Components */

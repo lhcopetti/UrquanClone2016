@@ -9,11 +9,14 @@
 
 #include <GameMachine/Components/DrawingComponent.h>
 #include <GameMachine/Components/PhysicsComponent.h>
+#include <GameMachine/Components/ShooterComponent.h>
 
 #include <GameMachine/GameObjects/GameObject.h>
 
 #include <GameMachine/GameObjects/Actions/SetVelocityAction.h>
 #include <GameMachine/GameObjects/Ship/SpriteDrawing.h>
+
+#include <GameMachine/GameObjects/Armory/ProjectileFactory/BulletFactory.h>
 
 namespace Components
 {
@@ -40,7 +43,11 @@ GameObjects::GameObject* ShipFactory::createNew(const GameObjects::ShipType ship
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
 	ship->setPhysicsComponent(new Components::PhysicsComponent);
+	Armory::ProjectileFactory* factory = new Armory::BulletFactory;
+	ship->setShooterComponent(new Components::ShooterComponent(factory));
+
 	return ship;
 }
+
 
 } /* namespace GameObjects */

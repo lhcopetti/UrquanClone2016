@@ -18,6 +18,7 @@ namespace Components
 {
 class DrawingComponent;
 class PhysicsComponent;
+class ShooterComponent;
 }
 
 namespace GameObjects
@@ -49,12 +50,19 @@ public:
 	void setPhysicsComponent(Components::PhysicsComponent* physics);
 	Components::PhysicsComponent* getPhysicsComponent();
 
+	void setShooterComponent(Components::ShooterComponent* shooter);
+	Components::ShooterComponent* getShooterComponent();
+
 	void pushAction(Actions::Action* action);
+
+	void reproduce(GameObject* gameObject);
+	std::vector<GameObject*>& getProduced();
 
 protected:
 
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
 	Components::PhysicsComponent* _physicsComponent;
+	Components::ShooterComponent* _shooterComponent;
 
 	bool _alive;
 	sf::Vector2f _pos;
@@ -62,6 +70,8 @@ protected:
 
 private:
 	Actions::ActionExecutor _executor;
+
+	std::vector<GameObject*> _reproduction;
 };
 
 } /* namespace GameState */

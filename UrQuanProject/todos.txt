@@ -22,3 +22,7 @@ Abstrair o registro do listener para as ações. Exemplo: register(K, UP_ACTION,
 Mover a Lógica do minimax do 360 graus para a action RotateAction OK!
 Fire Pressing events to remove the need to listen for press and release
 Rename VectorMath
+ShooterComponent and PhysicsComponent não precisam ser ponteiros!
+Efetuar limpeza na classe GameObject, muitos métodos getters e setter inócuos e implementações (handleInput) desnecessárias
+
+add clipsize 

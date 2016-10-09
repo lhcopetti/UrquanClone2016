@@ -41,7 +41,9 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	_inputController.registerAsListener(
 	{ sf::Keyboard::D, Inputs::InputType::INPUT_PRESSING }, shipPlayer1,
 			GameObjects::ShipInput::SHIP_ROTATE_RIGHT);
-
+	_inputController.registerAsListener(
+	{ sf::Keyboard::Space, Inputs::InputType::INPUT_PRESS }, shipPlayer1,
+			GameObjects::ShipInput::SHIP_SHOOT);
 
 //	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
 //			GameObjects::ShipType::SHIP_GAIJIN);

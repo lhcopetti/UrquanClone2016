@@ -13,6 +13,7 @@
 
 #include <GameMachine/GameObjects/Actions/ApplyForceAction.h>
 #include <GameMachine/GameObjects/Actions/Rotation/RotateByAction.h>
+#include <GameMachine/GameObjects/Actions/ShootAction.h>
 
 #include <VectorMath/VectorMath.h>
 
@@ -50,6 +51,11 @@ void GameObjects::Ship::handleInput(int userData)
 	{
 		pushAction(new Actions::RotateByAction(+4.f));
 	}
+	else if (userData == ShipInput::SHIP_SHOOT)
+	{
+		pushAction(new Actions::ShootAction());
+	}
+
 }
 
 } /* namespace GameObjects */

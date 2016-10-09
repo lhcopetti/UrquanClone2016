@@ -17,6 +17,7 @@ namespace GameObjects
 	code(THRUST) \
 	code(ROTATE_LEFT) \
 	code(ROTATE_RIGHT) \
+	code(SHOOT)
 
 
 #define DEFINE_ENUM_SHIP_INPUT(enum_type) SHIP_##enum_type,

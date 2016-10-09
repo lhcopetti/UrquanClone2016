@@ -43,20 +43,21 @@ void GameObjectCollection::update(const sf::Time& deltaTime)
 	{
 		(*it)->update(deltaTime);
 
+		std::vector<GameObject*>& reproduction = (*it)->getProduced();
+		for (unsigned int i = 0; i < reproduction.size(); ++i)
+			_reproduction.push_back(reproduction[i]);
+		reproduction.clear();
+
+
 		if (!(*it)->isAlive())
 			it = _gObjects.erase(it);
 		else
 			++it;
 	}
-	for (auto it = _gObjects.begin(); it != _gObjects.end(); ++it)
-	{
-		if (!(*it)->isAlive())
-			_gObjects.erase(it);
-	}
-//	for (auto const& gO : _gObjects)
-//	{
-//		gO->update(deltaTime);
-//	}
+
+	for (unsigned int i = 0; i < _reproduction.size(); ++i)
+		_gObjects.push_back(std::unique_ptr<GameObject>(_reproduction[i]));
+	_reproduction.clear();
 }
 
 const unsigned int GameObjectCollection::size() const
