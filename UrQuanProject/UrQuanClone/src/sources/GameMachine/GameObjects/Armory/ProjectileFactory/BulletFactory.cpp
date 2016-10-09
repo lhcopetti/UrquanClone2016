@@ -30,7 +30,7 @@ BulletFactory::~BulletFactory()
 Projectile* BulletFactory::createNew()
 {
 	Bullet* bullet = new Bullet(new Components::BlueDotComponent);
-	bullet->setPhysicsComponent(new Components::PhysicsComponent);
+	bullet->setPhysicsComponent(new Components::PhysicsComponent(1.0f, 350.f, 0.0f));
 	return bullet;
 }
 

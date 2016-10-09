@@ -32,22 +32,25 @@ ShipFactory::~ShipFactory()
 	// TODO Auto-generated destructor stub
 }
 
-GameObjects::GameObject* ShipFactory::createNew(const GameObjects::ShipType shipType)
+GameObjects::GameObject* ShipFactory::createNew(
+		const GameObjects::ShipType shipType)
 {
 	DrawingComponent* drawing = nullptr;
 
 	if (GameObjects::ShipType::SHIP_Soldier74 == shipType)
-		drawing = new GameObjects::SpriteDrawing("./resources/playerShip1_orange.png", +90.f);
+		drawing = new GameObjects::SpriteDrawing(
+				"./resources/playerShip1_orange.png", +90.f);
 	else if (GameObjects::ShipType::SHIP_GAIJIN == shipType)
-		drawing = new GameObjects::SpriteDrawing("./resources/playerShip2_blue.png", +90.f);
+		drawing = new GameObjects::SpriteDrawing(
+				"./resources/playerShip2_blue.png", +90.f);
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
-	ship->setPhysicsComponent(new Components::PhysicsComponent);
+	ship->setPhysicsComponent(
+			new Components::PhysicsComponent(1.0f, 250.f, 0.01f));
 	Armory::ProjectileFactory* factory = new Armory::BulletFactory;
 	ship->setShooterComponent(new Components::ShooterComponent(factory));
 
 	return ship;
 }
-
 
 } /* namespace GameObjects */

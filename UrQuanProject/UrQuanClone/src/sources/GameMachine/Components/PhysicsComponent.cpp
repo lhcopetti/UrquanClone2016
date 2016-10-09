@@ -14,11 +14,11 @@
 namespace Components
 {
 
-PhysicsComponent::PhysicsComponent() :
-		_mass(1), //
+PhysicsComponent::PhysicsComponent(float mass, float maxVelocity, float friction) :
+		_mass(mass), //
 		_forces(sf::Vector2f(0.f, 0.f)), //
 		_velocity(sf::Vector2f(0.f, 0.f)), //
-		_maxVelocity(250.f), _friction(0.01f)
+		_maxVelocity(maxVelocity), _friction(friction)
 {
 }
 
@@ -43,9 +43,8 @@ void PhysicsComponent::update(const sf::Time& deltaTime,
 	if (VectorMath::size(_velocity) > _maxVelocity)
 		_velocity = VectorMath::normalize(_velocity) * _maxVelocity;
 
-	_velocity *= (1 - _friction);
-//	_velocity.x = std::min(15.f, _velocity.x);
-//	_velocity.y = std::min(15.f, _velocity.y);
+	if (_friction > 0.f)
+		_velocity *= (1 - _friction);
 }
 
 sf::Vector2f& PhysicsComponent::getVelocity()

@@ -22,7 +22,7 @@ namespace Components
 class PhysicsComponent : public Component
 {
 public:
-	PhysicsComponent();
+	PhysicsComponent(float mass, float maxVelocity, float friction);
 	virtual ~PhysicsComponent();
 
 	void resetForces();
