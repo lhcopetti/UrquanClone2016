@@ -22,7 +22,6 @@ PressingState::~PressingState()
 
 void PressingState::onEnter()
 {
-
 }
 
 void PressingState::onExit()

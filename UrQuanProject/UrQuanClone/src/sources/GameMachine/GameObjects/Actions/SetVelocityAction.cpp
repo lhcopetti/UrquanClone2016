@@ -6,7 +6,6 @@
  */
 
 #include <GameMachine/GameObjects/Actions/SetVelocityAction.h>
-#include <GameMachine/GameObjects/GameObject.h>
 #include <GameMachine/Components/PhysicsComponent.h>
 
 namespace Actions

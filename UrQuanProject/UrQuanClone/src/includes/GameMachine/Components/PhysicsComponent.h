@@ -8,7 +8,7 @@
 #ifndef INCLUDES_GAMEMACHINE_COMPONENTS_PHYSICSCOMPONENT_H_
 #define INCLUDES_GAMEMACHINE_COMPONENTS_PHYSICSCOMPONENT_H_
 
-#include <SFML/System/Vector2.hpp>
+#include <SFML/System.hpp>
 
 namespace GameObjects
 {
@@ -24,17 +24,22 @@ public:
 	PhysicsComponent();
 	virtual ~PhysicsComponent();
 
-	virtual void update(GameObjects::GameObject& gameObject);
+	void resetForces();
+	virtual void update(const sf::Time& deltaTime, GameObjects::GameObject& gameObject);
 
-	sf::Vector2f& getVelocity();
+	sf::Vector2f& getForces();
 	sf::Vector2f& getAcceleration();
+	sf::Vector2f& getVelocity();
 
 	void setVelocity(const sf::Vector2f& velocity);
 	void setAcceleration(const sf::Vector2f& velocity);
 
 private:
-	sf::Vector2f _velocity;
+	float _mass;
+
+	sf::Vector2f _forces;
 	sf::Vector2f _acceleration;
+	sf::Vector2f _velocity;
 };
 
 } /* namespace Components */

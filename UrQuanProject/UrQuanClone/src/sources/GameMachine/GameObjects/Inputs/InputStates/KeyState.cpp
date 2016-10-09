@@ -11,9 +11,7 @@ namespace Inputs
 {
 
 KeyState::KeyState(sf::Keyboard::Key key, InputType type, sf::Time time) :
-		_key(key),
-		_type(type),
-		_timeElapsed(time)
+		_key(key), _timeElapsed(time), _type(type)
 {
 }
 

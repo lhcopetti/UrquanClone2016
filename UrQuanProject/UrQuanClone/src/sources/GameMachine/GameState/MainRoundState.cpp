@@ -25,16 +25,15 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	Components::ShipFactory shipFactory;
 	GameObjects::GameObject* shipPlayer1 = shipFactory.createNew(
 			GameObjects::ShipType::SHIP_Soldier74);
-	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
-			GameObjects::ShipType::SHIP_GAIJIN);
 
 	sf::Vector2f center = GAME_SCREEN_CENTER_VECTOR;
 	sf::Vector2f halfCenter(center.x / 2, center.y);
 
 	shipPlayer1->setPosition(halfCenter);
+	_goCollection.push(shipPlayer1);
 
 	_inputController.registerAsListener(
-	{ sf::Keyboard::W, Inputs::InputType::INPUT_PRESS }, shipPlayer1,
+	{ sf::Keyboard::W, Inputs::InputType::INPUT_PRESSING }, shipPlayer1,
 			GameObjects::ShipInput::SHIP_THRUST);
 	_inputController.registerAsListener(
 	{ sf::Keyboard::A, Inputs::InputType::INPUT_PRESSING }, shipPlayer1,
@@ -52,9 +51,11 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	{ sf::Keyboard::D, Inputs::InputType::INPUT_RELEASE }, shipPlayer1,
 			GameObjects::ShipInput::SHIP_ROTATE_RIGHT_RELEASE);
 
-	shipPlayer2->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
-	_goCollection.push(shipPlayer1);
-	_goCollection.push(shipPlayer2);
+
+//	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
+//			GameObjects::ShipType::SHIP_GAIJIN);
+//	shipPlayer2->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
+//	_goCollection.push(shipPlayer2);
 }
 
 MainRoundState::~MainRoundState()
@@ -64,7 +65,7 @@ MainRoundState::~MainRoundState()
 void MainRoundState::onEnter()
 {
 	std::cout << "Entering MainRoundState" << std::endl;
-	_goCollection.push(Components::BlueCircle::newBlueCircle());
+//	_goCollection.push(Components::BlueCircle::newBlueCircle());
 }
 
 void MainRoundState::onExit()

@@ -11,7 +11,7 @@
 #include <GameMachine/Components/PhysicsComponent.h>
 #include <iostream>
 
-#include <GameMachine/GameObjects/Actions/SetVelocityAction.h>
+#include <GameMachine/GameObjects/Actions/ApplyForceAction.h>
 #include <GameMachine/GameObjects/Actions/Rotation/RotateByAction.h>
 
 #include <VectorMath/VectorMath.h>
@@ -41,9 +41,9 @@ void GameObjects::Ship::handleInput(int userData)
 
 	if (userData == ShipInput::SHIP_THRUST)
 	{
-		sf::Vector2f velocityVector = VectorMath::newBySizeAngle(1.f,
+		sf::Vector2f velocityVector = VectorMath::newBySizeAngle(300.f,
 				_orientation);
-		pushAction(new Actions::SetVelocityAction(velocityVector));
+		pushAction(new Actions::ApplyForceAction(velocityVector));
 	}
 	else if (userData == ShipInput::SHIP_ROTATE_LEFT)
 	{

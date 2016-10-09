@@ -36,8 +36,6 @@ public:
 protected:
 	const sf::Keyboard::Key _key;
 	sf::Time _timeElapsed;
-
-private:
 	const InputType _type;
 };
 

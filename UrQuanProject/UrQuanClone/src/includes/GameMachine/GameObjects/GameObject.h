@@ -36,6 +36,7 @@ public:
 	void draw(sf::RenderWindow& window) const;
 
 	void setPosition(const sf::Vector2f& newPos);
+	void addPosition(const sf::Vector2f& position);
 	const sf::Vector2f& getPosition() const;
 
 	void setOrientation(float newOrientation);

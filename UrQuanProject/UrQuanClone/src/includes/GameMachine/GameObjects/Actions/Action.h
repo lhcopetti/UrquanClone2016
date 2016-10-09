@@ -8,10 +8,7 @@
 #ifndef INCLUDES_GAMEMACHINE_GAMEOBJECTS_ACTIONS_ACTION_H_
 #define INCLUDES_GAMEMACHINE_GAMEOBJECTS_ACTIONS_ACTION_H_
 
-namespace GameObjects
-{
-class GameObject;
-}
+#include <GameMachine/GameObjects/GameObject.h>
 
 namespace Actions
 {

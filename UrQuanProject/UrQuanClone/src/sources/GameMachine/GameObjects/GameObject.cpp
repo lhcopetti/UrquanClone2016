@@ -18,8 +18,11 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 		sf::Vector2f pos) :
 		_drawingComponent(
 				std::unique_ptr<Components::DrawingComponent>(
-						drawingComponent)), _physicsComponent(nullptr), _alive(
-				true), _pos(pos), _orientation(false)
+						drawingComponent)), //
+		_physicsComponent(nullptr),  //
+		_alive(true), //
+		_pos(pos), //
+		_orientation(false) //
 {
 }
 
@@ -37,11 +40,13 @@ void GameObject::draw(sf::RenderWindow& window) const
 
 void GameObject::update(const sf::Time& deltaTime)
 {
+	if (nullptr != _physicsComponent)
+		_physicsComponent->resetForces();
 
 	_executor.update(*this);
 
 	if (nullptr != _physicsComponent)
-		_physicsComponent->update(*this);
+		_physicsComponent->update(deltaTime, *this);
 
 	doUpdate(deltaTime);
 
@@ -58,6 +63,11 @@ void GameObject::doUpdate(const sf::Time& deltaTime)
 void GameObject::setPosition(const sf::Vector2f& newPos)
 {
 	_pos = newPos;
+}
+
+void GameObject::addPosition(const sf::Vector2f& position)
+{
+	_pos += position;
 }
 
 const sf::Vector2f& GameObject::getPosition() const

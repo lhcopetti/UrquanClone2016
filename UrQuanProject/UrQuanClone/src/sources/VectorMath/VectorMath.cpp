@@ -29,4 +29,24 @@ float toRadians(float degree)
 	return degree * M_PI / 180;
 }
 
+float size(const sf::Vector2f& vector)
+{
+	return sqrt(sizeSqrt(vector));
+}
+
+float sizeSqrt(const sf::Vector2f& vector)
+{
+	return pow(vector.x, 2) + pow(vector.y, 2);
+}
+
+sf::Vector2f normalize(const sf::Vector2f& vector)
+{
+	return vector / size(vector);
+}
+
+void normalize(sf::Vector2f& vector)
+{
+	vector /= size(vector);
+}
+
 } /* namespace VectorMath */
