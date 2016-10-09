@@ -22,6 +22,8 @@ float size(const sf::Vector2f& vector);
 float sizeSqrt(const sf::Vector2f& vector);
 
 sf::Vector2f normalize(const sf::Vector2f& vector);
+
+sf::Vector2f rotate(const sf::Vector2f& vector, float angle);
 //void normalize(sf::Vector2f& vector);
 
 } /* namespace VectorMath */

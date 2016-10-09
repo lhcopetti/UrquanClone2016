@@ -13,10 +13,12 @@
 namespace Armory
 {
 
-Weapon::Weapon(ProjectileFactory* factory, float timeBetweenBullets) :
+Weapon::Weapon(ProjectileFactory* factory, sf::Vector2f offset,
+		float timeBetweenBullets) :
 		_factory(factory), //
 		_timeBetweenBullets(timeBetweenBullets), //
-		_timeBetweenBulletsCounter(_timeBetweenBullets) //
+		_timeBetweenBulletsCounter(_timeBetweenBullets), //
+		_offset(offset)
 {
 }
 
@@ -29,10 +31,16 @@ bool Weapon::canShoot()
 	return _timeBetweenBulletsCounter <= 0;
 }
 
+const sf::Vector2f& Weapon::getOffset() const
+{
+	return _offset;
+}
+
 Projectile* Weapon::shoot()
 {
 	_timeBetweenBulletsCounter = _timeBetweenBullets;
-	return _factory->createNew();
+	Armory::Projectile* projectile = _factory->createNew();
+	return projectile;
 }
 
 void Armory::Weapon::update(const sf::Time& deltaTime)

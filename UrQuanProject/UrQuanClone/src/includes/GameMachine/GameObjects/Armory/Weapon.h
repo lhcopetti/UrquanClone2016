@@ -9,17 +9,23 @@
 #define INCLUDES_GAMEMACHINE_GAMEOBJECTS_ARMORY_WEAPON_H_
 
 #include <GameMachine/GameObjects/UpdatableFromTime.h>
+#include <SFML/System.hpp>
 
 namespace Armory
 {
 class Projectile;
 class ProjectileFactory;
 
-class Weapon : public UpdatableFromTime
+class Weapon: public UpdatableFromTime
 {
 public:
-	Weapon(ProjectileFactory* factory, float timeBetweenBullets = 0.5f);
+	Weapon(ProjectileFactory* factory,
+			sf::Vector2f offset = sf::Vector2f(39.f, 0.f),
+			float timeBetweenBullets = 0.5f);
 	virtual ~Weapon();
+
+
+	const sf::Vector2f& getOffset() const;
 
 	virtual void update(const sf::Time& deltaTime);
 
@@ -33,6 +39,8 @@ private:
 
 	const float _timeBetweenBullets;
 	float _timeBetweenBulletsCounter;
+
+	sf::Vector2f _offset;
 
 };
 

@@ -49,4 +49,15 @@ void normalize(sf::Vector2f& vector)
 	vector /= size(vector);
 }
 
+sf::Vector2f rotate(const sf::Vector2f& vector, float angle)
+{
+	float radians = toRadians(angle);
+	float sinAng = sin(radians);
+	float cosAng = cos(radians);
+
+	return sf::Vector2f(cosAng * vector.x - sinAng * vector.y,
+			sinAng * vector.x + cosAng * vector.y);
+}
+
 } /* namespace VectorMath */
+

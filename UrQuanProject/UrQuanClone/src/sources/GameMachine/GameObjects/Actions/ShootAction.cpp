@@ -12,6 +12,8 @@
 #include <GameMachine/GameObjects/Armory/Weapon.h>
 #include <GameMachine/GameObjects/Armory/Projectile.h>
 
+#include <GameMachine/Components/PhysicsComponent.h>
+
 #include <VectorMath/VectorMath.h>
 
 namespace Actions
@@ -44,12 +46,17 @@ bool ShootAction::execute(GameObjects::GameObject& gameObject)
 	if (nullptr == projectile)
 		return false;
 
-	projectile->setPosition(gameObject.getPosition());
+	sf::Vector2f weaponOffset = VectorMath::rotate(weapon.getOffset(),
+			gameObject.getOrientation());
+	projectile->setPosition(gameObject.getPosition() + weaponOffset);
 
-	sf::Vector2f forceVector = sf::Vector2f(
+	sf::Vector2f velocity = sf::Vector2f(
 			VectorMath::newBySizeAngle(300.f, gameObject.getOrientation()));
 
-	projectile->pushAction(new Actions::SetVelocityAction(forceVector));
+	if (nullptr != gameObject.getPhysicsComponent())
+		velocity += gameObject.getPhysicsComponent()->getVelocity();
+
+	projectile->pushAction(new Actions::SetVelocityAction(velocity));
 
 	gameObject.reproduce(projectile);
 	return true;

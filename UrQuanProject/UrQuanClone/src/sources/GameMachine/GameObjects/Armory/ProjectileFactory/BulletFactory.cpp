@@ -11,7 +11,7 @@
 #include <GameMachine/GameObjects/Armory/Bullet.h>
 
 #include <GameMachine/Components/PhysicsComponent.h>
-#include <GameMachine/Components/BlueDotComponent.h>
+#include <GameMachine/Components/ShapeComponent.h>
 
 namespace Armory
 {
@@ -29,8 +29,13 @@ BulletFactory::~BulletFactory()
 
 Projectile* BulletFactory::createNew()
 {
-	Bullet* bullet = new Bullet(new Components::BlueDotComponent);
-	bullet->setPhysicsComponent(new Components::PhysicsComponent(1.0f, 350.f, 0.0f));
+	sf::Shape* shape = new sf::CircleShape(3);
+	shape->setFillColor(sf::Color::White);
+	Components::ShapeComponent* shapeComponent = new Components::ShapeComponent(
+			shape);
+	Bullet* bullet = new Bullet(shapeComponent);
+	bullet->setPhysicsComponent(
+			new Components::PhysicsComponent(1.0f, 350.f, 0.0f));
 	return bullet;
 }
 
