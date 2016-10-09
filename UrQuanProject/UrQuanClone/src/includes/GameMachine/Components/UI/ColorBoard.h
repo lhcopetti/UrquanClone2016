@@ -20,7 +20,7 @@ public:
 	ColorBoard(sf::Text text, sf::Color color = sf::Color::Blue, int heigth = 50, int width = 200);
 	virtual ~ColorBoard();
 
-	virtual void update(const GameObjects::GameObject& gameObject);
+	virtual void update(const sf::Time& deltaTime, GameObjects::GameObject& gameObject);
 	virtual void draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const;
 
 	virtual void sendMessage(const std::string& msg);

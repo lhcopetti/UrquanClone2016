@@ -22,12 +22,14 @@ BlueDotComponent::~BlueDotComponent()
 {
 }
 
-void BlueDotComponent::update(const GameObjects::GameObject& gameObject)
+void BlueDotComponent::update(const sf::Time& deltaTime,
+		GameObjects::GameObject& gameObject)
 {
 	_circle.setPosition(gameObject.getPosition());
 }
 
-void BlueDotComponent::draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const
+void BlueDotComponent::draw(const GameObjects::GameObject& gameObject,
+		sf::RenderWindow& window) const
 {
 	window.draw(_circle);
 }

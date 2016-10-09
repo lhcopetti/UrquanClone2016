@@ -20,7 +20,7 @@ public:
 	BlueDotComponent();
 	virtual ~BlueDotComponent();
 
-	virtual void update(const GameObjects::GameObject& gameObject);
+	virtual void update(const sf::Time& deltaTime, GameObjects::GameObject& gameObject);
 	virtual void draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const;
 
 private:

@@ -38,7 +38,7 @@ ColorBoard::~ColorBoard()
 {
 }
 
-void ColorBoard::update(const GameObjects::GameObject& gameObject)
+void ColorBoard::update(const sf::Time& deltaTime, GameObjects::GameObject& gameObject)
 {
 	const sf::Vector2f pos = gameObject.getPosition();
 

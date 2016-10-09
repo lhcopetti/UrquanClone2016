@@ -8,6 +8,7 @@
 #ifndef INCLUDES_GAMEMACHINE_COMPONENTS_DRAWINGCOMPONENT_H_
 #define INCLUDES_GAMEMACHINE_COMPONENTS_DRAWINGCOMPONENT_H_
 
+#include <GameMachine/Components/Component.h>
 #include "SFML/Graphics.hpp"
 
 namespace GameObjects
@@ -18,14 +19,14 @@ namespace GameObjects
 namespace Components
 {
 
-class DrawingComponent
+class DrawingComponent : public Component
 {
 public:
 	DrawingComponent();
 	virtual ~DrawingComponent();
 
 	virtual void sendMessage(const std::string& msg);
-	virtual void update(const GameObjects::GameObject& gameObject) = 0;
+	virtual void update(const sf::Time& deltaTime, GameObjects::GameObject& gameObject);
 	virtual void draw(const GameObjects::GameObject& gameObject, sf::RenderWindow& window) const = 0;
 };
 

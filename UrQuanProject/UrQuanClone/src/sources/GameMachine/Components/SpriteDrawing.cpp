@@ -20,7 +20,8 @@ SpriteDrawing::SpriteDrawing(const std::string& resourcePath, float angleOffset)
 {
 	if (!_texture.loadFromFile(resourcePath))
 	{
-		std::cout << "Erro ao carregar do arquivo: " << resourcePath << std::endl;
+		std::cout << "Erro ao carregar do arquivo: " << resourcePath
+				<< std::endl;
 		return;
 	}
 
@@ -35,7 +36,8 @@ SpriteDrawing::~SpriteDrawing()
 {
 }
 
-void GameObjects::SpriteDrawing::update(const GameObjects::GameObject& gameObject)
+void GameObjects::SpriteDrawing::update(const sf::Time& deltaTime,
+		GameObjects::GameObject& gameObject)
 {
 	_sprite.setPosition(gameObject.getPosition());
 	_sprite.setRotation(gameObject.getOrientation() + 90.f);

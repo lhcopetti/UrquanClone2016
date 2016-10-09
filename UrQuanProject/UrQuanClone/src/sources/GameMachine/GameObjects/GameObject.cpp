@@ -51,7 +51,7 @@ void GameObject::update(const sf::Time& deltaTime)
 	doUpdate(deltaTime);
 
 	if (nullptr != _drawingComponent)
-		_drawingComponent->update(*this);
+		_drawingComponent->update(deltaTime, *this);
 
 }
 

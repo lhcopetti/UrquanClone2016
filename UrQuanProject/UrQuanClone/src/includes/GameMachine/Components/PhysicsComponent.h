@@ -8,6 +8,7 @@
 #ifndef INCLUDES_GAMEMACHINE_COMPONENTS_PHYSICSCOMPONENT_H_
 #define INCLUDES_GAMEMACHINE_COMPONENTS_PHYSICSCOMPONENT_H_
 
+#include <GameMachine/Components/Component.h>
 #include <SFML/System.hpp>
 
 namespace GameObjects
@@ -18,7 +19,7 @@ class GameObject;
 namespace Components
 {
 
-class PhysicsComponent
+class PhysicsComponent : public Component
 {
 public:
 	PhysicsComponent();

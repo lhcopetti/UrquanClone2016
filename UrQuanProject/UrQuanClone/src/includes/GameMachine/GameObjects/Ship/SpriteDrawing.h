@@ -25,7 +25,7 @@ public:
 	SpriteDrawing(const std::string& resourcePath, float angleOffset = 0.f);
 	virtual ~SpriteDrawing();
 
-	virtual void update(const GameObjects::GameObject& gameObject);
+	virtual void update(const sf::Time& deltaTime, GameObjects::GameObject& gameObject);
 	virtual void draw(const GameObjects::GameObject& gameObject,
 			sf::RenderWindow& window) const;
 
