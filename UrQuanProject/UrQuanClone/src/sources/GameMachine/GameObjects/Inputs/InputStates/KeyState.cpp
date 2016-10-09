@@ -10,10 +10,10 @@
 namespace Inputs
 {
 
-KeyState::KeyState(sf::Keyboard::Key key, InputType type) :
+KeyState::KeyState(sf::Keyboard::Key key, InputType type, sf::Time time) :
 		_key(key),
-		_timeElapsed(sf::seconds(0.0f)),
-		_type(type)
+		_type(type),
+		_timeElapsed(time)
 {
 }
 

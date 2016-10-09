@@ -6,7 +6,7 @@
  */
 
 #include <GameMachine/GameObjects/Inputs/InputStates/PressedState.h>
-#include <GameMachine/GameObjects/Inputs/InputStates/ReleasedState.h>
+#include <GameMachine/GameObjects/Inputs/InputStates/PressingState.h>
 #include <iostream>
 
 namespace Inputs
@@ -20,17 +20,11 @@ PressedState::PressedState(sf::Keyboard::Key key) :
 
 PressedState::~PressedState()
 {
-	// TODO Auto-generated destructor stub
 }
 
 KeyState* PressedState::doUpdate(const sf::Time& deltaTime)
 {
-	if (!sf::Keyboard::isKeyPressed(_key))
-	{
-		return new ReleasedState(_key, _timeElapsed.asMilliseconds() < DOUBLE_TAP_KEY_INTERVAL_MS);
-	}
-
-	return nullptr;
+	return new PressingState(_key);
 }
 
 void PressedState::onEnter()
@@ -41,6 +35,5 @@ void PressedState::onEnter()
 void PressedState::onExit()
 {
 }
-
 
 } /* namespace Inputs */

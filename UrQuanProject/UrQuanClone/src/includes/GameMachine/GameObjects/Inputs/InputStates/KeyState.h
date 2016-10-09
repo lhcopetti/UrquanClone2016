@@ -21,7 +21,7 @@ namespace Inputs
 class KeyState
 {
 public:
-	KeyState(sf::Keyboard::Key key, InputType type);
+	KeyState(sf::Keyboard::Key key, InputType type, sf::Time = sf::Time());
 	virtual ~KeyState();
 
 	virtual void onEnter() {}

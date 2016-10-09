@@ -36,25 +36,22 @@ void GameObjects::Ship::doUpdate(const sf::Time& deltaTime)
 
 void GameObjects::Ship::handleInput(int userData)
 {
-	std::cout << "Ship command received: "
-			<< GameObjects::shipInputString((ShipInput) userData) << std::endl;
+//	std::cout << "Ship command received: "
+//			<< GameObjects::shipInputString((ShipInput) userData) << std::endl;
 
 	if (userData == ShipInput::SHIP_THRUST)
 	{
-		std::cout << "Orientation: " << _orientation << std::endl;
 		sf::Vector2f velocityVector = VectorMath::newBySizeAngle(1.f,
 				_orientation);
-		std::cout << "Printing vel vector. X: " << velocityVector.x << " Y: "
-				<< velocityVector.y << std::endl;
 		pushAction(new Actions::SetVelocityAction(velocityVector));
 	}
 	else if (userData == ShipInput::SHIP_ROTATE_LEFT)
 	{
-		pushAction(new Actions::RotateByAction(-25.f));
+		pushAction(new Actions::RotateByAction(-4.f));
 	}
 	else if (userData == ShipInput::SHIP_ROTATE_RIGHT)
 	{
-		pushAction(new Actions::RotateByAction(+25.f));
+		pushAction(new Actions::RotateByAction(+4.f));
 	}
 }
 
