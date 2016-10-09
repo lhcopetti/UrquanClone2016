@@ -36,9 +36,6 @@ void GameObjects::Ship::doUpdate(const sf::Time& deltaTime)
 
 void GameObjects::Ship::handleInput(int userData)
 {
-//	std::cout << "Ship command received: "
-//			<< GameObjects::shipInputString((ShipInput) userData) << std::endl;
-
 	if (userData == ShipInput::SHIP_THRUST)
 	{
 		sf::Vector2f velocityVector = VectorMath::newBySizeAngle(300.f,

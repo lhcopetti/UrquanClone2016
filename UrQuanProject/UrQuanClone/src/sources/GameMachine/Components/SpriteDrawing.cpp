@@ -5,8 +5,8 @@
  *      Author: LuisCopetti
  */
 
-#include <GameMachine/GameObjects/Ship/ShipDrawing.h>
 #include <GameMachine/GameObjects/GameObject.h>
+#include <GameMachine/GameObjects/Ship/SpriteDrawing.h>
 
 #include <SFML/Graphics.hpp>
 
@@ -15,7 +15,8 @@
 namespace GameObjects
 {
 
-ShipDrawing::ShipDrawing(const std::string& resourcePath)
+SpriteDrawing::SpriteDrawing(const std::string& resourcePath, float angleOffset) :
+		_angleOffset(angleOffset)
 {
 	if (!_texture.loadFromFile(resourcePath))
 	{
@@ -30,25 +31,19 @@ ShipDrawing::ShipDrawing(const std::string& resourcePath)
 	_sprite.setOrigin(newOrigin);
 }
 
-ShipDrawing::~ShipDrawing()
+SpriteDrawing::~SpriteDrawing()
 {
 }
 
-void GameObjects::ShipDrawing::update(const GameObjects::GameObject& gameObject)
+void GameObjects::SpriteDrawing::update(const GameObjects::GameObject& gameObject)
 {
 	_sprite.setPosition(gameObject.getPosition());
 	_sprite.setRotation(gameObject.getOrientation() + 90.f);
 }
 
-void GameObjects::ShipDrawing::draw(const GameObjects::GameObject& gameObject,
+void GameObjects::SpriteDrawing::draw(const GameObjects::GameObject& gameObject,
 		sf::RenderWindow& window) const
 {
-	sf::CircleShape circle;
-	circle.setRadius(10.f);
-	circle.setFillColor(sf::Color::Black);
-	circle.setPosition(gameObject.getPosition());
-	window.draw(circle);
-
 	window.draw(_sprite);
 }
 

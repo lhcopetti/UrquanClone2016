@@ -17,8 +17,8 @@ namespace Components
 PhysicsComponent::PhysicsComponent() :
 		_mass(1), //
 		_forces(sf::Vector2f(0.f, 0.f)), //
-		_acceleration(sf::Vector2f(0.f, 0.f)), //
-		_velocity(sf::Vector2f(0.f, 0.f))
+		_velocity(sf::Vector2f(0.f, 0.f)), //
+		_maxVelocity(250.f), _friction(0.01f)
 {
 }
 
@@ -29,8 +29,8 @@ PhysicsComponent::~PhysicsComponent()
 void PhysicsComponent::update(const sf::Time& deltaTime,
 		GameObjects::GameObject& gameObject)
 {
-	_acceleration = _forces / _mass;
-	sf::Vector2f accelSecs = _acceleration * deltaTime.asSeconds();
+	sf::Vector2f acceleration = _forces / _mass;
+	sf::Vector2f accelSecs = acceleration * deltaTime.asSeconds();
 
 	sf::Vector2f position = (_velocity + accelSecs / 2.f)
 			* deltaTime.asSeconds();
@@ -40,10 +40,10 @@ void PhysicsComponent::update(const sf::Time& deltaTime,
 
 	std::cout << "Velocity: " << VectorMath::size(_velocity) << std::endl;
 
-	const float maxVelociy = 250.f;
+	if (VectorMath::size(_velocity) > _maxVelocity)
+		_velocity = VectorMath::normalize(_velocity) * _maxVelocity;
 
-	if (VectorMath::size(_velocity) > maxVelociy)
-		_velocity = VectorMath::normalize(_velocity) * 250.f;
+	_velocity *= (1 - _friction);
 //	_velocity.x = std::min(15.f, _velocity.x);
 //	_velocity.y = std::min(15.f, _velocity.y);
 }
@@ -51,11 +51,6 @@ void PhysicsComponent::update(const sf::Time& deltaTime,
 sf::Vector2f& PhysicsComponent::getVelocity()
 {
 	return _velocity;
-}
-
-sf::Vector2f& PhysicsComponent::getAcceleration()
-{
-	return _acceleration;
 }
 
 void PhysicsComponent::setVelocity(const sf::Vector2f& velocity)
@@ -66,11 +61,6 @@ void PhysicsComponent::setVelocity(const sf::Vector2f& velocity)
 sf::Vector2f& PhysicsComponent::getForces()
 {
 	return _forces;
-}
-
-void PhysicsComponent::setAcceleration(const sf::Vector2f& acceleration)
-{
-	_acceleration = acceleration;
 }
 
 void Components::PhysicsComponent::resetForces()

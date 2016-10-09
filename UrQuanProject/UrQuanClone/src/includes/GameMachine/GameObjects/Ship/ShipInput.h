@@ -15,11 +15,8 @@ namespace GameObjects
 
 #define HIGH_ORDER_SHIP_INPUT(code) \
 	code(THRUST) \
-	code(THRUST_RELEASE) \
 	code(ROTATE_LEFT) \
-	code(ROTATE_LEFT_RELEASE) \
 	code(ROTATE_RIGHT) \
-	code(ROTATE_RIGHT_RELEASE) \
 
 
 #define DEFINE_ENUM_SHIP_INPUT(enum_type) SHIP_##enum_type,

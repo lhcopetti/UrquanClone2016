@@ -38,8 +38,10 @@ private:
 	float _mass;
 
 	sf::Vector2f _forces;
-	sf::Vector2f _acceleration;
 	sf::Vector2f _velocity;
+
+	float _maxVelocity;
+	float _friction;
 };
 
 } /* namespace Components */
