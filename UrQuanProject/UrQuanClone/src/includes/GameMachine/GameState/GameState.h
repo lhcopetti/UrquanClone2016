@@ -43,7 +43,7 @@ protected:
 	GameMachine::GameStateController& _controller;
 
 	GameObjects::GameObjectCollection _goCollection;
-	GameMachine::InputController _inputController;
+	Inputs::InputController _inputController;
 
 private:
 

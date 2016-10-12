@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <iostream>
 
-namespace GameMachine
+namespace Inputs
 {
 
 InputController::InputController()

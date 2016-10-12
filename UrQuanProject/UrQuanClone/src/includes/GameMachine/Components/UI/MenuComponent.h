@@ -23,7 +23,7 @@ namespace UI
 class MenuComponent: public Inputs::InputHandler
 {
 public:
-	MenuComponent(GameMachine::InputController& inputController, std::vector<AbstractOption*> options, sf::Vector2f pos);
+	MenuComponent(Inputs::InputController& inputController, std::vector<AbstractOption*> options, sf::Vector2f pos);
 	virtual ~MenuComponent();
 
 	virtual void handleInput(int handlerData);
@@ -37,7 +37,7 @@ private:
 
 	void updateOptions(const unsigned int currentIndex, const unsigned int index);
 
-	GameMachine::InputController& _inputController;
+	Inputs::InputController& _inputController;
 
 	std::vector<AbstractOption*> _options;
 

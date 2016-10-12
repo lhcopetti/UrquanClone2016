@@ -18,7 +18,7 @@ enum INPUT_MENU_COMMANDS
 	UP_COMMAND, DOWN_COMMAND, ENTER_COMMAND
 };
 
-MenuComponent::MenuComponent(GameMachine::InputController& inputController,
+MenuComponent::MenuComponent(Inputs::InputController& inputController,
 		std::vector<AbstractOption*> options, sf::Vector2f pos) :
 		_inputController(inputController), _options(options), _pos(pos), _currentIndex(
 				0), _menuFinished(false), _selectedOption(nullptr)
