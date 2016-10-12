@@ -8,7 +8,7 @@
 #ifndef INCLUDES_GAMEMECHANICS_GAMECONTROLLER_H_
 #define INCLUDES_GAMEMECHANICS_GAMECONTROLLER_H_
 
-#include <GameMachine/InputController.h>
+#include <GameMachine/InputControl/InputController.h>
 #include "GameMachine/GameStateController.h"
 
 #include "SFML/Graphics.hpp"

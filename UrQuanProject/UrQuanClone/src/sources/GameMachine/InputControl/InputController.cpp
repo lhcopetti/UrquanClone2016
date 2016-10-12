@@ -5,7 +5,7 @@
  *      Author: Pichau
  */
 
-#include <GameMachine/InputController.h>
+#include <GameMachine/InputControl/InputController.h>
 
 #include <algorithm>
 #include <iostream>
@@ -37,7 +37,8 @@ void InputController::registerAsListener(Inputs::InputAction inputAction,
 	if (isNew)
 		_inputKeys.push_back(inputKey);
 
-	inputKey->registerListener(inputAction.inputType(), inpHandler, handlerData);
+	inputKey->registerListener(inputAction.inputType(), inpHandler,
+			handlerData);
 }
 
 void InputController::unregisterAsListener(Inputs::InputAction inputAction,
@@ -48,23 +49,14 @@ void InputController::unregisterAsListener(Inputs::InputAction inputAction,
 	for (auto it = _inputKeys.begin(); it != _inputKeys.end(); ++it)
 		if ((*it)->key() == inputAction.key())
 		{
-			if ((*it)->unregisterListener(inputAction.inputType(), inpHandler) && (*it)->getNumListeners() == 0)
+			if ((*it)->unregisterListener(inputAction.inputType(), inpHandler)
+					&& (*it)->getNumListeners() == 0)
 			{
 				delete *it;
 				_inputKeys.erase(it);
 				return;
 			}
 		}
-
-//	for (auto* inpKey : _inputKeys)
-//	{
-//		if (inpKey->key() == inputAction.key())
-//		{
-//			if (inpKey->unregisterListener(inputAction.inputType(), inpHandler) && inpKey->getNumListeners() == 0)
-//
-//			return;
-//		}
-//	}
 
 	std::cout << "Attempt to unregister a Listener Failed. Input: "
 			<< inputAction.key() << " Type: " << inputAction.inputType()
@@ -75,8 +67,8 @@ Inputs::KeyInput* InputController::retrieveOrNew(
 		const Inputs::InputAction& inputAction, bool* isNew)
 {
 	auto found = std::find_if(_inputKeys.begin(), _inputKeys.end(),
-				[&, inputAction] (Inputs::KeyInput* kI)
-				{	return kI->key() == inputAction.key();});
+			[&, inputAction] (Inputs::KeyInput* kI)
+			{	return kI->key() == inputAction.key();});
 
 	if (found == _inputKeys.end() && nullptr != isNew)
 	{
