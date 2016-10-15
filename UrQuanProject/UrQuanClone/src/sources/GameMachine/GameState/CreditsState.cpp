@@ -11,6 +11,7 @@
 #include <GameMachine/Components/Geometry/TimeBomb.h>
 
 #include <GameMachine/Components/BlueDotComponent.h>
+#include <GameMachine/InputControl/InputBuilder.h>
 
 #include <iostream>
 
@@ -49,9 +50,15 @@ void CreditsState::doUpdate(const sf::Time& deltaTime)
 
 void CreditsState::onEnter()
 {
-	_inputController.registerAsListener(
-			Inputs::InputAction(sf::Keyboard::Escape, Inputs::INPUT_RELEASE),
-			this, ESCAPE);
+	using namespace Inputs;
+
+	InputBuilder builder;
+	builder
+		.bind({sf::Keyboard::Escape, INPUT_RELEASE})
+		.to(ESCAPE)
+		.applyFor(this)
+		.on(_inputController)
+		.run();
 }
 
 void CreditsState::onExit()
