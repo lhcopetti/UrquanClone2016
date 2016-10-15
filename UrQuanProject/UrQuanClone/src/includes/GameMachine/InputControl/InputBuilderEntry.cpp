@@ -10,7 +10,8 @@
 namespace Inputs
 {
 
-InputBuilderEntry::InputBuilderEntry()
+InputBuilderEntry::InputBuilderEntry() :
+		_code(-1)
 {
 }
 
