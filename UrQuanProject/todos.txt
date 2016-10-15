@@ -26,3 +26,5 @@ ShooterComponent and PhysicsComponent não precisam ser ponteiros!
 Efetuar limpeza na classe GameObject, muitos métodos getters e setter inócuos e implementações (handleInput) desnecessárias
 
 add clipsize 
+
+add unregisterListener to the API

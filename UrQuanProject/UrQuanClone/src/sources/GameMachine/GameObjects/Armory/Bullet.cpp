@@ -13,13 +13,10 @@ namespace Armory
 Bullet::Bullet(Components::DrawingComponent* drawing) :
 		Projectile(drawing)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 Bullet::~Bullet()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Actions */

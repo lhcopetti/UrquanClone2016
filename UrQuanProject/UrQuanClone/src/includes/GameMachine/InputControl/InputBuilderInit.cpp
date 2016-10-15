@@ -12,13 +12,11 @@ namespace Inputs
 
 InputBuilderInit::InputBuilderInit()
 {
-	// TODO Auto-generated constructor stub
 
 }
 
 InputBuilderInit::~InputBuilderInit()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Actions */

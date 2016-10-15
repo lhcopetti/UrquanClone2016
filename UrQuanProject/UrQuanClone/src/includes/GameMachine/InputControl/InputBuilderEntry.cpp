@@ -17,7 +17,6 @@ InputBuilderEntry::InputBuilderEntry() :
 
 InputBuilderEntry::~InputBuilderEntry()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void InputBuilderEntry::reset()

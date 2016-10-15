@@ -13,13 +13,10 @@ namespace Inputs
 KeyInputAction::KeyInputAction(const InputType inputType) :
 		_inputType(inputType)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 KeyInputAction::~KeyInputAction()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Components */

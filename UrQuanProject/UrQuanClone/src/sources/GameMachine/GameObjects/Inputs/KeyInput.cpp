@@ -26,7 +26,6 @@ KeyInput::KeyInput(sf::Keyboard::Key key) :
 
 KeyInput::~KeyInput()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void KeyInput::update(const sf::Time& deltaTime)

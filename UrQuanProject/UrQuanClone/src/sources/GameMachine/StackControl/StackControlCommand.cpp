@@ -12,13 +12,10 @@ namespace GameMachine
 
 StackControlCommand::StackControlCommand()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 StackControlCommand::~StackControlCommand()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace GameMachine */

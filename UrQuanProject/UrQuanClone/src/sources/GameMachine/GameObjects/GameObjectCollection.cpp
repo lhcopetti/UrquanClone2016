@@ -12,12 +12,10 @@ namespace GameObjects
 
 GameObjectCollection::GameObjectCollection()
 {
-	// TODO Auto-generated constructor stub
 }
 
 GameObjectCollection::~GameObjectCollection()
 {
-	// TODO Auto-generated destructor stub
 }
 
 

@@ -21,7 +21,6 @@ AbstractOptionFactory::AbstractOptionFactory(sf::Vector2f boxSize, sf::Text text
 
 AbstractOptionFactory::~AbstractOptionFactory()
 {
-	// TODO Auto-generated destructor stub
 }
 
 AbstractOption* AbstractOptionFactory::newOption(std::string text)

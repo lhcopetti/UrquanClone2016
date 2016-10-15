@@ -18,13 +18,10 @@ namespace Armory
 
 BulletFactory::BulletFactory()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 BulletFactory::~BulletFactory()
 {
-	// TODO Auto-generated destructor stub
 }
 
 Projectile* BulletFactory::createNew()

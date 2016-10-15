@@ -23,13 +23,10 @@ namespace Components
 
 ShipFactory::ShipFactory()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 ShipFactory::~ShipFactory()
 {
-	// TODO Auto-generated destructor stub
 }
 
 GameObjects::GameObject* ShipFactory::createNew(

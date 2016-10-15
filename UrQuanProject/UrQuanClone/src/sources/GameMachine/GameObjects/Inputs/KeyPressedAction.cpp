@@ -12,13 +12,10 @@ namespace Inputs
 
 KeyPressedAction::KeyPressedAction()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 KeyPressedAction::~KeyPressedAction()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Inputs */

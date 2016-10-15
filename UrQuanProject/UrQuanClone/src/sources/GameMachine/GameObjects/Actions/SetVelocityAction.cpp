@@ -18,7 +18,6 @@ SetVelocityAction::SetVelocityAction(const sf::Vector2f& velocity) :
 
 SetVelocityAction::~SetVelocityAction()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool SetVelocityAction::canExecute(GameObjects::GameObject& gameObject)

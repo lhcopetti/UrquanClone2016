@@ -19,7 +19,6 @@ InputBuilderApplyFor::InputBuilderApplyFor(InputBuilderTable table) :
 
 InputBuilderApplyFor::~InputBuilderApplyFor()
 {
-	// TODO Auto-generated destructor stub
 }
 
 InputBuilderApplyFor InputBuilderApplyFor::andAlso(

@@ -12,13 +12,10 @@ namespace Inputs
 
 KeyDoubleTapAction::KeyDoubleTapAction()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 KeyDoubleTapAction::~KeyDoubleTapAction()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Inputs */

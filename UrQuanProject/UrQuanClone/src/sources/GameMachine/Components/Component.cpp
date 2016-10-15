@@ -12,13 +12,10 @@ namespace Components
 
 Component::Component()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 Component::~Component()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Components */

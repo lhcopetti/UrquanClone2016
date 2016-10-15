@@ -18,7 +18,6 @@ InputAction::InputAction(sf::Keyboard::Key key, Inputs::InputType inputType) :
 
 InputAction::~InputAction()
 {
-	// TODO Auto-generated destructor stub
 }
 
 const sf::Keyboard::Key InputAction::key() const

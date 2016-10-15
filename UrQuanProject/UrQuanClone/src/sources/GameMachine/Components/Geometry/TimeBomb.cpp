@@ -20,7 +20,6 @@ TimeBomb::TimeBomb(Components::DrawingComponent* drawingComponent, sf::Time time
 
 TimeBomb::~TimeBomb()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void TimeBomb::update(const sf::Time& deltaTime)

@@ -12,13 +12,10 @@ namespace Actions
 
 Action::Action()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 Action::~Action()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool Action::canExecute(GameObjects::GameObject& gameObject)

@@ -13,13 +13,10 @@ namespace Components
 
 BlueCircle::BlueCircle()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 BlueCircle::~BlueCircle()
 {
-	// TODO Auto-generated destructor stub
 }
 
 GameObjects::GameObject* BlueCircle::newBlueCircle()

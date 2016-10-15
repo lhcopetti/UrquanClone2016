@@ -18,7 +18,6 @@ RotateAction::RotateAction(float angle) :
 
 RotateAction::~RotateAction()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool RotateAction::execute(GameObjects::GameObject& gameObject)

@@ -12,13 +12,10 @@ namespace UI
 
 ImageOption::ImageOption()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 ImageOption::~ImageOption()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace UI */

@@ -13,13 +13,10 @@ namespace UI
 LabelOption::LabelOption(sf::Vector2f size, Components::DrawingComponent* drawingComponent) :
 		AbstractOption(size, drawingComponent)
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 LabelOption::~LabelOption()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace UI */

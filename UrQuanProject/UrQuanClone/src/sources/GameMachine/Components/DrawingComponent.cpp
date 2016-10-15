@@ -12,13 +12,10 @@ namespace Components
 
 DrawingComponent::DrawingComponent()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 DrawingComponent::~DrawingComponent()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void DrawingComponent::update(const sf::Time& deltaTime, GameObjects::GameObject& gameObject)

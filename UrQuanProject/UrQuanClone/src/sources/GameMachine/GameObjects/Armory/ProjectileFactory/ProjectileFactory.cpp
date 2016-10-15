@@ -12,13 +12,10 @@ namespace Armory
 
 ProjectileFactory::ProjectileFactory()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 ProjectileFactory::~ProjectileFactory()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace Armory */

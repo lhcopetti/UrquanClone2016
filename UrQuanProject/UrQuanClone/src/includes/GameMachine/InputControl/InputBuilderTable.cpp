@@ -20,7 +20,6 @@ InputBuilderTable::InputBuilderTable() :
 
 InputBuilderTable::~InputBuilderTable()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void Inputs::InputBuilderTable::startEntry(InputAction action)

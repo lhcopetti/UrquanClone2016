@@ -18,7 +18,6 @@ InputHandlerParam::InputHandlerParam(InputHandler *const handler, const int data
 
 InputHandlerParam::~InputHandlerParam()
 {
-	// TODO Auto-generated destructor stub
 }
 
 InputHandler* InputHandlerParam::getHandler() const
