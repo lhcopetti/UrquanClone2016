@@ -14,6 +14,8 @@
 #include <GameMachine/GameObjects/Ship/Ship.h>
 #include <GameMachine/GameObjects/Ship/ShipInput.h>
 
+#include <GameMachine/InputControl/InputBuilder.h>
+
 #include <iostream>
 
 namespace GameState
@@ -32,18 +34,23 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	shipPlayer1->setPosition(halfCenter);
 	_goCollection.push(shipPlayer1);
 
-	_inputController.registerAsListener(
-	{ sf::Keyboard::W, Inputs::InputType::INPUT_PRESSING }, shipPlayer1,
-			GameObjects::ShipInput::SHIP_THRUST);
-	_inputController.registerAsListener(
-	{ sf::Keyboard::A, Inputs::InputType::INPUT_PRESSING }, shipPlayer1,
-			GameObjects::ShipInput::SHIP_ROTATE_LEFT);
-	_inputController.registerAsListener(
-	{ sf::Keyboard::D, Inputs::InputType::INPUT_PRESSING }, shipPlayer1,
-			GameObjects::ShipInput::SHIP_ROTATE_RIGHT);
-	_inputController.registerAsListener(
-	{ sf::Keyboard::Space, Inputs::InputType::INPUT_PRESS }, shipPlayer1,
-			GameObjects::ShipInput::SHIP_SHOOT);
+	using namespace Inputs;
+	using namespace sf;
+	using namespace GameObjects;
+
+	InputBuilder builder;
+	builder
+		.bind({Keyboard::W, INPUT_PRESSING})
+			.to(ShipInput::SHIP_THRUST)
+		.bind({Keyboard::A, INPUT_PRESSING})
+			.to(ShipInput::SHIP_ROTATE_LEFT)
+		.bind({Keyboard::D, INPUT_PRESSING})
+			.to(ShipInput::SHIP_ROTATE_RIGHT)
+		.bind({Keyboard::Space, INPUT_PRESS})
+			.to(ShipInput::SHIP_SHOOT)
+		.applyFor(shipPlayer1).
+		on(_inputController)
+		.run();
 
 //	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
 //			GameObjects::ShipType::SHIP_GAIJIN);
