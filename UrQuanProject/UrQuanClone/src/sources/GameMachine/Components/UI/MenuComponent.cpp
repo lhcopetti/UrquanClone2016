@@ -7,6 +7,8 @@
 
 #include <GameMachine/Components/UI/MenuComponent.h>
 
+#include <GameMachine/InputControl/InputBuilder.h>
+
 #include <iostream>
 #include <algorithm>
 
@@ -49,6 +51,17 @@ MenuComponent::MenuComponent(Inputs::InputController& inputController,
 	_inputController.registerAsListener(
 			Inputs::InputAction(sf::Keyboard::Key::Return,
 					Inputs::InputType::INPUT_RELEASE), this, ENTER_COMMAND);
+
+
+	using namespace Inputs;
+	Inputs::InputBuilder inputBuilder;
+	inputBuilder
+			.bind({ sf::Keyboard::Space, InputType::INPUT_RELEASE })
+			.to(ENTER_COMMAND)
+			.applyFor(this)
+			.on(_inputController)
+			.run();
+
 
 	_options[_currentIndex]->hightlight();
 }
