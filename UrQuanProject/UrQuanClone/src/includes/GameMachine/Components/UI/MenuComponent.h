@@ -11,11 +11,15 @@
 #include <GameMachine/GameObjects/GameObject.h>
 #include <GameMachine/GameObjects/Inputs/InputHandler.h>
 
-#include <GameMachine/InputControl/InputController.h>
 #include <GameMachine/Components/UI/Options/AbstractOption.h>
 
 #include <vector>
 
+
+namespace Inputs
+{
+class InputController;
+}
 
 namespace UI
 {

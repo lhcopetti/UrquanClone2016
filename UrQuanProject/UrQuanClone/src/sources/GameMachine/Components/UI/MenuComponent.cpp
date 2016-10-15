@@ -42,26 +42,22 @@ MenuComponent::MenuComponent(Inputs::InputController& inputController,
 						menuPos.y + (optionSize.y + padding) * i));
 	}
 
-	_inputController.registerAsListener(
-			Inputs::InputAction(sf::Keyboard::Key::Up,
-					Inputs::InputType::INPUT_RELEASE), this, UP_COMMAND);
-	_inputController.registerAsListener(
-			Inputs::InputAction(sf::Keyboard::Key::Down,
-					Inputs::InputType::INPUT_RELEASE), this, DOWN_COMMAND);
-	_inputController.registerAsListener(
-			Inputs::InputAction(sf::Keyboard::Key::Return,
-					Inputs::InputType::INPUT_RELEASE), this, ENTER_COMMAND);
-
-
 	using namespace Inputs;
-	Inputs::InputBuilder inputBuilder;
-	inputBuilder
-			.bind({ sf::Keyboard::Space, InputType::INPUT_RELEASE })
-			.to(ENTER_COMMAND)
-			.applyFor(this)
-			.on(_inputController)
-			.run();
+	using namespace sf;
 
+	Inputs::InputBuilder builder;
+	builder
+		.bind({ Keyboard::Up, INPUT_RELEASE })
+			.to(UP_COMMAND)
+		.bind({ Keyboard::Down, INPUT_RELEASE})
+			.to(DOWN_COMMAND)
+		.bind({ Keyboard::Return, INPUT_RELEASE})
+			.to(ENTER_COMMAND)
+		.bind({ Keyboard::Space, INPUT_RELEASE})
+			.to(ENTER_COMMAND)
+		.applyFor(this)
+		.on(_inputController)
+		.run();
 
 	_options[_currentIndex]->hightlight();
 }
