@@ -7,6 +7,8 @@
 
 #include <GameMachine/Components/UI/MenuComponent.h>
 
+#include <GameMachine/InputControl/InputBuilder.h>
+
 #include <iostream>
 #include <algorithm>
 
@@ -18,7 +20,7 @@ enum INPUT_MENU_COMMANDS
 	UP_COMMAND, DOWN_COMMAND, ENTER_COMMAND
 };
 
-MenuComponent::MenuComponent(GameMachine::InputController& inputController,
+MenuComponent::MenuComponent(Inputs::InputController& inputController,
 		std::vector<AbstractOption*> options, sf::Vector2f pos) :
 		_inputController(inputController), _options(options), _pos(pos), _currentIndex(
 				0), _menuFinished(false), _selectedOption(nullptr)
@@ -40,15 +42,22 @@ MenuComponent::MenuComponent(GameMachine::InputController& inputController,
 						menuPos.y + (optionSize.y + padding) * i));
 	}
 
-	_inputController.registerAsListener(
-			Inputs::InputAction(sf::Keyboard::Key::Up,
-					Inputs::InputType::INPUT_RELEASE), this, UP_COMMAND);
-	_inputController.registerAsListener(
-			Inputs::InputAction(sf::Keyboard::Key::Down,
-					Inputs::InputType::INPUT_RELEASE), this, DOWN_COMMAND);
-	_inputController.registerAsListener(
-			Inputs::InputAction(sf::Keyboard::Key::Return,
-					Inputs::InputType::INPUT_RELEASE), this, ENTER_COMMAND);
+	using namespace Inputs;
+	using namespace sf;
+
+	Inputs::InputBuilder builder;
+	builder
+		.bind({ Keyboard::Up, INPUT_RELEASE })
+			.to(UP_COMMAND)
+		.bind({ Keyboard::Down, INPUT_RELEASE})
+			.to(DOWN_COMMAND)
+		.bind({ Keyboard::Return, INPUT_RELEASE})
+			.to(ENTER_COMMAND)
+		.bind({ Keyboard::Space, INPUT_RELEASE})
+			.to(ENTER_COMMAND)
+		.applyFor(this)
+		.on(_inputController)
+		.run();
 
 	_options[_currentIndex]->hightlight();
 }

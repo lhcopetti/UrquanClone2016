@@ -22,7 +22,7 @@ namespace GameObjects
 class GameObject;
 }
 
-namespace GameMachine
+namespace Inputs
 {
 
 class InputController

@@ -9,7 +9,7 @@
 #define INCLUDES_GAMEMACHINE_GAMESTATE_GAMESTATE_H_
 
 #include <GameMachine/GameObjects/GameObjectCollection.h>
-#include <GameMachine/InputController.h>
+#include <GameMachine/InputControl/InputController.h>
 #include <GameMachine/GameStateController.h>
 
 #include "SFML/System/Time.hpp"
@@ -43,7 +43,7 @@ protected:
 	GameMachine::GameStateController& _controller;
 
 	GameObjects::GameObjectCollection _goCollection;
-	GameMachine::InputController _inputController;
+	Inputs::InputController _inputController;
 
 private:
 
