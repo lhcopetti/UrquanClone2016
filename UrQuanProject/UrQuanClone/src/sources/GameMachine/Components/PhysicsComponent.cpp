@@ -43,8 +43,6 @@ void PhysicsComponent::update(const sf::Time& deltaTime,
 
 	_velocity += accelSecs;
 
-	std::cout << "Velocity: " << VectorMath::size(_velocity) << std::endl;
-
 	if (VectorMath::size(_velocity) > _maxVelocity)
 		_velocity = VectorMath::normalize(_velocity) * _maxVelocity;
 

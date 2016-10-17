@@ -8,6 +8,8 @@
 #ifndef INCLUDES_GAMEMACHINE_COMPONENTS_COLLISION_COLLIDINGSHAPE_H_
 #define INCLUDES_GAMEMACHINE_COMPONENTS_COLLISION_COLLIDINGSHAPE_H_
 
+#include <SFML/System/Vector2.hpp>
+
 namespace Collision
 {
 
@@ -20,8 +22,17 @@ enum CollidingShapeType
 class CollidingShape
 {
 public:
-	CollidingShape();
+	CollidingShape(CollidingShapeType shapeType, const sf::Vector2f& position);
 	virtual ~CollidingShape();
+
+	CollidingShapeType getType() const;
+
+	const sf::Vector2f& getPosition() const;
+	void setPosition(const sf::Vector2f& position);
+
+private:
+	sf::Vector2f _position;
+	const CollidingShapeType _shapeType;
 };
 
 } /* namespace Collision */

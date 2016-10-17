@@ -5,20 +5,35 @@
  *      Author: LuisCopetti
  */
 
-#include <GameMachine/Components/Collision/CollidingShape.h>
+#include <GameMachine/Components/Collision/Shape/CollidingShape.h>
 
 namespace Collision
 {
 
-CollidingShape::CollidingShape()
+CollidingShape::CollidingShape(CollidingShapeType shapeType,
+		const sf::Vector2f& position) :
+		_position(position), //
+		_shapeType(shapeType) //
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 CollidingShape::~CollidingShape()
 {
-	// TODO Auto-generated destructor stub
+}
+
+CollidingShapeType CollidingShape::getType() const
+{
+	return _shapeType;
+}
+
+const sf::Vector2f& CollidingShape::getPosition() const
+{
+	return _position;
+}
+
+void CollidingShape::setPosition(const sf::Vector2f& position)
+{
+	_position = position;
 }
 
 } /* namespace Collision */

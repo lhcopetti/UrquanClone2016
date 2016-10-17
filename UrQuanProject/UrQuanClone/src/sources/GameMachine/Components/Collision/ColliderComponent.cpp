@@ -8,12 +8,15 @@
 #include <GameMachine/Components/Collision/ColliderComponent.h>
 #include <GameMachine/Components/Collision/ColliderCategory.h>
 
+#include <GameMachine/GameObjects/GameObject.h>
+
 namespace Collision
 {
 
-ColliderComponent::ColliderComponent(CollidingShape* collidingShape) :
-		_category(CC_WALL), //
-		_collidingCategory(), //
+ColliderComponent::ColliderComponent(CollidingShape* collidingShape,
+		CCategories categories, ColliderCategory colliderCategory) :
+		_category(categories), //
+		_collidingCategory(colliderCategory), //
 		_collidingShape(collidingShape)
 {
 
@@ -26,7 +29,7 @@ ColliderComponent::~ColliderComponent()
 void ColliderComponent::update(const sf::Time& deltaTime,
 		GameObjects::GameObject& gameObject)
 {
-
+	_collidingShape->setPosition(gameObject.getPosition());
 }
 
 bool ColliderComponent::checkCategoryCollision(ColliderComponent* collider)
@@ -38,6 +41,16 @@ bool ColliderComponent::checkCategoryCollision(ColliderComponent* collider)
 CCategories ColliderComponent::getCategory() const
 {
 	return _category;
+}
+
+const CollidingShape* ColliderComponent::getCollidingShape() const
+{
+	return _collidingShape;
+}
+
+CollidingShapeType ColliderComponent::getShapeType() const
+{
+	return _collidingShape->getType();
 }
 
 } /* namespace Components */

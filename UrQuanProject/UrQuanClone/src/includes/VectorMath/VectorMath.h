@@ -21,6 +21,9 @@ float toDegree(float radians);
 float size(const sf::Vector2f& vector);
 float sizeSqrt(const sf::Vector2f& vector);
 
+float dist(const sf::Vector2f& p1, const sf::Vector2f& p2);
+float distSqr(const sf::Vector2f& p1, const sf::Vector2f& p2);
+
 sf::Vector2f normalize(const sf::Vector2f& vector);
 
 sf::Vector2f rotate(const sf::Vector2f& vector, float angle);

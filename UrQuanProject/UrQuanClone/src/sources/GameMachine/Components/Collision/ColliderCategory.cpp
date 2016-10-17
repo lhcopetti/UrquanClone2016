@@ -10,9 +10,10 @@
 namespace Collision
 {
 
-ColliderCategory::ColliderCategory() :
-		_categoryBitMask(0x00)
+ColliderCategory::ColliderCategory(unsigned long bitMask) :
+		_categoryBitMask(bitMask)
 {
+
 }
 
 ColliderCategory::~ColliderCategory()

@@ -13,6 +13,10 @@
 #include <GameMachine/Components/PhysicsComponent.h>
 #include <GameMachine/Components/ShapeComponent.h>
 
+#include <GameMachine/Components/Collision/ColliderComponent.h>
+#include <GameMachine/Components/Collision/Shape/CircleCollidingShape.h>
+#include <GameMachine/Components/Collision/ColliderCategory.h>
+
 namespace Armory
 {
 
@@ -33,6 +37,14 @@ Projectile* BulletFactory::createNew()
 	Bullet* bullet = new Bullet(shapeComponent);
 	bullet->setPhysicsComponent(
 			new Components::PhysicsComponent(1.0f, 350.f, 0.0f));
+
+	Collision::CollidingShape* collidingShape = new Collision::CircleCollidingShape({0.f, 0.f}, 3.f);
+	Collision::CCategories myCategory = Collision::CC_PROJECTILE_PLAYERONE;
+	Collision::ColliderCategory category(0x02);
+
+	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, myCategory, category);
+	bullet->setColliderComponent(collider);
+
 	return bullet;
 }
 

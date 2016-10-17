@@ -28,7 +28,7 @@ enum CCategories
 class ColliderCategory
 {
 public:
-	ColliderCategory();
+	ColliderCategory(unsigned long bitMask = 0x00);
 	virtual ~ColliderCategory();
 
 	bool collidesWith(CCategories category) const;

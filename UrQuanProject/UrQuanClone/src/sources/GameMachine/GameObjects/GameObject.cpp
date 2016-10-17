@@ -11,6 +11,7 @@
 #include <GameMachine/Components/DrawingComponent.h>
 #include <GameMachine/Components/PhysicsComponent.h>
 #include <GameMachine/Components/ShooterComponent.h>
+#include <GameMachine/Components/Collision/ColliderComponent.h>
 
 namespace GameObjects
 {
@@ -64,6 +65,9 @@ void GameObject::update(const sf::Time& deltaTime)
 
 	if (nullptr != _physicsComponent)
 		_physicsComponent->update(deltaTime, *this);
+
+	if (nullptr != _colliderComponent)
+		_colliderComponent->update(deltaTime, *this);
 
 	doUpdate(deltaTime);
 

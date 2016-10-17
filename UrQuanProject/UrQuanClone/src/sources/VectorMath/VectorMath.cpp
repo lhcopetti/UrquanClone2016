@@ -59,5 +59,14 @@ sf::Vector2f rotate(const sf::Vector2f& vector, float angle)
 			sinAng * vector.x + cosAng * vector.y);
 }
 
-} /* namespace VectorMath */
+float dist(const sf::Vector2f& p1, const sf::Vector2f& p2)
+{
+	return size(p1 - p2);
+}
 
+float distSqr(const sf::Vector2f& p1, const sf::Vector2f& p2)
+{
+	return sizeSqrt(p1 - p2);
+}
+
+} /* namespace VectorMath */
