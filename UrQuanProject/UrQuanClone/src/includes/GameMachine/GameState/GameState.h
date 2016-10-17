@@ -12,6 +12,8 @@
 #include <GameMachine/InputControl/InputController.h>
 #include <GameMachine/GameStateController.h>
 
+#include <GameMachine/Components/Collision/CollisionManager.h>
+
 #include "SFML/System/Time.hpp"
 #include "SFML/Graphics.hpp"
 
@@ -41,8 +43,9 @@ public:
 
 protected:
 	GameMachine::GameStateController& _controller;
-
 	GameObjects::GameObjectCollection _goCollection;
+	Collision::CollisionManager _collisionManager;
+
 	Inputs::InputController _inputController;
 
 private:

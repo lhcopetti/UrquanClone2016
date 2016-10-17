@@ -16,6 +16,11 @@ namespace GameObjects
 class GameObject;
 }
 
+namespace Collision
+{
+class ColliderComponent;
+}
+
 namespace Components
 {
 
@@ -35,7 +40,12 @@ public:
 	void setVelocity(const sf::Vector2f& velocity);
 	void setAcceleration(const sf::Vector2f& velocity);
 
+	void setColliderComponent(Collision::ColliderComponent* collider);
+	const Collision::ColliderComponent& getCollider() const;
+
 private:
+	Collision::ColliderComponent* _colliderComponent;
+
 	float _mass;
 
 	sf::Vector2f _forces;

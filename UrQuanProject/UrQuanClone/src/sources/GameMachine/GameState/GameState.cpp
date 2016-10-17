@@ -23,6 +23,7 @@ GameState::~GameState()
 void GameState::update(const sf::Time& deltaTime)
 {
 	_goCollection.update(deltaTime);
+	_collisionManager.run(_goCollection);
 	_inputController.update(deltaTime);
 	doUpdate(deltaTime);
 }

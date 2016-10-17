@@ -18,9 +18,7 @@ GameObjectCollection::~GameObjectCollection()
 {
 }
 
-
-void GameObjectCollection::push(
-		GameObjects::GameObject* gameObject)
+void GameObjectCollection::push(GameObjects::GameObject* gameObject)
 {
 	_gObjects.push_back(std::unique_ptr<GameObject>(gameObject));
 }
@@ -37,7 +35,7 @@ void GameObjectCollection::update(const sf::Time& deltaTime)
 {
 	auto it = _gObjects.begin();
 
-	while(it != _gObjects.end())
+	while (it != _gObjects.end())
 	{
 		(*it)->update(deltaTime);
 
@@ -45,7 +43,6 @@ void GameObjectCollection::update(const sf::Time& deltaTime)
 		for (unsigned int i = 0; i < reproduction.size(); ++i)
 			_reproduction.push_back(reproduction[i]);
 		reproduction.clear();
-
 
 		if (!(*it)->isAlive())
 			it = _gObjects.erase(it);
@@ -61,6 +58,11 @@ void GameObjectCollection::update(const sf::Time& deltaTime)
 const unsigned int GameObjectCollection::size() const
 {
 	return _gObjects.size();
+}
+
+std::vector<std::unique_ptr<GameObject>>& GameObjectCollection::getObjects()
+{
+	return _gObjects;
 }
 
 } /* namespace Components */

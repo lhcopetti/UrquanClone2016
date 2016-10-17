@@ -21,6 +21,11 @@ class PhysicsComponent;
 class ShooterComponent;
 }
 
+namespace Collision
+{
+class ColliderComponent;
+}
+
 namespace GameObjects
 {
 
@@ -53,6 +58,9 @@ public:
 	void setShooterComponent(Components::ShooterComponent* shooter);
 	Components::ShooterComponent* getShooterComponent();
 
+	void setColliderComponent(Collision::ColliderComponent* collider);
+	Collision::ColliderComponent* getColliderComponent();
+
 	void pushAction(Actions::Action* action);
 
 	void reproduce(GameObject* gameObject);
@@ -63,6 +71,7 @@ protected:
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
 	Components::PhysicsComponent* _physicsComponent;
 	Components::ShooterComponent* _shooterComponent;
+	Collision::ColliderComponent* _colliderComponent;
 
 	bool _alive;
 	sf::Vector2f _pos;

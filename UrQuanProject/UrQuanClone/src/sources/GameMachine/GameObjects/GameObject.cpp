@@ -21,7 +21,9 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 				std::unique_ptr<Components::DrawingComponent>(
 						drawingComponent)), //
 		_physicsComponent(nullptr),  //
-		_shooterComponent(nullptr), _alive(true), //
+		_shooterComponent(nullptr), //
+		_colliderComponent(nullptr), //
+		_alive(true), //
 		_pos(pos), //
 		_orientation(false) //
 {
@@ -143,6 +145,16 @@ void GameObject::reproduce(GameObject* gameObject)
 std::vector<GameObject*>& GameObject::getProduced()
 {
 	return _reproduction;
+}
+
+void GameObject::setColliderComponent(Collision::ColliderComponent* collider)
+{
+	_colliderComponent = collider;
+}
+
+Collision::ColliderComponent* GameObject::getColliderComponent()
+{
+	return _colliderComponent;
 }
 
 } /* namespace GameState */
