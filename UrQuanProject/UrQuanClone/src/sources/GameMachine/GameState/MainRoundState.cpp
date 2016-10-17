@@ -9,8 +9,11 @@
 #include <GameMachine/GameObjects/Factory/BlueCircle.h>
 
 #include <GameMachine/GameObjects/Factory/ShipFactory.h>
+#include <GameMachine/GameObjects/Factory/WallFactory.h>
+
 #include <GameClone/Defs.h>
 
+#include <GameMachine/GameObjects/Blocks/Wall.h>
 #include <GameMachine/GameObjects/Ship/Ship.h>
 #include <GameMachine/GameObjects/Ship/ShipInput.h>
 
@@ -39,23 +42,22 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	using namespace GameObjects;
 
 	InputBuilder builder;
-	builder
-		.bind({Keyboard::W, INPUT_PRESSING})
-			.to(ShipInput::SHIP_THRUST)
-		.bind({Keyboard::A, INPUT_PRESSING})
-			.to(ShipInput::SHIP_ROTATE_LEFT)
-		.bind({Keyboard::D, INPUT_PRESSING})
-			.to(ShipInput::SHIP_ROTATE_RIGHT)
-		.bind({Keyboard::Space, INPUT_PRESS})
-			.to(ShipInput::SHIP_SHOOT)
-		.applyFor(shipPlayer1).
-		on(_inputController)
-		.run();
+	builder.bind(
+	{ Keyboard::W, INPUT_PRESSING }).to(ShipInput::SHIP_THRUST).bind(
+	{ Keyboard::A, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_LEFT).bind(
+	{ Keyboard::D, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
+	{ Keyboard::Space, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
+			shipPlayer1).on(_inputController).run();
 
+	Factory::WallFactory wallFactory(sf::Color::Cyan);
+	GameObjects::GameObject* wall = wallFactory.createNew(sf::Vector2f(0.f, 0.f),
+			sf::Vector2f(5.f, 1376.f));
+	_goCollection.push(wall);
 //	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
 //			GameObjects::ShipType::SHIP_GAIJIN);
 //	shipPlayer2->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
 //	_goCollection.push(shipPlayer2);
+
 }
 
 MainRoundState::~MainRoundState()
