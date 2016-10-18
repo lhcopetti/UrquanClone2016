@@ -7,6 +7,8 @@
 
 #include <GameMachine/Components/Collision/ColliderCategory.h>
 
+#include <math.h>
+
 namespace Collision
 {
 
@@ -23,6 +25,11 @@ ColliderCategory::~ColliderCategory()
 bool ColliderCategory::collidesWith(CCategories category) const
 {
 	return (_categoryBitMask >> category) & 0x01;
+}
+
+void ColliderCategory::add(CCategories category)
+{
+ 	_categoryBitMask |= (unsigned int) pow(2, (unsigned int) category);
 }
 
 } /* namespace Collision */

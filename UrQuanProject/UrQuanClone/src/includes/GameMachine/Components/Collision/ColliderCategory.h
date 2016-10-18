@@ -32,6 +32,7 @@ public:
 	virtual ~ColliderCategory();
 
 	bool collidesWith(CCategories category) const;
+	void add(CCategories category);
 
 private:
 	unsigned long _categoryBitMask;
