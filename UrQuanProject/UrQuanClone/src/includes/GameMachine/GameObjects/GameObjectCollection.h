@@ -28,6 +28,8 @@ public:
 
 	const unsigned int size() const;
 
+	std::vector<std::unique_ptr<GameObject>>& getObjects();
+
 private:
 	std::vector<std::unique_ptr<GameObject>> _gObjects;
 

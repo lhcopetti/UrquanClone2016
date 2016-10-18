@@ -6,6 +6,7 @@
  */
 
 #include <GameMachine/Components/PhysicsComponent.h>
+#include <GameMachine/Components/Collision/ColliderComponent.h>
 #include <GameMachine/GameObjects/GameObject.h>
 
 #include <iostream>
@@ -15,15 +16,19 @@ namespace Components
 {
 
 PhysicsComponent::PhysicsComponent(float mass, float maxVelocity, float friction) :
+		_colliderComponent(nullptr), //
 		_mass(mass), //
 		_forces(sf::Vector2f(0.f, 0.f)), //
 		_velocity(sf::Vector2f(0.f, 0.f)), //
-		_maxVelocity(maxVelocity), _friction(friction)
+		_maxVelocity(maxVelocity), //
+		_friction(friction) //
 {
 }
 
 PhysicsComponent::~PhysicsComponent()
 {
+	delete _colliderComponent;
+	_colliderComponent = nullptr;
 }
 
 void PhysicsComponent::update(const sf::Time& deltaTime,
@@ -37,8 +42,6 @@ void PhysicsComponent::update(const sf::Time& deltaTime,
 	gameObject.addPosition(position);
 
 	_velocity += accelSecs;
-
-	std::cout << "Velocity: " << VectorMath::size(_velocity) << std::endl;
 
 	if (VectorMath::size(_velocity) > _maxVelocity)
 		_velocity = VectorMath::normalize(_velocity) * _maxVelocity;
@@ -65,6 +68,17 @@ sf::Vector2f& PhysicsComponent::getForces()
 void Components::PhysicsComponent::resetForces()
 {
 	_forces = sf::Vector2f(0.f, 0.f);
+}
+
+void PhysicsComponent::setColliderComponent(
+		Collision::ColliderComponent* collider)
+{
+	_colliderComponent = collider;
+}
+
+const Collision::ColliderComponent& PhysicsComponent::getCollider() const
+{
+	return *_colliderComponent;
 }
 
 } /* namespace Components */

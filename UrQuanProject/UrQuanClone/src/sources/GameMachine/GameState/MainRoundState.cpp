@@ -52,7 +52,10 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	Factory::WallFactory wallFactory(sf::Color::Cyan);
 	GameObjects::GameObject* wall = wallFactory.createNew(sf::Vector2f(0.f, 0.f),
 			sf::Vector2f(5.f, 1376.f));
+	GameObjects::GameObject* wall2 = wallFactory.createNew(sf::Vector2f(GAME_SCREEN_HALF_WIDTH, GAME_SCREEN_HALF_HEIGHT),
+				sf::Vector2f(5.f, GAME_SCREEN_HALF_HEIGHT / 2.F));
 	_goCollection.push(wall);
+	_goCollection.push(wall2);
 //	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
 //			GameObjects::ShipType::SHIP_GAIJIN);
 //	shipPlayer2->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));

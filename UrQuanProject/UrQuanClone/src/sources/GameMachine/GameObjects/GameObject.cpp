@@ -11,6 +11,7 @@
 #include <GameMachine/Components/DrawingComponent.h>
 #include <GameMachine/Components/PhysicsComponent.h>
 #include <GameMachine/Components/ShooterComponent.h>
+#include <GameMachine/Components/Collision/ColliderComponent.h>
 
 namespace GameObjects
 {
@@ -21,7 +22,9 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 				std::unique_ptr<Components::DrawingComponent>(
 						drawingComponent)), //
 		_physicsComponent(nullptr),  //
-		_shooterComponent(nullptr), _alive(true), //
+		_shooterComponent(nullptr), //
+		_colliderComponent(nullptr), //
+		_alive(true), //
 		_pos(pos), //
 		_orientation(false) //
 {
@@ -62,6 +65,9 @@ void GameObject::update(const sf::Time& deltaTime)
 
 	if (nullptr != _physicsComponent)
 		_physicsComponent->update(deltaTime, *this);
+
+	if (nullptr != _colliderComponent)
+		_colliderComponent->update(deltaTime, *this);
 
 	doUpdate(deltaTime);
 
@@ -143,6 +149,34 @@ void GameObject::reproduce(GameObject* gameObject)
 std::vector<GameObject*>& GameObject::getProduced()
 {
 	return _reproduction;
+}
+
+void GameObject::setColliderComponent(Collision::ColliderComponent* collider)
+{
+	_colliderComponent = collider;
+}
+
+Collision::ColliderComponent* GameObject::getColliderComponent()
+{
+	return _colliderComponent;
+}
+
+void GameObject::onCollisionWith(GameObject& other)
+{
+	if (nullptr == _colliderComponent)
+		return;
+
+	Actions::Action* action = _colliderComponent->getTriggerAction();
+
+	if (nullptr == action)
+		return;
+
+	pushAction(_colliderComponent->getTriggerAction());
+}
+
+void GameObject::die()
+{
+	_alive = false;
 }
 
 } /* namespace GameState */
