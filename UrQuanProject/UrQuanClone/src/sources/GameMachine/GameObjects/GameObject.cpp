@@ -161,4 +161,17 @@ Collision::ColliderComponent* GameObject::getColliderComponent()
 	return _colliderComponent;
 }
 
+void GameObject::onCollisionWith(GameObject& other)
+{
+	if (nullptr == _colliderComponent)
+		return;
+
+	pushAction(_colliderComponent->getTriggerAction());
+}
+
+void GameObject::die()
+{
+	_alive = false;
+}
+
 } /* namespace GameState */

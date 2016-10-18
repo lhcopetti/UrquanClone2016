@@ -12,6 +12,11 @@
 #include <GameMachine/Components/Collision/Shape/CollidingShape.h>
 #include <GameMachine/Components/Component.h>
 
+namespace Actions
+{
+class Action;
+}
+
 namespace Collision
 {
 class CollidingShape;
@@ -19,7 +24,8 @@ class CollidingShape;
 class ColliderComponent: public Components::Component
 {
 public:
-	ColliderComponent(CollidingShape* collidingShape, CCategories categories, ColliderCategory colliderCategory);
+	ColliderComponent(CollidingShape* collidingShape, Actions::Action* action,
+			CCategories categories, ColliderCategory colliderCategory);
 	virtual ~ColliderComponent();
 
 	virtual void update(const sf::Time& deltaTime,
@@ -32,10 +38,14 @@ public:
 	const CollidingShape* getCollidingShape() const;
 	CollidingShapeType getShapeType() const;
 
+	Actions::Action* getTriggerAction() const;
+
 private:
 	CCategories _category;
 	ColliderCategory _collidingCategory;
 	CollidingShape* _collidingShape;
+
+	Actions::Action* _triggerAction;
 };
 
 } /* namespace Geometry */

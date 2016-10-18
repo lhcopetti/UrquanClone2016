@@ -14,10 +14,12 @@ namespace Collision
 {
 
 ColliderComponent::ColliderComponent(CollidingShape* collidingShape,
-		CCategories categories, ColliderCategory colliderCategory) :
+		Actions::Action* action, CCategories categories,
+		ColliderCategory colliderCategory) :
 		_category(categories), //
 		_collidingCategory(colliderCategory), //
-		_collidingShape(collidingShape)
+		_collidingShape(collidingShape), //
+		_triggerAction(action) //
 {
 
 }
@@ -51,6 +53,11 @@ const CollidingShape* ColliderComponent::getCollidingShape() const
 CollidingShapeType ColliderComponent::getShapeType() const
 {
 	return _collidingShape->getType();
+}
+
+Actions::Action* ColliderComponent::getTriggerAction() const
+{
+	return _triggerAction;
 }
 
 } /* namespace Components */

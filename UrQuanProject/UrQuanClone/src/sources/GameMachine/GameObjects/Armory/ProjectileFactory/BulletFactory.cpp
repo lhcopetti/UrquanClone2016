@@ -17,6 +17,8 @@
 #include <GameMachine/Components/Collision/Shape/CircleCollidingShape.h>
 #include <GameMachine/Components/Collision/ColliderCategory.h>
 
+#include <GameMachine/GameObjects/Actions/SuicideAction.h>
+
 namespace Armory
 {
 
@@ -42,7 +44,7 @@ Projectile* BulletFactory::createNew()
 	Collision::CCategories myCategory = Collision::CC_PROJECTILE_PLAYERONE;
 	Collision::ColliderCategory category(0x02);
 
-	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, myCategory, category);
+	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, new Actions::SuicideAction, myCategory, category);
 	bullet->setColliderComponent(collider);
 
 	return bullet;

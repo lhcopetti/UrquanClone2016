@@ -34,6 +34,9 @@ bool CollisionManager::checkCollision(GameObjects::GameObject& g1,
 	if (!collider.resolve(g1, g2))
 		return false;
 
+	g1.onCollisionWith(g2);
+	g2.onCollisionWith(g1);
+
 	return true;
 }
 

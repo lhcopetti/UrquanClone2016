@@ -51,6 +51,7 @@ public:
 	virtual void handleInput(int userData);
 
 	bool isAlive() const;
+	void die();
 
 	void setPhysicsComponent(Components::PhysicsComponent* physics);
 	Components::PhysicsComponent* getPhysicsComponent();
@@ -65,6 +66,8 @@ public:
 
 	void reproduce(GameObject* gameObject);
 	std::vector<GameObject*>& getProduced();
+
+	void onCollisionWith(GameObject& other);
 
 protected:
 
