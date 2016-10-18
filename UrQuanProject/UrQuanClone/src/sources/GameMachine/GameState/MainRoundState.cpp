@@ -31,11 +31,16 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	GameObjects::GameObject* shipPlayer1 = shipFactory.createNew(
 			GameObjects::ShipType::SHIP_Soldier74);
 
+	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
+			GameObjects::ShipType::SHIP_GAIJIN);
+
 	sf::Vector2f center = GAME_SCREEN_CENTER_VECTOR;
 	sf::Vector2f halfCenter(center.x / 2, center.y);
-
 	shipPlayer1->setPosition(halfCenter);
+	shipPlayer2->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
+
 	_goCollection.push(shipPlayer1);
+	_goCollection.push(shipPlayer2);
 
 	using namespace Inputs;
 	using namespace sf;
@@ -43,24 +48,24 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 
 	InputBuilder builder;
 	builder.bind(
-	{ Keyboard::W, INPUT_PRESSING }).to(ShipInput::SHIP_THRUST).bind(
-	{ Keyboard::A, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_LEFT).bind(
-	{ Keyboard::D, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
-	{ Keyboard::Space, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
-			shipPlayer1).on(_inputController).run();
+	{ Keyboard::W, INPUT_PRESSING }).andAlso(
+	{ Keyboard::Numpad8, INPUT_PRESSING }).to(ShipInput::SHIP_THRUST).bind(
+	{ Keyboard::A, INPUT_PRESSING }).andAlso(
+	{ Keyboard::Numpad4, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_LEFT).bind(
+	{ Keyboard::D, INPUT_PRESSING }).andAlso(
+	{ Keyboard::Numpad6, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
+	{ Keyboard::Space, INPUT_PRESS }).andAlso(
+	{ Keyboard::Numpad0, INPUT_PRESSING }).to(ShipInput::SHIP_SHOOT).applyFor(
+			shipPlayer1).andAlso(shipPlayer2).on(_inputController).run();
 
 	Factory::WallFactory wallFactory(sf::Color::Cyan);
-	GameObjects::GameObject* wall = wallFactory.createNew(sf::Vector2f(0.f, 0.f),
-			sf::Vector2f(5.f, 1376.f));
-	GameObjects::GameObject* wall2 = wallFactory.createNew(sf::Vector2f(GAME_SCREEN_HALF_WIDTH, GAME_SCREEN_HALF_HEIGHT),
-				sf::Vector2f(5.f, GAME_SCREEN_HALF_HEIGHT / 2.F));
+	GameObjects::GameObject* wall = wallFactory.createNew(
+			sf::Vector2f(0.f, 0.f), sf::Vector2f(5.f, 1376.f));
+	GameObjects::GameObject* wall2 = wallFactory.createNew(
+			sf::Vector2f(GAME_SCREEN_HALF_WIDTH, GAME_SCREEN_HALF_HEIGHT),
+			sf::Vector2f(5.f, GAME_SCREEN_HALF_HEIGHT / 2.F));
 	_goCollection.push(wall);
 	_goCollection.push(wall2);
-//	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
-//			GameObjects::ShipType::SHIP_GAIJIN);
-//	shipPlayer2->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
-//	_goCollection.push(shipPlayer2);
-
 }
 
 MainRoundState::~MainRoundState()
