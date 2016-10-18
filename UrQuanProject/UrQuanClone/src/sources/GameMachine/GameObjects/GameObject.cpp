@@ -166,6 +166,11 @@ void GameObject::onCollisionWith(GameObject& other)
 	if (nullptr == _colliderComponent)
 		return;
 
+	Actions::Action* action = _colliderComponent->getTriggerAction();
+
+	if (nullptr == action)
+		return;
+
 	pushAction(_colliderComponent->getTriggerAction());
 }
 

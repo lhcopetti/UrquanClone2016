@@ -42,7 +42,9 @@ Projectile* BulletFactory::createNew()
 
 	Collision::CollidingShape* collidingShape = new Collision::CircleCollidingShape({0.f, 0.f}, 3.f);
 	Collision::CCategories myCategory = Collision::CC_PROJECTILE_PLAYERONE;
-	Collision::ColliderCategory category(0x02);
+	Collision::ColliderCategory category;
+	category.add(Collision::CC_WALL);
+	category.add(Collision::CC_PROJECTILE_PLAYERONE);
 
 	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, new Actions::SuicideAction, myCategory, category);
 	bullet->setColliderComponent(collider);

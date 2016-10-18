@@ -33,6 +33,12 @@ void GameObjectCollection::draw(sf::RenderWindow& window) const
 
 void GameObjectCollection::update(const sf::Time& deltaTime)
 {
+	/* Add the reproduction list from the last pass */
+	for (unsigned int i = 0; i < _reproduction.size(); ++i)
+		_gObjects.push_back(std::unique_ptr<GameObject>(_reproduction[i]));
+	_reproduction.clear();
+
+
 	auto it = _gObjects.begin();
 
 	while (it != _gObjects.end())
@@ -50,9 +56,6 @@ void GameObjectCollection::update(const sf::Time& deltaTime)
 			++it;
 	}
 
-	for (unsigned int i = 0; i < _reproduction.size(); ++i)
-		_gObjects.push_back(std::unique_ptr<GameObject>(_reproduction[i]));
-	_reproduction.clear();
 }
 
 const unsigned int GameObjectCollection::size() const
