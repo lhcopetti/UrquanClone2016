@@ -25,6 +25,17 @@ Rename VectorMath
 ShooterComponent and PhysicsComponent não precisam ser ponteiros!
 Efetuar limpeza na classe GameObject, muitos métodos getters e setter inócuos e implementações (handleInput) desnecessárias
 
+Definir quem será o responsável por propagar as categorias do projéteis criados. Lembre-se, pode ser que o mesmo gameobject dispare 
+projéteis com categorias diferentes.
+
+Adicionar uma forma prática de customizar a criação do Ship
+				DrawingComponent,
+				PlayerType,
+				ShipType,
+				ProjectileFactory type etc??? DDD???
+				
+Adicionar uma DSL para criação de categorias customizáveis. Exemplo: Wall, colide com tudo e etc.
+
 add clipsize 
 
 add unregisterListener to the API

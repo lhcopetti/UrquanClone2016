@@ -41,6 +41,7 @@ GameObjects::GameObject* WallFactory::createNew(sf::Vector2f position,
 	Collision::ColliderCategory category;
 	category.add(Collision::CC_WALL);
 	category.add(Collision::CC_PROJECTILE_PLAYERONE);
+	category.add(Collision::CC_PROJECTILE_PLAYERTWO);
 	Collision::ColliderComponent* collider = new Collision::ColliderComponent(
 			collShape, nullptr, Collision::CC_WALL, category);
 

@@ -38,6 +38,18 @@ bool Collision::ShapeCollider::checkCollision(
 		const RectangleCollidingShape* rectangle1,
 		const RectangleCollidingShape* rectangle2)
 {
+	const sf::Vector2f& rect1Pos = rectangle1->getPosition();
+	const sf::Vector2f& rect1Size = rectangle1->getSize();
+
+	const sf::Vector2f& rect2Pos = rectangle2->getPosition();
+	const sf::Vector2f& rect2Size = rectangle2->getSize();
+
+	if (rect1Pos.x < rect2Pos.x + rect2Size.x
+			&& rect1Pos.x + rect1Size.x > rect2Pos.x
+			&& rect1Pos.y < rect2Pos.y + rect2Size.y
+			&& rect1Pos.y + rect1Size.y > rect2Pos.y)
+		return true;
+
 	return false;
 }
 

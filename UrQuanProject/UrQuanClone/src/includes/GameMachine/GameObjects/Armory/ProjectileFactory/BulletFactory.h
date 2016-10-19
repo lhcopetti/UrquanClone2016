@@ -16,7 +16,7 @@ namespace Armory
 class BulletFactory : public ProjectileFactory
 {
 public:
-	BulletFactory();
+	BulletFactory(Collision::CCategories projectileCategory);
 	virtual ~BulletFactory();
 
 	virtual Projectile* createNew();

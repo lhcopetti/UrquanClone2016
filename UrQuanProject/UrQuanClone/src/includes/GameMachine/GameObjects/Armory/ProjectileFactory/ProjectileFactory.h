@@ -8,6 +8,8 @@
 #ifndef SOURCES_GAMEMACHINE_GAMEOBJECTS_ARMORY_PROJECTILEFACTORY_H_
 #define SOURCES_GAMEMACHINE_GAMEOBJECTS_ARMORY_PROJECTILEFACTORY_H_
 
+#include <GameMachine/Components/Collision/ColliderCategory.h>
+
 namespace Armory
 {
 
@@ -16,10 +18,13 @@ class Projectile;
 class ProjectileFactory
 {
 public:
-	ProjectileFactory();
+	ProjectileFactory(Collision::CCategories projectileCategory);
 	virtual ~ProjectileFactory();
 
 	virtual Projectile* createNew() = 0;
+
+protected:
+	const Collision::CCategories _projectileCategory;
 };
 
 } /* namespace Armory */

@@ -17,6 +17,12 @@ class GameObject;
 class Ship;
 }
 
+enum PlayerType
+{
+	PLAYER_ONE,
+	PLAYER_TWO
+};
+
 namespace Components
 {
 
@@ -26,7 +32,7 @@ public:
 	ShipFactory();
 	virtual ~ShipFactory();
 
-	GameObjects::GameObject* createNew(const GameObjects::ShipType shipType);
+	GameObjects::GameObject* createNew(PlayerType playerType, const GameObjects::ShipType shipType);
 
 };
 

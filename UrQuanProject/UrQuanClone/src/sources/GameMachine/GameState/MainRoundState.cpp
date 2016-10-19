@@ -28,10 +28,10 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 		GameState(controller)
 {
 	Components::ShipFactory shipFactory;
-	GameObjects::GameObject* shipPlayer1 = shipFactory.createNew(
+	GameObjects::GameObject* shipPlayer1 = shipFactory.createNew(PLAYER_ONE,
 			GameObjects::ShipType::SHIP_Soldier74);
 
-	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(
+	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(PLAYER_TWO,
 			GameObjects::ShipType::SHIP_GAIJIN);
 
 	sf::Vector2f center = GAME_SCREEN_CENTER_VECTOR;
@@ -55,7 +55,7 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	{ Keyboard::D, INPUT_PRESSING }).andAlso(
 	{ Keyboard::Numpad6, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
 	{ Keyboard::Space, INPUT_PRESS }).andAlso(
-	{ Keyboard::Numpad0, INPUT_PRESSING }).to(ShipInput::SHIP_SHOOT).applyFor(
+	{ Keyboard::Numpad0, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
 			shipPlayer1).andAlso(shipPlayer2).on(_inputController).run();
 
 	Factory::WallFactory wallFactory(sf::Color::Cyan);

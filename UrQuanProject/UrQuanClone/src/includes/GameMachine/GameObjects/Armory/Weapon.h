@@ -9,6 +9,7 @@
 #define INCLUDES_GAMEMACHINE_GAMEOBJECTS_ARMORY_WEAPON_H_
 
 #include <GameMachine/GameObjects/UpdatableFromTime.h>
+
 #include <SFML/System.hpp>
 
 namespace Armory
@@ -23,7 +24,6 @@ public:
 			sf::Vector2f offset = sf::Vector2f(39.f, 0.f),
 			float timeBetweenBullets = 0.5f);
 	virtual ~Weapon();
-
 
 	const sf::Vector2f& getOffset() const;
 
@@ -41,7 +41,6 @@ private:
 	float _timeBetweenBulletsCounter;
 
 	sf::Vector2f _offset;
-
 };
 
 } /* namespace Armory */

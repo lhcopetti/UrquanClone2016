@@ -10,7 +10,8 @@
 namespace Armory
 {
 
-ProjectileFactory::ProjectileFactory()
+ProjectileFactory::ProjectileFactory(Collision::CCategories projectileCategory) :
+		_projectileCategory(projectileCategory)
 {
 }
 

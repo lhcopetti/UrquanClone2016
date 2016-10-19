@@ -18,7 +18,7 @@ Weapon::Weapon(ProjectileFactory* factory, sf::Vector2f offset,
 		_factory(factory), //
 		_timeBetweenBullets(timeBetweenBullets), //
 		_timeBetweenBulletsCounter(_timeBetweenBullets), //
-		_offset(offset)
+		_offset(offset) //
 {
 }
 
