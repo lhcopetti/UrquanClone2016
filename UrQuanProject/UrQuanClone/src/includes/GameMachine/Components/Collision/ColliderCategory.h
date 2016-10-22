@@ -13,8 +13,11 @@ namespace Collision
 
 #define HIGH_ORDER_COLLIDER_CATEGORY(code) \
 	code(WALL) \
+	code(SHIP_PLAYERONE) \
+	code(SHIP_PLAYERTWO) \
 	code(PROJECTILE_PLAYERONE) \
-	code(PROJECTILE_PLAYERTWO)
+	code(PROJECTILE_PLAYERTWO) \
+	code(TURRET) \
 
 
 

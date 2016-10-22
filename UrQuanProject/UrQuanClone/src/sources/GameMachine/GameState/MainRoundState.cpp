@@ -10,6 +10,7 @@
 
 #include <GameMachine/GameObjects/Factory/ShipFactory.h>
 #include <GameMachine/GameObjects/Factory/WallFactory.h>
+#include <GameMachine/GameObjects/Factory/TurretFactory.h>
 
 #include <GameClone/Defs.h>
 
@@ -66,6 +67,10 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 			sf::Vector2f(5.f, GAME_SCREEN_HALF_HEIGHT / 2.F));
 	_goCollection.push(wall);
 	_goCollection.push(wall2);
+
+	Factory::TurretFactory turretFactory;
+	_goCollection.push(turretFactory.createNew(
+	{ GAME_SCREEN_HALF_WIDTH, 50.f }));
 }
 
 MainRoundState::~MainRoundState()

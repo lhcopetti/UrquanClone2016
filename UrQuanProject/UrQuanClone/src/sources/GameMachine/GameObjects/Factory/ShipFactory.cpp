@@ -19,6 +19,9 @@
 #include <GameMachine/GameObjects/Armory/ProjectileFactory/BulletFactory.h>
 #include <GameMachine/GameObjects/Armory/ProjectileFactory/SquareBulletFactory.h>
 
+#include <GameMachine/Components/Collision/ColliderComponent.h>
+#include <GameMachine/Components/Collision/Shape/CircleCollidingShape.h>
+
 namespace Components
 {
 
@@ -59,6 +62,22 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 			new Components::PhysicsComponent(1.0f, 250.f, 0.01f));
 
 	ship->setShooterComponent(new Components::ShooterComponent(factory));
+
+	Collision::CollidingShape* collidingShape =
+			new Collision::CircleCollidingShape(
+			{ 0.f, 0.f }, 3.f);
+	Collision::CCategories myCategory =
+			playerType == PLAYER_ONE ?
+					Collision::CC_SHIP_PLAYERONE : Collision::CC_SHIP_PLAYERTWO;
+	Collision::ColliderCategory category;
+	category.add(Collision::CC_WALL);
+	category.add(Collision::CC_TURRET);
+	category.add(Collision::CC_PROJECTILE_PLAYERONE);
+	category.add(Collision::CC_PROJECTILE_PLAYERTWO);
+
+	Collision::ColliderComponent* collider = new Collision::ColliderComponent(
+			collidingShape, nullptr, myCategory, category);
+	ship->setColliderComponent(collider);
 
 	return ship;
 }

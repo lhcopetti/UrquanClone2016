@@ -15,6 +15,9 @@ namespace Components
 ShapeComponent::ShapeComponent(sf::Shape* shape) :
 		_shape(shape)
 {
+	sf::FloatRect rect = _shape->getLocalBounds();
+	sf::Vector2f newOrigin(rect.width / 2, rect.height / 2);
+	shape->setOrigin(newOrigin);
 }
 
 ShapeComponent::~ShapeComponent()
