@@ -33,15 +33,18 @@ bool ActionExecutor::update(GameObjects::GameObject& gameObject)
 
 	while (it != _actions.end())
 	{
-		update(gameObject, *it);
-		delete *it;
+		execute(gameObject, *it);
+
+		if (!(*it)->isCallback())
+			delete *it;
+
 		it = _actions.erase(it);
 	}
 
 	return true;
 }
 
-bool ActionExecutor::update(GameObjects::GameObject& gameObject,
+bool ActionExecutor::execute(GameObjects::GameObject& gameObject,
 		Actions::Action* action)
 {
 	if (!action->canExecute(gameObject))

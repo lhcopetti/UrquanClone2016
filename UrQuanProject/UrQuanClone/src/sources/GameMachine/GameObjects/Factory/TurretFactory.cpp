@@ -62,7 +62,9 @@ GameObjects::GameObject* TurretFactory::createNew(sf::Vector2f position)
 	category.add(Collision::CC_SHIP_PLAYERONE);
 	category.add(Collision::CC_SHIP_PLAYERTWO);
 
-	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, new Actions::AimAction, myCategory, category);
+	Actions::Action* aimAction = new Actions::AimAction;
+	aimAction->setCallback();
+	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, aimAction, myCategory, category);
 	turret->setColliderComponent(collider);
 
 	return turret;

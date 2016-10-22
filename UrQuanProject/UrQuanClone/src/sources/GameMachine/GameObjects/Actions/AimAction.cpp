@@ -10,6 +10,8 @@
 #include <VectorMath/VectorMath.h>
 #include <math.h>
 
+#include <iostream>
+
 namespace Actions
 {
 
@@ -31,10 +33,10 @@ bool AimAction::canExecute(GameObjects::GameObject& gameObject)
 
 bool AimAction::execute(GameObjects::GameObject& gameObject)
 {
-	sf::Vector2f angleVector = gameObject.getPosition()
-			- _context->getPosition();
+	sf::Vector2f angleVector = _context->getPosition() - gameObject.getPosition();
 
-	gameObject.setOrientation(VectorMath::toDegree(atan2f(angleVector.y, angleVector.x)));
+	float angle = VectorMath::toDegree(atan2f(angleVector.y, angleVector.x));
+	gameObject.setOrientation(angle);
 	return true;
 }
 

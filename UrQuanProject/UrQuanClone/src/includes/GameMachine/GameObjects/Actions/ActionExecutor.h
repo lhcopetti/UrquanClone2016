@@ -31,7 +31,7 @@ public:
 	bool update(GameObjects::GameObject& gameObject);
 
 private:
-	bool update(GameObjects::GameObject& gameObject, Actions::Action* action);
+	bool execute(GameObjects::GameObject& gameObject, Actions::Action* action);
 	std::vector<Actions::Action*> _actions;
 };
 

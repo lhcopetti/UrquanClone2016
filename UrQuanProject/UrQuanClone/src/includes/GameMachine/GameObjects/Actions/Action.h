@@ -16,13 +16,16 @@ namespace Actions
 class Action
 {
 public:
-	Action();
+	Action(bool isCallback = false);
 	virtual ~Action();
 
 	virtual bool canExecute(GameObjects::GameObject& gameObject);
 	virtual bool execute(GameObjects::GameObject& gameObject) = 0;
 
 	void setContext(GameObjects::GameObject* context);
+
+	bool isCallback();
+	void setCallback();
 
 protected:
 	/*
@@ -31,6 +34,13 @@ protected:
 	 * Ex: Vetor normal, Separating Axis Theorem
 	 */
 	GameObjects::GameObject* _context;
+
+private:
+	/*
+	 * Se a ação é marcada como callback ela não será mais deletada
+	 * ao fim de sua execução
+	 */
+	bool _isCallback;
 };
 
 } /* namespace Components */
