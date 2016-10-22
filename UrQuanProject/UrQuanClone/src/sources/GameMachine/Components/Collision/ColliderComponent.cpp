@@ -55,9 +55,11 @@ CollidingShapeType ColliderComponent::getShapeType() const
 	return _collidingShape->getType();
 }
 
-Actions::Action* ColliderComponent::getTriggerAction() const
+Actions::Action* ColliderComponent::getTriggerActionCopy()
 {
-	return _triggerAction;
+	Actions::Action* temp(_triggerAction);
+	_triggerAction = nullptr;
+	return temp;
 }
 
 } /* namespace Components */

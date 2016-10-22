@@ -10,7 +10,8 @@
 namespace Actions
 {
 
-Action::Action()
+Action::Action() :
+		_context(nullptr)
 {
 }
 
@@ -22,6 +23,11 @@ bool Action::canExecute(GameObjects::GameObject& gameObject)
 {
 	/* Default empty implementation */
 	return true;
+}
+
+void Action::setContext(GameObjects::GameObject* context)
+{
+	_context = context;
 }
 
 } /* namespace Components */

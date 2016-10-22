@@ -20,7 +20,7 @@
 #include <GameMachine/Components/Collision/ColliderComponent.h>
 #include <GameMachine/Components/Collision/Shape/ShapeCollider.h>
 
-#include <GameMachine/GameObjects/Actions/SuicideAction.h>
+#include <GameMachine/GameObjects/Actions/AimAction.h>
 
 namespace Factory
 {
@@ -59,13 +59,10 @@ GameObjects::GameObject* TurretFactory::createNew(sf::Vector2f position)
 	Collision::CollidingShape* collidingShape = new Collision::CircleCollidingShape({0.f, 0.f}, 250.f);
 	Collision::CCategories myCategory = Collision::CC_TURRET;
 	Collision::ColliderCategory category;
-	category.add(Collision::CC_WALL);
 	category.add(Collision::CC_SHIP_PLAYERONE);
 	category.add(Collision::CC_SHIP_PLAYERTWO);
-	category.add(Collision::CC_PROJECTILE_PLAYERONE);
-	category.add(Collision::CC_PROJECTILE_PLAYERTWO);
 
-	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, new Actions::SuicideAction, myCategory, category);
+	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, new Actions::AimAction, myCategory, category);
 	turret->setColliderComponent(collider);
 
 	return turret;
