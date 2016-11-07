@@ -10,7 +10,8 @@
 namespace Actions
 {
 
-Action::Action()
+Action::Action(bool isCallback) :
+		_context(nullptr), _isCallback(isCallback)
 {
 }
 
@@ -22,6 +23,21 @@ bool Action::canExecute(GameObjects::GameObject& gameObject)
 {
 	/* Default empty implementation */
 	return true;
+}
+
+void Action::setContext(GameObjects::GameObject* context)
+{
+	_context = context;
+}
+
+bool Action::isCallback()
+{
+	return _isCallback;
+}
+
+void Action::setCallback()
+{
+	_isCallback = true;
 }
 
 } /* namespace Components */

@@ -36,6 +36,12 @@ Adicionar uma forma prática de customizar a criação do Ship
 				
 Adicionar uma DSL para criação de categorias customizáveis. Exemplo: Wall, colide com tudo e etc.
 
+Arrumar DSL do InputController. Evitar cópias desnecessárias e utilizar interfaceSeggregation (Sempre utilizar o mesmo ponteiro, porém, retornar cast para as subinterfaces)
+
+Adicionar uma turret que atira em gameObjects que passam próximos (Como adaptar isso para a ideia da utilização de somente ações?)
+
+Incorporar um novo método escalável para que novos components sejam adicionados facilmente
+
 add clipsize 
 
 add unregisterListener to the API

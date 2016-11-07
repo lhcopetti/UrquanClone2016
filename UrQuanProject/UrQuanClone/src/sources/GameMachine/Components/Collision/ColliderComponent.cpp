@@ -10,6 +10,8 @@
 
 #include <GameMachine/GameObjects/GameObject.h>
 
+#include <GameMachine/GameObjects/Actions/Action.h>
+
 namespace Collision
 {
 
@@ -26,6 +28,11 @@ ColliderComponent::ColliderComponent(CollidingShape* collidingShape,
 
 ColliderComponent::~ColliderComponent()
 {
+	if (!_triggerAction->isCallback())
+		return;
+
+	delete _triggerAction;
+	_triggerAction = nullptr;
 }
 
 void ColliderComponent::update(const sf::Time& deltaTime,
@@ -55,7 +62,7 @@ CollidingShapeType ColliderComponent::getShapeType() const
 	return _collidingShape->getType();
 }
 
-Actions::Action* ColliderComponent::getTriggerAction() const
+Actions::Action* ColliderComponent::getTriggerActionCopy()
 {
 	return _triggerAction;
 }

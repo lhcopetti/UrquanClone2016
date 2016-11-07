@@ -13,6 +13,8 @@
 #include <GameMachine/Components/ShooterComponent.h>
 #include <GameMachine/Components/Collision/ColliderComponent.h>
 
+#include <GameMachine/GameObjects/Actions/Action.h>
+
 namespace GameObjects
 {
 
@@ -166,12 +168,13 @@ void GameObject::onCollisionWith(GameObject& other)
 	if (nullptr == _colliderComponent)
 		return;
 
-	Actions::Action* action = _colliderComponent->getTriggerAction();
+	Actions::Action* action = _colliderComponent->getTriggerActionCopy();
 
 	if (nullptr == action)
 		return;
 
-	pushAction(_colliderComponent->getTriggerAction());
+	action->setContext(&other);
+	pushAction(action);
 }
 
 void GameObject::die()

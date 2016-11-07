@@ -38,7 +38,7 @@ public:
 	const CollidingShape* getCollidingShape() const;
 	CollidingShapeType getShapeType() const;
 
-	Actions::Action* getTriggerAction() const;
+	Actions::Action* getTriggerActionCopy();
 
 private:
 	CCategories _category;
