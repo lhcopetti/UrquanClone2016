@@ -10,7 +10,8 @@
 namespace Components
 {
 
-DrawingComponent::DrawingComponent()
+DrawingComponent::DrawingComponent() :
+		Component(DRAWING_COMPONENT)
 {
 }
 

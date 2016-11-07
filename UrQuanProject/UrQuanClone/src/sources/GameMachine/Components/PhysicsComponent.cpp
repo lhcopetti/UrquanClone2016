@@ -16,6 +16,7 @@ namespace Components
 {
 
 PhysicsComponent::PhysicsComponent(float mass, float maxVelocity, float friction) :
+		Component(PHYSICS_COMPONENT),
 		_colliderComponent(nullptr), //
 		_mass(mass), //
 		_forces(sf::Vector2f(0.f, 0.f)), //

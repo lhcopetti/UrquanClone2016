@@ -12,6 +12,7 @@ namespace Components
 {
 
 ShooterComponent::ShooterComponent(Armory::ProjectileFactory* factory) :
+		Component(SHOOTER_COMPONENT),
 		_weapon(factory)
 {
 }

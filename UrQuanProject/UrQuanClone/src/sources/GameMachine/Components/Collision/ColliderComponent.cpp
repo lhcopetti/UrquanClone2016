@@ -18,6 +18,7 @@ namespace Collision
 ColliderComponent::ColliderComponent(CollidingShape* collidingShape,
 		Actions::Action* action, CCategories categories,
 		ColliderCategory colliderCategory) :
+		Component(Components::COLLIDER_COMPONENT),
 		_category(categories), //
 		_collidingCategory(colliderCategory), //
 		_collidingShape(collidingShape), //
