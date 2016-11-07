@@ -47,17 +47,30 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	using namespace sf;
 	using namespace GameObjects;
 
+//	InputBuilder builder;
+//	builder.bind(
+//	{ Keyboard::W, INPUT_PRESSING }).andAlso(
+//	{ Keyboard::Numpad8, INPUT_PRESSING }).to(ShipInput::SHIP_THRUST).bind(
+//	{ Keyboard::A, INPUT_PRESSING }).andAlso(
+//	{ Keyboard::Numpad4, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_LEFT).bind(
+//	{ Keyboard::D, INPUT_PRESSING }).andAlso(
+//	{ Keyboard::Numpad6, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
+//	{ Keyboard::Space, INPUT_PRESS }).andAlso(
+//	{ Keyboard::Numpad0, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
+//			shipPlayer1).andAlso(shipPlayer2).on(_inputController).run();
+
 	InputBuilder builder;
 	builder.bind(
 	{ Keyboard::W, INPUT_PRESSING }).andAlso(
-	{ Keyboard::Numpad8, INPUT_PRESSING }).to(ShipInput::SHIP_THRUST).bind(
+	{ Keyboard::I, INPUT_PRESSING }).to(ShipInput::SHIP_THRUST).bind(
 	{ Keyboard::A, INPUT_PRESSING }).andAlso(
-	{ Keyboard::Numpad4, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_LEFT).bind(
+	{ Keyboard::J, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_LEFT).bind(
 	{ Keyboard::D, INPUT_PRESSING }).andAlso(
-	{ Keyboard::Numpad6, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
+	{ Keyboard::L, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
 	{ Keyboard::Space, INPUT_PRESS }).andAlso(
-	{ Keyboard::Numpad0, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
+	{ Keyboard::M, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
 			shipPlayer1).andAlso(shipPlayer2).on(_inputController).run();
+
 
 	Factory::WallFactory wallFactory(sf::Color::Cyan);
 	GameObjects::GameObject* wall = wallFactory.createNew(
