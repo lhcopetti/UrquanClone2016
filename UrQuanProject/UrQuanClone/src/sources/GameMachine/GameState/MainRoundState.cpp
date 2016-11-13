@@ -81,9 +81,9 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	_goCollection.push(wall);
 	_goCollection.push(wall2);
 
-	Factory::TurretFactory turretFactory;
-	_goCollection.push(turretFactory.createNew(
-	{ GAME_SCREEN_HALF_WIDTH, 50.f }));
+//	Factory::TurretFactory turretFactory;
+//	_goCollection.push(turretFactory.createNew(
+//	{ GAME_SCREEN_HALF_WIDTH, 50.f }));
 }
 
 MainRoundState::~MainRoundState()

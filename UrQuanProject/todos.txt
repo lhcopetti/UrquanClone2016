@@ -1,5 +1,13 @@
 
 
+Adicionar vida para os gameObjects, vida < 0 = morte!
+Finalizar o jogo, quando algum dos dois ships forem mortos
+Adicionar uma segunda arma para as naves (míssel mais lento, maior).
+Modificar a segunda arma para que os mísseis sejam tele-guidados
+
+
+
+
 OK! (25-09-2016) Use HighOrderMacro to print on screen the name of InputTypes (Press, Release, etc) (25-09-2016)
 
 
