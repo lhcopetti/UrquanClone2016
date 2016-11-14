@@ -53,6 +53,10 @@ public:
 	void setHealth(int newHealth);
 	int getHealth() const;
 	
+	void setMaxHealth(float newMaxHealth);
+	float getMaxHealth() const;
+
+
 	bool isAlive() const;
 	void die();
 
@@ -82,7 +86,8 @@ protected:
 	sf::Vector2f _pos;
 	float _orientation;
 
-	int _health;
+	float _health;
+	float _maxHealth;
 
 private:
 	Actions::ActionExecutor _executor;

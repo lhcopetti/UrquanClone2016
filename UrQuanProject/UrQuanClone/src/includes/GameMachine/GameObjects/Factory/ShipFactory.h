@@ -34,6 +34,9 @@ public:
 
 	GameObjects::GameObject* createNew(PlayerType playerType, const GameObjects::ShipType shipType);
 
+private:
+	Components::DrawingComponent* getHealthUI(PlayerType playerType);
+
 };
 
 }

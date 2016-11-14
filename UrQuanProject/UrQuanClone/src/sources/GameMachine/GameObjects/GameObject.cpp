@@ -192,4 +192,14 @@ void GameObject::die()
 	_health = 0;
 }
 
+void GameObject::setMaxHealth(float newMaxHealth)
+{
+	_maxHealth = newMaxHealth;
+}
+
+float GameObject::getMaxHealth() const
+{
+	return _maxHealth;
+}
+
 } /* namespace GameState */

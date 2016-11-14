@@ -7,7 +7,8 @@
 
 #include <GameMachine/GameObjects/Factory/ShipFactory.h>
 
-#include <GameMachine/Components/DrawingComponent.h>
+#include <GameMachine/Components/CompositeDrawingComponent.h>
+
 #include <GameMachine/Components/PhysicsComponent.h>
 #include <GameMachine/Components/ShooterComponent.h>
 
@@ -21,6 +22,10 @@
 
 #include <GameMachine/Components/Collision/ColliderComponent.h>
 #include <GameMachine/Components/Collision/Shape/CircleCollidingShape.h>
+
+#include <GameMachine/Components/UI/HealthStatusDrawing.h>
+
+#include <GameClone/Defs.h>
 
 namespace Components
 {
@@ -36,8 +41,10 @@ ShipFactory::~ShipFactory()
 GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 		const GameObjects::ShipType shipType)
 {
-	DrawingComponent* drawing = nullptr;
+	CompositeDrawingComponent* drawing = new Components::CompositeDrawingComponent;
 	Armory::ProjectileFactory* factory = nullptr;
+
+	drawing->push(getHealthUI(playerType));
 
 	const Collision::CCategories projectileCategory =
 			playerType == PLAYER_ONE ?
@@ -46,14 +53,14 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 
 	if (GameObjects::ShipType::SHIP_Soldier74 == shipType)
 	{
-		drawing = new GameObjects::SpriteDrawing(
-				"./resources/playerShip1_orange.png", +90.f);
+		drawing->push(new GameObjects::SpriteDrawing(
+				"./resources/playerShip1_orange.png", +90.f));
 		factory = new Armory::BulletFactory(projectileCategory);
 	}
 	else if (GameObjects::ShipType::SHIP_GAIJIN == shipType)
 	{
-		drawing = new GameObjects::SpriteDrawing(
-				"./resources/playerShip2_blue.png", +90.f);
+		drawing->push(new GameObjects::SpriteDrawing(
+				"./resources/playerShip2_blue.png", +90.f));
 		factory = new Armory::SquareBulletFactory(projectileCategory);
 	}
 
@@ -86,7 +93,20 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 			collidingShape, nullptr, myCategory, category);
 	ship->setColliderComponent(collider);
 
+	ship->setMaxHealth(350);
+	ship->setHealth(350);
+
 	return ship;
+}
+
+Components::DrawingComponent* ShipFactory::getHealthUI(PlayerType playerType)
+{
+	const float y = 15.f;
+
+	if (playerType == PlayerType::PLAYER_ONE)
+		return new UI::HealthStatusDrawing(sf::Vector2f(0.f, y), sf::Color::Red);
+	else
+		return new UI::HealthStatusDrawing(sf::Vector2f(GAME_SCREEN_HALF_WIDTH, y), sf::Color::Green);
 }
 
 } /* namespace GameObjects */
