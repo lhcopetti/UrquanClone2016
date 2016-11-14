@@ -26,6 +26,8 @@ private:
 
 	float getSizeFromHealth(const GameObjects::GameObject& gameObject);
 
+	void addToOrigin(sf::Transformable& t, float x, float y);
+
 	sf::Text _lifeText;
 	sf::RectangleShape _lifeRect;
 	sf::RectangleShape _outlineRect;
