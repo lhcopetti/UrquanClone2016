@@ -56,6 +56,8 @@ Projectile* SquareBulletFactory::createNew()
 	category.add(Collision::CC_WALL);
 	category.add(Collision::CC_PROJECTILE_PLAYERONE);
 	category.add(Collision::CC_PROJECTILE_PLAYERTWO);
+	category.add(Collision::CC_SHIP_PLAYERONE);
+	category.add(Collision::CC_SHIP_PLAYERTWO);
 
 	Collision::ColliderComponent* collider = new Collision::ColliderComponent(
 			collidingShape, new Actions::SuicideAction, myCategory, category);
