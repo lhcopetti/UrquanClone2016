@@ -95,7 +95,6 @@ void MainMenuState::doUpdate(const sf::Time& deltaTime)
 
 	if (selectedOption == _optionStart)
 	{
-		_controller.addCommand(new GameMachine::PopStackCommand());
 		_controller.addCommand(
 				new GameMachine::PushStackCommand(
 						new MainRoundState(_controller)));

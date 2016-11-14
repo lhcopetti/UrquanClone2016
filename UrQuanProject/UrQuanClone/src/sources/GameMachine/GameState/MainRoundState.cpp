@@ -6,6 +6,9 @@
  */
 
 #include <GameMachine/GameState/MainRoundState.h>
+
+#include <GameMachine/GameState/WinnerState.h>
+
 #include <GameMachine/GameObjects/Factory/BlueCircle.h>
 
 #include <GameMachine/GameObjects/Factory/ShipFactory.h>
@@ -20,28 +23,33 @@
 
 #include <GameMachine/InputControl/InputBuilder.h>
 
+#include <GameMachine/StackControl/PopStackCommand.h>
+#include <GameMachine/StackControl/PushStackCommand.h>
+
 #include <iostream>
 
 namespace GameState
 {
 
 MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
-		GameState(controller)
+		GameState(controller),
+		_shipPlayerOne(nullptr),
+		_shipPlayerTwo(nullptr)
 {
 	Components::ShipFactory shipFactory;
-	GameObjects::GameObject* shipPlayer1 = shipFactory.createNew(PLAYER_ONE,
+	_shipPlayerOne = shipFactory.createNew(PLAYER_ONE,
 			GameObjects::ShipType::SHIP_Soldier74);
 
-	GameObjects::GameObject* shipPlayer2 = shipFactory.createNew(PLAYER_TWO,
+	_shipPlayerTwo = shipFactory.createNew(PLAYER_TWO,
 			GameObjects::ShipType::SHIP_GAIJIN);
 
 	sf::Vector2f center = GAME_SCREEN_CENTER_VECTOR;
 	sf::Vector2f halfCenter(center.x / 2, center.y);
-	shipPlayer1->setPosition(halfCenter);
-	shipPlayer2->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
+	_shipPlayerOne->setPosition(halfCenter);
+	_shipPlayerTwo->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
 
-	_goCollection.push(shipPlayer1);
-	_goCollection.push(shipPlayer2);
+	_goCollection.push(_shipPlayerOne);
+	_goCollection.push(_shipPlayerTwo);
 
 	using namespace Inputs;
 	using namespace sf;
@@ -69,7 +77,7 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	{ Keyboard::L, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
 	{ Keyboard::Space, INPUT_PRESS }).andAlso(
 	{ Keyboard::M, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
-			shipPlayer1).andAlso(shipPlayer2).on(_inputController).run();
+			_shipPlayerOne).andAlso(_shipPlayerTwo).on(_inputController).run();
 
 
 	Factory::WallFactory wallFactory(sf::Color::Cyan);
@@ -103,7 +111,8 @@ void MainRoundState::onExit()
 
 void MainRoundState::doUpdate(const sf::Time& deltaTime)
 {
-
+	if (_shipPlayerOne->getPosition().x < 0)
+		transition();
 }
 
 void MainRoundState::doBeforeDraw(sf::RenderWindow& window) const
@@ -113,6 +122,12 @@ void MainRoundState::doBeforeDraw(sf::RenderWindow& window) const
 
 void MainRoundState::doDraw(sf::RenderWindow& window)
 {
+}
+
+void MainRoundState::transition()
+{
+	_controller.addCommand(new GameMachine::PopStackCommand);
+	_controller.addCommand(new GameMachine::PushStackCommand(new WinnerState(_controller)));
 }
 
 } /* namespace GameState */

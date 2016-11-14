@@ -25,6 +25,12 @@ public:
 	virtual void doUpdate(const sf::Time& deltaTime);
 	virtual void doBeforeDraw(sf::RenderWindow& window) const;
 	virtual void doDraw(sf::RenderWindow& window);
+
+	void transition();
+
+private:
+	GameObjects::GameObject* _shipPlayerOne;
+	GameObjects::GameObject* _shipPlayerTwo;
 };
 
 } /* namespace GameState */

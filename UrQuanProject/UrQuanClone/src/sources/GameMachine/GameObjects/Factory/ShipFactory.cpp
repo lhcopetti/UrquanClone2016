@@ -65,15 +65,22 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 
 	Collision::CollidingShape* collidingShape =
 			new Collision::CircleCollidingShape(
-			{ 0.f, 0.f }, 3.f);
-	Collision::CCategories myCategory =
-			playerType == PLAYER_ONE ?
-					Collision::CC_SHIP_PLAYERONE : Collision::CC_SHIP_PLAYERTWO;
+			{ 0.f, 0.f }, 30.f);
+
+	Collision::CCategories myCategory;
 	Collision::ColliderCategory category;
-	category.add(Collision::CC_WALL);
+
+	if (playerType == PLAYER_ONE) {
+		myCategory = Collision::CC_SHIP_PLAYERONE;
+		category.add(Collision::CC_PROJECTILE_PLAYERTWO);
+	}
+	else if (playerType == PLAYER_TWO)
+	{
+		myCategory = Collision::CC_SHIP_PLAYERTWO;
+		category.add(Collision::CC_PROJECTILE_PLAYERONE);
+	}
+
 	category.add(Collision::CC_TURRET);
-	category.add(Collision::CC_PROJECTILE_PLAYERONE);
-	category.add(Collision::CC_PROJECTILE_PLAYERTWO);
 
 	Collision::ColliderComponent* collider = new Collision::ColliderComponent(
 			collidingShape, nullptr, myCategory, category);
