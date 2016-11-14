@@ -26,6 +26,8 @@ public:
 	virtual void doBeforeDraw(sf::RenderWindow& window) const;
 	virtual void doDraw(sf::RenderWindow& window);
 
+	sf::Text getDefaultSfText(const std::string& text);
+
 	void transition();
 
 private:

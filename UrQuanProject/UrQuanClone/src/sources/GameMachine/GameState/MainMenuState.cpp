@@ -22,14 +22,15 @@
 
 #include <GameClone/Defs.h>
 
+#include <GameMachine/ResourceManager.h>
+
 #include <iostream>
 
 namespace GameState
 {
 
-MainMenuState::MainMenuState(GameMachine::GameStateController& controller,
-		const sf::Font& font) :
-		GameState(controller), _defaultFont(font), _startMenu(nullptr), _testCounter(
+MainMenuState::MainMenuState(GameMachine::GameStateController& controller) :
+		GameState(controller), _startMenu(nullptr), _testCounter(
 				0), _registered(false), _optionStart(nullptr), _optionCredits(
 				nullptr), _optionQuitGame(nullptr), _menuComponent(nullptr)
 
@@ -120,7 +121,7 @@ void MainMenuState::doDraw(sf::RenderWindow& window)
 sf::Text MainMenuState::getDefaultSfText(const std::string& text)
 {
 	sf::Text sfText;
-	sfText.setFont(getDefaultFont());
+	sfText.setFont(Resources::ResourceManager::get().getDefaultFont());
 	sfText.setFillColor(sf::Color::Black);
 	sfText.setString(text);
 	return sfText;
@@ -156,11 +157,6 @@ void MainMenuState::onExit()
 {
 	std::cout << "Leaving MainMenuState! " << std::endl;
 	_menuComponent->reset();
-}
-
-const sf::Font& MainMenuState::getDefaultFont() const
-{
-	return _defaultFont;
 }
 
 void MainMenuState::handleInput(int handlerData)

@@ -25,7 +25,7 @@ namespace GameState
 class MainMenuState: public GameState, public Inputs::InputHandler
 {
 public:
-	MainMenuState(GameMachine::GameStateController& controller, const sf::Font& font);
+	MainMenuState(GameMachine::GameStateController& controller);
 	virtual ~MainMenuState();
 
 	virtual void onEnter();
@@ -35,7 +35,6 @@ public:
 	virtual void doDraw(sf::RenderWindow& window);
 
 	sf::Text getDefaultSfText(const std::string& text);
-	const sf::Font& getDefaultFont() const;
 
 	//virtual void handleInput(Inputs::InputAction inputAction);
 	virtual void handleInput(int handlerData);
@@ -44,7 +43,6 @@ private:
 	enum GameOptions { START_GAME, SHOW_CREDITS, QUIT_GAME };
 	Components::GameMenu<GameOptions> t;
 
-	const sf::Font& _defaultFont;
 	GameObjects::GameObject* _startMenu;
 
 	int _testCounter;
