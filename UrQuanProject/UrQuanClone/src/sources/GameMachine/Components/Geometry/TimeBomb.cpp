@@ -27,7 +27,7 @@ void TimeBomb::update(const sf::Time& deltaTime)
 	_counter += deltaTime;
 
 	if (_counter > _timeToExplode)
-		_alive = false;
+		die();
 }
 
 } /* namespace Geometry */

@@ -26,9 +26,9 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 		_physicsComponent(nullptr),  //
 		_shooterComponent(nullptr), //
 		_colliderComponent(nullptr), //
-		_alive(true), //
 		_pos(pos), //
-		_orientation(false) //
+		_orientation(false), //
+		_health(1) //
 {
 }
 
@@ -102,9 +102,14 @@ void GameObject::handleInput(int userData)
 {
 }
 
+int GameObject::getHealth() const
+{
+	return _health;
+}
+
 bool GameObject::isAlive() const
 {
-	return _alive;
+	return _health > 0;
 }
 
 void GameObject::setOrientation(float newOrientation)
@@ -163,6 +168,11 @@ Collision::ColliderComponent* GameObject::getColliderComponent()
 	return _colliderComponent;
 }
 
+void GameObject::setHealth(int newHealth)
+{
+	_health = newHealth;
+}
+
 void GameObject::onCollisionWith(GameObject& other)
 {
 	if (nullptr == _colliderComponent)
@@ -179,7 +189,7 @@ void GameObject::onCollisionWith(GameObject& other)
 
 void GameObject::die()
 {
-	_alive = false;
+	_health = 0;
 }
 
 } /* namespace GameState */

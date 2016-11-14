@@ -25,7 +25,6 @@ WinnerState::WinnerState(GameMachine::GameStateController& controller) :
 				GameState(controller)
 {
 	// TODO Auto-generated constructor stub
-
 }
 
 WinnerState::~WinnerState()

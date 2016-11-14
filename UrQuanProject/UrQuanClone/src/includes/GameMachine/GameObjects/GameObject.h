@@ -50,6 +50,9 @@ public:
 
 	virtual void handleInput(int userData);
 
+	void setHealth(int newHealth);
+	int getHealth() const;
+	
 	bool isAlive() const;
 	void die();
 
@@ -76,9 +79,10 @@ protected:
 	Components::ShooterComponent* _shooterComponent;
 	Collision::ColliderComponent* _colliderComponent;
 
-	bool _alive;
 	sf::Vector2f _pos;
 	float _orientation;
+
+	int _health;
 
 private:
 	Actions::ActionExecutor _executor;
