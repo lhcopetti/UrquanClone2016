@@ -18,6 +18,8 @@
 #include <GameMachine/Components/Collision/ColliderCategory.h>
 
 #include <GameMachine/GameObjects/Actions/SuicideAction.h>
+#include <GameMachine/GameObjects/Actions/DamageAction.h>
+#include <GameMachine/GameObjects/Actions/Decorations/ActionBundle.h>
 
 namespace Armory
 {
@@ -50,7 +52,11 @@ Projectile* BulletFactory::createNew()
 	category.add(Collision::CC_SHIP_PLAYERONE);
 	category.add(Collision::CC_SHIP_PLAYERTWO);
 
-	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, new Actions::SuicideAction, myCategory, category);
+	Actions::ActionBundle* bundle = new Actions::ActionBundle;
+	bundle->add(new Actions::DamageAction(15));
+	bundle->add(new Actions::SuicideAction);
+
+	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, bundle, myCategory, category);
 	bullet->setColliderComponent(collider);
 
 	return bullet;

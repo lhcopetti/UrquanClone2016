@@ -23,6 +23,7 @@ namespace GameObjects
 Ship::Ship(Components::DrawingComponent* drawingComponent) :
 		GameObject(drawingComponent)
 {
+	_health = 20;
 }
 
 Ship::~Ship()

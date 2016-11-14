@@ -22,7 +22,7 @@ public:
 	virtual bool canExecute(GameObjects::GameObject& gameObject);
 	virtual bool execute(GameObjects::GameObject& gameObject) = 0;
 
-	void setContext(GameObjects::GameObject* context);
+	virtual void setContext(GameObjects::GameObject* context);
 
 	bool isCallback();
 	void setCallback();
