@@ -64,7 +64,23 @@ CollidingShapeType ColliderComponent::getShapeType() const
 
 Actions::Action* ColliderComponent::getTriggerActionCopy()
 {
-	return _triggerAction;
+	if (nullptr == _triggerAction)
+		return nullptr;
+
+
+	if (_triggerAction->isCallback())
+		return _triggerAction;
+
+	/*
+	 * If the Action is not a callback, return it only once!
+	 *
+	 * This avoids the mistake of returning a deleted action.
+	 * TODO: This is a workaround, what would be a more suitable fix?
+	 */
+	Actions::Action* action = _triggerAction;
+	_triggerAction = nullptr;
+
+	return action;
 }
 
 } /* namespace Components */
