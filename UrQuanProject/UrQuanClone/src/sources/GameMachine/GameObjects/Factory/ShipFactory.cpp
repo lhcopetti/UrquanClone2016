@@ -17,6 +17,7 @@
 #include <GameMachine/GameObjects/Actions/SetVelocityAction.h>
 #include <GameMachine/GameObjects/Ship/SpriteDrawing.h>
 
+#include <GameMachine/GameObjects/Armory/ProjectileFactory/MissileFactory.h>
 #include <GameMachine/GameObjects/Armory/ProjectileFactory/BulletFactory.h>
 #include <GameMachine/GameObjects/Armory/ProjectileFactory/SquareBulletFactory.h>
 
@@ -64,7 +65,7 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 	}
 
 	secondaryFactory = new Armory::BulletFactory(projectileCategory);
-	mainFactory = new Armory::SquareBulletFactory(projectileCategory);
+	mainFactory = new Armory::MissileFactory(projectileCategory);
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
 	ship->setPhysicsComponent(
