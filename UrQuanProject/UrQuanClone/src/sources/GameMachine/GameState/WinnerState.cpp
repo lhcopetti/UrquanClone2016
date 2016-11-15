@@ -12,7 +12,7 @@
 #include <GameMachine/InputControl/InputBuilder.h>
 
 #include <GameMachine/GameObjects/Factory/ShipFactory.h>
-
+#include <GameMachine/ResourceManager.h>
 #include <GameClone/Defs.h>
 
 #include <iostream>
@@ -53,10 +53,21 @@ void WinnerState::onEnter()
 	GameObjects::GameObject* shipLooser = shipFactory.createNew(PLAYER_TWO,
 			_looser);
 
+	_textWinner.setFont(Resources::ResourceManager::get().getDefaultFont());
+	_textWinner.setString("WINNER");
+	_textWinner.setOrigin(sf::Vector2f(+60.f, +85.f));
+
+	_textLooser.setFont(Resources::ResourceManager::get().getDefaultFont());
+	_textLooser.setString("LOOSER");
+	_textLooser.setOrigin(sf::Vector2f(+60.f, +85.f));
+
 	sf::Vector2f center = GAME_SCREEN_CENTER_VECTOR;
 	sf::Vector2f halfCenter(center.x / 2, center.y);
 	shipWinner->setPosition(halfCenter);
+	_textWinner.setPosition(halfCenter);
+
 	shipLooser->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
+	_textLooser.setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
 
 	shipWinner->setOrientation(+270);
 	shipLooser->setOrientation(+270);
@@ -91,6 +102,8 @@ void WinnerState::doUpdate(const sf::Time& deltaTime)
 void WinnerState::doBeforeDraw(sf::RenderWindow& window) const
 {
 	window.clear(sf::Color::Cyan);
+	window.draw(_textWinner);
+	window.draw(_textLooser);
 }
 
 } /* namespace Armory */

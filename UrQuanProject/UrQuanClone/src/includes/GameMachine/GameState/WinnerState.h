@@ -11,6 +11,7 @@
 #include <GameMachine/GameState/GameState.h>
 
 #include <GameMachine/GameObjects/Ship/Ship.h>
+#include <SFML/Graphics/Text.hpp>
 
 namespace GameState
 {
@@ -32,6 +33,9 @@ public:
 private:
 	GameObjects::ShipType _winner;
 	GameObjects::ShipType _looser;
+
+	sf::Text _textWinner;
+	sf::Text _textLooser;
 };
 
 } /* namespace Armory */

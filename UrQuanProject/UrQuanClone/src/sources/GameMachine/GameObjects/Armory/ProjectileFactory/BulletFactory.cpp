@@ -53,7 +53,7 @@ Projectile* BulletFactory::createNew()
 	category.add(Collision::CC_SHIP_PLAYERTWO);
 
 	Actions::ActionBundle* bundle = new Actions::ActionBundle;
-	bundle->add(new Actions::DamageAction(15));
+	bundle->add(new Actions::DamageAction(150));
 	bundle->add(new Actions::SuicideAction);
 
 	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, bundle, myCategory, category);

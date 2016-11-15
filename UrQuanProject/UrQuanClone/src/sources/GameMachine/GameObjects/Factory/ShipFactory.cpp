@@ -61,7 +61,7 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 	{
 		drawing->push(new GameObjects::SpriteDrawing(
 				"./resources/playerShip2_blue.png", +90.f));
-		factory = new Armory::SquareBulletFactory(projectileCategory);
+		factory = new Armory::BulletFactory(projectileCategory);
 	}
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
