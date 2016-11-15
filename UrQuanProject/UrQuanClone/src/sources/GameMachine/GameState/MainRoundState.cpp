@@ -53,8 +53,8 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	_shipPlayerOne->setPosition(halfCenter);
 	_shipPlayerTwo->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
 
-	_goCollection.push(_shipPlayerOne);
-	_goCollection.push(_shipPlayerTwo);
+	_goCollection.push("shipPlayerOne", _shipPlayerOne);
+	_goCollection.push("shipPlayerTwo", _shipPlayerTwo);
 
 	using namespace Inputs;
 	using namespace sf;
@@ -123,6 +123,14 @@ void MainRoundState::onExit()
 
 void MainRoundState::doUpdate(const sf::Time& deltaTime)
 {
+
+	GameObjects::GameObject* playerOne = _goCollection.getNamedObject("shipPlayerOne");
+	if (nullptr != playerOne)
+	{
+		std::cout << "The current life of player1 is: " << std::to_string(playerOne->getHealth()) << std::endl;
+	}
+
+
 	if (_shipPlayerOne->isAlive() && _shipPlayerTwo->isAlive())
 		return;
 

@@ -7,6 +7,9 @@
 
 #include <GameMachine/GameObjects/GameObjectCollection.h>
 
+#include <iostream>
+#include <string>
+
 namespace GameObjects
 {
 
@@ -18,10 +21,30 @@ GameObjectCollection::~GameObjectCollection()
 {
 }
 
-void GameObjectCollection::push(GameObjects::GameObject* gameObject)
+bool GameObjectCollection::push(GameObjects::GameObject* gameObject)
 {
 	gameObject->_parent = this;
 	_gObjects.push_back(std::unique_ptr<GameObject>(gameObject));
+	return true;
+}
+
+bool GameObjectCollection::push(std::string name,
+		GameObjects::GameObject* gameObject)
+{
+	if (name.empty())
+	{
+		std::cout << "Cannot name a GameObject to the empty string" << std::endl;
+		return false;
+	}
+
+	if (_namedObjects.find(name) != _namedObjects.end())
+	{
+		std::cout << "There is already a GameObject named: " << name << " in this collection" << std::endl;
+		return false;
+	}
+
+	_namedObjects[name] = gameObject;
+	return push(gameObject);
 }
 
 void GameObjectCollection::draw(sf::RenderWindow& window) const
@@ -39,24 +62,67 @@ void GameObjectCollection::update(const sf::Time& deltaTime)
 		_gObjects.push_back(std::unique_ptr<GameObject>(_reproduction[i]));
 	_reproduction.clear();
 
+	/*
+	 * This one gotta go first!
+	 * It will eventually hold invalid pointers if one of the gameObject dies
+	 * */
+	removeDeadFromNamedGoCollection(deltaTime);
 
+
+	updateGoCollection(deltaTime);
+}
+
+void GameObjectCollection::updateGoCollection(const sf::Time& deltaTime)
+{
 	auto it = _gObjects.begin();
 
 	while (it != _gObjects.end())
 	{
-		(*it)->update(deltaTime);
-
-		std::vector<GameObject*>& reproduction = (*it)->getProduced();
-		for (unsigned int i = 0; i < reproduction.size(); ++i)
-			_reproduction.push_back(reproduction[i]);
-		reproduction.clear();
+		update(it->get(), deltaTime);
 
 		if (!(*it)->isAlive())
 			it = _gObjects.erase(it);
 		else
 			++it;
 	}
+}
 
+GameObject* GameObjectCollection::getNamedObject(const std::string& name)
+{
+	auto it = _namedObjects.find(name);
+
+	if (it == _namedObjects.end())
+	{
+		std::cout << "Não foi possível encontrar o GameObject: " << name << std::endl;
+		return nullptr;
+	}
+
+	return it->second;
+}
+
+void GameObjectCollection::removeDeadFromNamedGoCollection(const sf::Time& deltaTime)
+{
+	auto mapIt = _namedObjects.begin();
+
+	while (mapIt != _namedObjects.end())
+	{
+		if (!mapIt->second->isAlive())
+			mapIt = _namedObjects.erase(mapIt);
+		else
+			++mapIt;
+	}
+}
+
+void GameObjectCollection::update(GameObject* gameObject,
+	const sf::Time& deltaTime)
+{
+	gameObject->update(deltaTime);
+
+	std::vector<GameObject*>& reproduction = gameObject->getProduced();
+
+	for (unsigned int i = 0; i < reproduction.size(); ++i)
+		_reproduction.push_back(reproduction[i]);
+	reproduction.clear();
 }
 
 const unsigned int GameObjectCollection::size() const
