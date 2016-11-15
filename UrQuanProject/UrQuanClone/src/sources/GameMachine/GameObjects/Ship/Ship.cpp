@@ -52,9 +52,13 @@ void GameObjects::Ship::handleInput(int userData)
 	{
 		pushAction(new Actions::RotateByAction(+4.f));
 	}
-	else if (userData == ShipInput::SHIP_SHOOT)
+	else if (userData == ShipInput::SHIP_SECONDARY_SHOOT)
 	{
 		pushAction(Actions::ShootAction::withSecondaryWeapon());
+	}
+	else if (userData == ShipInput::SHIP_MAIN_SHOOT)
+	{
+		pushAction(Actions::ShootAction::withMainWeapon());
 	}
 
 }

@@ -78,7 +78,8 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	{ Keyboard::D, INPUT_PRESSING }).andAlso(
 	{ Keyboard::L, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
 	{ Keyboard::Space, INPUT_PRESS }).andAlso(
-	{ Keyboard::M, INPUT_PRESS }).to(ShipInput::SHIP_SHOOT).applyFor(
+	{ Keyboard::M, INPUT_PRESS }).to(ShipInput::SHIP_SECONDARY_SHOOT).bind(
+	{Keyboard::V, INPUT_PRESS}).andAlso({Keyboard::N, INPUT_PRESS}).to(ShipInput::SHIP_MAIN_SHOOT).applyFor(
 			_shipPlayerOne).andAlso(_shipPlayerTwo).on(_inputController).run();
 
 

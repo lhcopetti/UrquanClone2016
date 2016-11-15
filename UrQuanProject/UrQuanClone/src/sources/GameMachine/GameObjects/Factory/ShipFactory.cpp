@@ -64,7 +64,7 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 	}
 
 	secondaryFactory = new Armory::BulletFactory(projectileCategory);
-	mainFactory = new Armory::BulletFactory(projectileCategory);
+	mainFactory = new Armory::SquareBulletFactory(projectileCategory);
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
 	ship->setPhysicsComponent(
