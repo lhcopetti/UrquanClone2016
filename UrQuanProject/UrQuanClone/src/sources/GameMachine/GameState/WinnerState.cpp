@@ -11,6 +11,10 @@
 
 #include <GameMachine/InputControl/InputBuilder.h>
 
+#include <GameMachine/GameObjects/Factory/ShipFactory.h>
+
+#include <GameClone/Defs.h>
+
 #include <iostream>
 
 namespace GameState
@@ -21,8 +25,10 @@ enum WINNER_INPUT
 	ESCAPE
 };
 
-WinnerState::WinnerState(GameMachine::GameStateController& controller) :
-				GameState(controller)
+WinnerState::WinnerState(GameMachine::GameStateController& controller, GameObjects::ShipType winner, GameObjects::ShipType looser) :
+				GameState(controller),
+				_winner(winner),
+				_looser(looser)
 {
 	// TODO Auto-generated constructor stub
 }
@@ -40,6 +46,23 @@ void WinnerState::onEnter()
 	builder.bind(
 	{ sf::Keyboard::Escape, INPUT_RELEASE }).to(ESCAPE).applyFor(this).on(
 			_inputController).run();
+
+	Components::ShipFactory shipFactory;
+	GameObjects::GameObject* shipWinner = shipFactory.createNew(PLAYER_ONE,
+			_winner);
+	GameObjects::GameObject* shipLooser = shipFactory.createNew(PLAYER_TWO,
+			_looser);
+
+	sf::Vector2f center = GAME_SCREEN_CENTER_VECTOR;
+	sf::Vector2f halfCenter(center.x / 2, center.y);
+	shipWinner->setPosition(halfCenter);
+	shipLooser->setPosition(sf::Vector2f(halfCenter.x * 3, halfCenter.y));
+
+	shipWinner->setOrientation(+270);
+	shipLooser->setOrientation(+270);
+
+	_goCollection.push(shipWinner);
+	_goCollection.push(shipLooser);
 }
 
 void WinnerState::onExit()

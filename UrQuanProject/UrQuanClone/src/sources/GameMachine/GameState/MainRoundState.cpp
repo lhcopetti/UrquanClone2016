@@ -39,9 +39,11 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	Components::ShipFactory shipFactory;
 	_shipPlayerOne = shipFactory.createNew(PLAYER_ONE,
 			GameObjects::ShipType::SHIP_Soldier74);
+	_shipTypeOne = GameObjects::SHIP_Soldier74;
 
 	_shipPlayerTwo = shipFactory.createNew(PLAYER_TWO,
 			GameObjects::ShipType::SHIP_GAIJIN);
+	_shipTypeTwo = GameObjects::SHIP_GAIJIN;
 
 	sf::Vector2f center = GAME_SCREEN_CENTER_VECTOR;
 	sf::Vector2f halfCenter(center.x / 2, center.y);
@@ -111,8 +113,13 @@ void MainRoundState::onExit()
 
 void MainRoundState::doUpdate(const sf::Time& deltaTime)
 {
-	if (_shipPlayerOne->getPosition().x < 0)
-		transition();
+	if (_shipPlayerOne->isAlive() && _shipPlayerTwo->isAlive())
+		return;
+
+	if (!_shipPlayerOne->isAlive())
+		transition(_shipTypeTwo, _shipTypeOne);
+	else
+		transition(_shipTypeOne, _shipTypeTwo);
 }
 
 void MainRoundState::doBeforeDraw(sf::RenderWindow& window) const
@@ -124,10 +131,10 @@ void MainRoundState::doDraw(sf::RenderWindow& window)
 {
 }
 
-void MainRoundState::transition()
+void MainRoundState::transition(GameObjects::ShipType winner, GameObjects::ShipType looser)
 {
 	_controller.addCommand(new GameMachine::PopStackCommand);
-	_controller.addCommand(new GameMachine::PushStackCommand(new WinnerState(_controller)));
+	_controller.addCommand(new GameMachine::PushStackCommand(new WinnerState(_controller, winner, looser)));
 }
 
 } /* namespace GameState */

@@ -10,6 +10,8 @@
 
 #include <GameMachine/GameState/GameState.h>
 
+#include <GameMachine/GameObjects/Ship/Ship.h>
+
 namespace GameState
 {
 
@@ -28,11 +30,14 @@ public:
 
 	sf::Text getDefaultSfText(const std::string& text);
 
-	void transition();
+	void transition(GameObjects::ShipType winner, GameObjects::ShipType looser);
 
 private:
 	GameObjects::GameObject* _shipPlayerOne;
 	GameObjects::GameObject* _shipPlayerTwo;
+
+	GameObjects::ShipType _shipTypeOne;
+	GameObjects::ShipType _shipTypeTwo;
 };
 
 } /* namespace GameState */

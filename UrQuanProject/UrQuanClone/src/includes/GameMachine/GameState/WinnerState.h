@@ -10,13 +10,15 @@
 
 #include <GameMachine/GameState/GameState.h>
 
+#include <GameMachine/GameObjects/Ship/Ship.h>
+
 namespace GameState
 {
 
 class WinnerState: public GameState::GameState, public Inputs::InputHandler
 {
 public:
-	WinnerState(GameMachine::GameStateController& controller);
+	WinnerState(GameMachine::GameStateController& controller, GameObjects::ShipType winner, GameObjects::ShipType looser);
 	virtual ~WinnerState();
 
 	virtual void onEnter();
@@ -28,7 +30,8 @@ public:
 	virtual void doBeforeDraw(sf::RenderWindow& window) const;
 
 private:
-
+	GameObjects::ShipType _winner;
+	GameObjects::ShipType _looser;
 };
 
 } /* namespace Armory */
