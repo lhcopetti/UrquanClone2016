@@ -15,7 +15,7 @@
 namespace GameState
 {
 
-class MainRoundState : public GameState
+class MainRoundState : public GameState, public Inputs::InputHandler
 {
 public:
 	MainRoundState(GameMachine::GameStateController& controller);
@@ -31,6 +31,8 @@ public:
 	sf::Text getDefaultSfText(const std::string& text);
 
 	void transition(GameObjects::ShipType winner, GameObjects::ShipType looser);
+
+	virtual void handleInput(int data);
 
 private:
 	GameObjects::GameObject* _shipPlayerOne;

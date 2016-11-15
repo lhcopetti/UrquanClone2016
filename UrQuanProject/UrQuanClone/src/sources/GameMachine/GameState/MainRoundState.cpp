@@ -31,10 +31,13 @@
 namespace GameState
 {
 
+enum MAINROUNDSTATE_INPUT
+{
+	EXIT_GAME
+};
+
 MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
-		GameState(controller),
-		_shipPlayerOne(nullptr),
-		_shipPlayerTwo(nullptr)
+		GameState(controller), _shipPlayerOne(nullptr), _shipPlayerTwo(nullptr)
 {
 	Components::ShipFactory shipFactory;
 	_shipPlayerOne = shipFactory.createNew(PLAYER_ONE,
@@ -79,9 +82,15 @@ MainRoundState::MainRoundState(GameMachine::GameStateController& controller) :
 	{ Keyboard::L, INPUT_PRESSING }).to(ShipInput::SHIP_ROTATE_RIGHT).bind(
 	{ Keyboard::Space, INPUT_PRESS }).andAlso(
 	{ Keyboard::M, INPUT_PRESS }).to(ShipInput::SHIP_SECONDARY_SHOOT).bind(
-	{Keyboard::V, INPUT_PRESS}).andAlso({Keyboard::N, INPUT_PRESS}).to(ShipInput::SHIP_MAIN_SHOOT).applyFor(
+	{ Keyboard::V, INPUT_PRESS }).andAlso(
+	{ Keyboard::N, INPUT_PRESS }).to(ShipInput::SHIP_MAIN_SHOOT).applyFor(
 			_shipPlayerOne).andAlso(_shipPlayerTwo).on(_inputController).run();
 
+	InputBuilder exitShortcut;
+
+	exitShortcut.bind(
+	{ Keyboard::Escape, INPUT_PRESS }).to(EXIT_GAME).applyFor(this).on(
+			_inputController).run();
 
 	Factory::WallFactory wallFactory(sf::Color::Cyan);
 	GameObjects::GameObject* wall = wallFactory.createNew(
@@ -132,10 +141,25 @@ void MainRoundState::doDraw(sf::RenderWindow& window)
 {
 }
 
-void MainRoundState::transition(GameObjects::ShipType winner, GameObjects::ShipType looser)
+void MainRoundState::handleInput(int data)
+{
+	if (data != EXIT_GAME)
+	{
+		std::cout << "Não há tratamento para eventos do tipo: " << data
+				<< std::endl;
+		return;
+	}
+
+	_controller.addCommand(new GameMachine::PopStackCommand);
+}
+
+void MainRoundState::transition(GameObjects::ShipType winner,
+		GameObjects::ShipType looser)
 {
 	_controller.addCommand(new GameMachine::PopStackCommand);
-	_controller.addCommand(new GameMachine::PushStackCommand(new WinnerState(_controller, winner, looser)));
+	_controller.addCommand(
+			new GameMachine::PushStackCommand(
+					new WinnerState(_controller, winner, looser)));
 }
 
 } /* namespace GameState */
