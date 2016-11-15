@@ -29,8 +29,12 @@ class ColliderComponent;
 namespace GameObjects
 {
 
+class GameObjectCollection;
+
 class GameObject: public UpdatableFromTime, public Inputs::InputHandler
 {
+	friend GameObjectCollection;
+
 public:
 	GameObject(Components::DrawingComponent* drawingComponent = nullptr,
 			sf::Vector2f pos = sf::Vector2f(0.f, 0.f));
@@ -74,6 +78,8 @@ public:
 	void reproduce(GameObject* gameObject);
 	std::vector<GameObject*>& getProduced();
 
+	GameObjectCollection* getParent() const;
+
 	void onCollisionWith(GameObject& other);
 
 protected:
@@ -83,6 +89,7 @@ protected:
 	Components::ShooterComponent* _shooterComponent;
 	Collision::ColliderComponent* _colliderComponent;
 
+
 	sf::Vector2f _pos;
 	float _orientation;
 
@@ -90,6 +97,8 @@ protected:
 	float _maxHealth;
 
 private:
+	GameObjectCollection* _parent;
+
 	Actions::ActionExecutor _executor;
 
 	std::vector<GameObject*> _reproduction;

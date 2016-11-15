@@ -28,7 +28,8 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 		_colliderComponent(nullptr), //
 		_pos(pos), //
 		_orientation(false), //
-		_health(1) //
+		_health(1), //
+		_parent(nullptr)
 {
 }
 

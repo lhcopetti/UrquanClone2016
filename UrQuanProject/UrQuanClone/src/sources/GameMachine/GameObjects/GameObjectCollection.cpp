@@ -20,6 +20,7 @@ GameObjectCollection::~GameObjectCollection()
 
 void GameObjectCollection::push(GameObjects::GameObject* gameObject)
 {
+	gameObject->_parent = this;
 	_gObjects.push_back(std::unique_ptr<GameObject>(gameObject));
 }
 
