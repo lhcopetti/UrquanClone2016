@@ -52,9 +52,10 @@ GameObjects::GameObject* TurretFactory::createNew(sf::Vector2f position)
 
 	GameObjects::GameObject* turret = new GameObjects::GameObject(composite, position);
 
-	Armory::ProjectileFactory* factory = new Armory::BulletFactory(Collision::CC_TURRET);
+	Armory::ProjectileFactory* mainFactory = new Armory::BulletFactory(Collision::CC_TURRET);
+	Armory::ProjectileFactory* secondaryFactory = new Armory::BulletFactory(Collision::CC_TURRET);
 
-	turret->setShooterComponent(new Components::ShooterComponent(factory));
+	turret->setShooterComponent(new Components::ShooterComponent(mainFactory, secondaryFactory));
 
 	Collision::CollidingShape* collidingShape = new Collision::CircleCollidingShape({0.f, 0.f}, 250.f);
 	Collision::CCategories myCategory = Collision::CC_TURRET;

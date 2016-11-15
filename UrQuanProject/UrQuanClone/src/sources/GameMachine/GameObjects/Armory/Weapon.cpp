@@ -24,6 +24,8 @@ Weapon::Weapon(ProjectileFactory* factory, sf::Vector2f offset,
 
 Weapon::~Weapon()
 {
+	delete _factory;
+	_factory = nullptr;
 }
 
 bool Weapon::canShoot()

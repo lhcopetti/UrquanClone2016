@@ -22,16 +22,18 @@ namespace Components
 class ShooterComponent: public Component
 {
 public:
-	ShooterComponent(Armory::ProjectileFactory* factory);
+	ShooterComponent(Armory::ProjectileFactory* main, Armory::ProjectileFactory* secondary);
 	virtual ~ShooterComponent();
 
 	virtual void update(const sf::Time& deltaTime,
 			GameObjects::GameObject& gameObject);
 
-	Armory::Weapon& getWeapon();
+	Armory::Weapon& getSecondaryWeapon();
+	Armory::Weapon& getMainWeapon();
 
 private:
-	Armory::Weapon _weapon;
+	Armory::Weapon _mainWeapon;
+	Armory::Weapon _secondaryWeapon;
 };
 
 } /* namespace Components */

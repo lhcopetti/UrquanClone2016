@@ -19,7 +19,18 @@
 namespace Actions
 {
 
-ShootAction::ShootAction()
+ShootAction* ShootAction::withMainWeapon()
+{
+	return new ShootAction(true);
+}
+
+ShootAction* ShootAction::withSecondaryWeapon()
+{
+	return new ShootAction(false);
+}
+
+ShootAction::ShootAction(bool shootWithMainWeapon) :
+		_shootWithMainWeapon(shootWithMainWeapon)
 {
 }
 
@@ -34,12 +45,12 @@ bool ShootAction::canExecute(GameObjects::GameObject& gameObject)
 	if (nullptr == shooter)
 		return false;
 
-	return shooter->getWeapon().canShoot();
+	return resolveWeapon(gameObject).canShoot();
 }
 
 bool ShootAction::execute(GameObjects::GameObject& gameObject)
 {
-	Armory::Weapon& weapon = gameObject.getShooterComponent()->getWeapon();
+	Armory::Weapon& weapon = resolveWeapon(gameObject);
 
 	Armory::Projectile* projectile = weapon.shoot();
 
@@ -60,6 +71,14 @@ bool ShootAction::execute(GameObjects::GameObject& gameObject)
 
 	gameObject.reproduce(projectile);
 	return true;
+}
+
+Armory::Weapon& ShootAction::resolveWeapon(GameObjects::GameObject& gameObject)
+{
+	if (_shootWithMainWeapon)
+		return gameObject.getShooterComponent()->getMainWeapon();
+	else
+		return gameObject.getShooterComponent()->getSecondaryWeapon();
 }
 
 } /* namespace Actions */

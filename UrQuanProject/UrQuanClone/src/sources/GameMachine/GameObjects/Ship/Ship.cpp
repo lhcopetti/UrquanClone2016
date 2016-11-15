@@ -54,7 +54,7 @@ void GameObjects::Ship::handleInput(int userData)
 	}
 	else if (userData == ShipInput::SHIP_SHOOT)
 	{
-		pushAction(new Actions::ShootAction());
+		pushAction(Actions::ShootAction::withSecondaryWeapon());
 	}
 
 }

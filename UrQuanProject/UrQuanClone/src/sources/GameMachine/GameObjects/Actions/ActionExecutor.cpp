@@ -49,7 +49,7 @@ bool ActionExecutor::execute(GameObjects::GameObject& gameObject,
 {
 	if (!action->canExecute(gameObject))
 	{
-		std::cout << "Ação não pôde ser executada!" << std::endl;
+ 		std::cout << "Ação não pôde ser executada!" << std::endl;
 		return false;
 	}
 

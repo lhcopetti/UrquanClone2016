@@ -42,7 +42,8 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 		const GameObjects::ShipType shipType)
 {
 	CompositeDrawingComponent* drawing = new Components::CompositeDrawingComponent;
-	Armory::ProjectileFactory* factory = nullptr;
+	Armory::ProjectileFactory* secondaryFactory = nullptr;
+	Armory::ProjectileFactory* mainFactory = nullptr;
 
 	drawing->push(getHealthUI(playerType));
 
@@ -55,20 +56,21 @@ GameObjects::GameObject* ShipFactory::createNew(PlayerType playerType,
 	{
 		drawing->push(new GameObjects::SpriteDrawing(
 				"./resources/playerShip1_orange.png", +90.f));
-		factory = new Armory::BulletFactory(projectileCategory);
 	}
 	else if (GameObjects::ShipType::SHIP_GAIJIN == shipType)
 	{
 		drawing->push(new GameObjects::SpriteDrawing(
 				"./resources/playerShip2_blue.png", +90.f));
-		factory = new Armory::BulletFactory(projectileCategory);
 	}
+
+	secondaryFactory = new Armory::BulletFactory(projectileCategory);
+	mainFactory = new Armory::BulletFactory(projectileCategory);
 
 	GameObjects::GameObject* ship = new GameObjects::Ship(drawing);
 	ship->setPhysicsComponent(
 			new Components::PhysicsComponent(1.0f, 250.f, 0.01f));
 
-	ship->setShooterComponent(new Components::ShooterComponent(factory));
+	ship->setShooterComponent(new Components::ShooterComponent(mainFactory, secondaryFactory));
 
 	Collision::CollidingShape* collidingShape =
 			new Collision::CircleCollidingShape(

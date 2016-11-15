@@ -21,11 +21,19 @@ namespace Actions
 class ShootAction : public Action
 {
 public:
-	ShootAction();
 	virtual ~ShootAction();
 
 	virtual bool canExecute(GameObjects::GameObject& gameObject);
 	virtual bool execute(GameObjects::GameObject& gameObject);
+
+	static ShootAction* withMainWeapon();
+	static ShootAction* withSecondaryWeapon();
+private:
+	ShootAction(bool shootWithMainWeapon);
+
+	Armory::Weapon& resolveWeapon(GameObjects::GameObject& gameObject);
+
+	bool _shootWithMainWeapon;
 };
 
 } /* namespace Actions */

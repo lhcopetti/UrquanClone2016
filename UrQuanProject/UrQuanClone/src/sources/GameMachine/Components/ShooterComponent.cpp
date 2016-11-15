@@ -11,8 +11,9 @@
 namespace Components
 {
 
-ShooterComponent::ShooterComponent(Armory::ProjectileFactory* factory) :
-		_weapon(factory)
+ShooterComponent::ShooterComponent(Armory::ProjectileFactory* mainFactory, Armory::ProjectileFactory* secondaryFactory) :
+		_mainWeapon(mainFactory),
+		_secondaryWeapon(secondaryFactory)
 {
 }
 
@@ -23,12 +24,18 @@ ShooterComponent::~ShooterComponent()
 void ShooterComponent::update(const sf::Time& deltaTime,
 		GameObjects::GameObject& gameObject)
 {
-	_weapon.update(deltaTime);
+	_mainWeapon.update(deltaTime);
+	_secondaryWeapon.update(deltaTime);
 }
 
-Armory::Weapon& ShooterComponent::getWeapon()
+Armory::Weapon& ShooterComponent::getSecondaryWeapon()
 {
-	return _weapon;
+	return _secondaryWeapon;
+}
+
+Armory::Weapon& ShooterComponent::getMainWeapon()
+{
+	return _mainWeapon;
 }
 
 } /* namespace Components */
