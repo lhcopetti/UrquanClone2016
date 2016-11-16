@@ -11,9 +11,12 @@
 #include <GameMachine/Components/DrawingComponent.h>
 #include <GameMachine/Components/PhysicsComponent.h>
 #include <GameMachine/Components/ShooterComponent.h>
+#include <GameMachine/Components/BehaviorComponent.h>
 #include <GameMachine/Components/Collision/ColliderComponent.h>
 
 #include <GameMachine/GameObjects/Actions/Action.h>
+
+#include <iostream>
 
 namespace GameObjects
 {
@@ -25,10 +28,12 @@ GameObject::GameObject(Components::DrawingComponent* drawingComponent,
 						drawingComponent)), //
 		_physicsComponent(nullptr),  //
 		_shooterComponent(nullptr), //
+		_behaviorComponent(nullptr),
 		_colliderComponent(nullptr), //
 		_pos(pos), //
 		_orientation(false), //
 		_health(1), //
+		_maxHealth(1),
 		_parent(nullptr)
 {
 }
@@ -60,6 +65,9 @@ void GameObject::update(const sf::Time& deltaTime)
 {
 	if (nullptr != _physicsComponent)
 		_physicsComponent->resetForces();
+
+	if (nullptr != _behaviorComponent)
+		_behaviorComponent->update(deltaTime, *this);
 
 	_executor.update(*this);
 
@@ -172,6 +180,25 @@ Collision::ColliderComponent* GameObject::getColliderComponent()
 void GameObject::setHealth(int newHealth)
 {
 	_health = newHealth;
+}
+
+GameObjectCollection* GameObject::getParent() const
+{
+	return _parent;
+}
+
+void GameObject::setBehaviorComponent(Components::BehaviorComponent* behavior)
+{
+	if (nullptr != _behaviorComponent)
+	{
+		std::cout << "Sobrescrita de Componente do tipo Behavior impedida!" << std::endl;
+	}
+	_behaviorComponent = behavior;
+}
+
+Components::BehaviorComponent* GameObject::getBehaviorComponent()
+{
+	return _behaviorComponent;
 }
 
 void GameObject::onCollisionWith(GameObject& other)

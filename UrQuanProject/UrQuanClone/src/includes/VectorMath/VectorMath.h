@@ -27,7 +27,6 @@ float distSqr(const sf::Vector2f& p1, const sf::Vector2f& p2);
 sf::Vector2f normalize(const sf::Vector2f& vector);
 
 sf::Vector2f rotate(const sf::Vector2f& vector, float angle);
-//void normalize(sf::Vector2f& vector);
 
 } /* namespace VectorMath */
 

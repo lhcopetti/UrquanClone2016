@@ -53,3 +53,5 @@ Incorporar um novo método escalável para que novos components sejam adicionado
 add clipsize 
 
 add unregisterListener to the API
+
+Remove the direct calls to sf::Vector2f, implement my own vector library and only use SFML's when needed.

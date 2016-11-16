@@ -21,6 +21,11 @@
 #include <GameMachine/GameObjects/Actions/DamageAction.h>
 #include <GameMachine/GameObjects/Actions/Decorations/ActionBundle.h>
 
+#include <GameMachine/Components/BehaviorComponent.h>
+
+#include <GameMachine/GameObjects/Behaviors/SteeringBehavior.h>
+#include <GameMachine/GameObjects/Behaviors/Steering/SeekBehavior.h>
+
 namespace Armory
 {
 
@@ -39,11 +44,18 @@ MissileFactory::~MissileFactory()
 Projectile* MissileFactory::createNew()
 {
 	GameObjects::SpriteDrawing* drawing = nullptr;
+	Behavior::SteeringBehavior* beh;
 
 	if (_projectileCategory == Collision::CC_PROJECTILE_PLAYERONE)
+	{
 		drawing = new GameObjects::SpriteDrawing("./resources/missile_red.png");
+		beh = new Behavior::SteeringBehavior("shipPlayerTwo");
+	}
 	else
+	{
 		drawing = new GameObjects::SpriteDrawing("./resources/missile_green.png");
+		beh = new Behavior::SteeringBehavior("shipPlayerOne");
+	}
 
 
 	Missile* missile = new Missile(drawing);
@@ -65,6 +77,10 @@ Projectile* MissileFactory::createNew()
 
 	Collision::ColliderComponent* collider = new Collision::ColliderComponent(collidingShape, bundle, myCategory, category);
 	missile->setColliderComponent(collider);
+
+	beh->add(new Behavior::SeekBehavior);
+
+	missile->setBehaviorComponent(new Components::BehaviorComponent(beh));
 
 	return missile;
 }

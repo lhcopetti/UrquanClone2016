@@ -44,11 +44,6 @@ sf::Vector2f normalize(const sf::Vector2f& vector)
 	return vector / size(vector);
 }
 
-void normalize(sf::Vector2f& vector)
-{
-	vector /= size(vector);
-}
-
 sf::Vector2f rotate(const sf::Vector2f& vector, float angle)
 {
 	float radians = toRadians(angle);

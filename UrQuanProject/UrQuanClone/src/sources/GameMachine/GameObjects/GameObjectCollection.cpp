@@ -59,7 +59,9 @@ void GameObjectCollection::update(const sf::Time& deltaTime)
 {
 	/* Add the reproduction list from the last pass */
 	for (unsigned int i = 0; i < _reproduction.size(); ++i)
-		_gObjects.push_back(std::unique_ptr<GameObject>(_reproduction[i]));
+	{
+		push(_reproduction[i]);
+	}
 	_reproduction.clear();
 
 	/*

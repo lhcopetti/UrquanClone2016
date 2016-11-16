@@ -37,6 +37,8 @@ public:
 	sf::Vector2f& getAcceleration();
 	sf::Vector2f& getVelocity();
 
+	float getMaxVelocity();
+
 	void setVelocity(const sf::Vector2f& velocity);
 	void setAcceleration(const sf::Vector2f& velocity);
 

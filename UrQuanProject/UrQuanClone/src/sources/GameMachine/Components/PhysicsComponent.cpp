@@ -76,6 +76,11 @@ void PhysicsComponent::setColliderComponent(
 	_colliderComponent = collider;
 }
 
+float PhysicsComponent::getMaxVelocity()
+{
+	return _maxVelocity;
+}
+
 const Collision::ColliderComponent& PhysicsComponent::getCollider() const
 {
 	return *_colliderComponent;

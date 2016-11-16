@@ -19,6 +19,7 @@ namespace Components
 class DrawingComponent;
 class PhysicsComponent;
 class ShooterComponent;
+class BehaviorComponent;
 }
 
 namespace Collision
@@ -73,6 +74,9 @@ public:
 	void setColliderComponent(Collision::ColliderComponent* collider);
 	Collision::ColliderComponent* getColliderComponent();
 
+	void setBehaviorComponent(Components::BehaviorComponent* behavior);
+	Components::BehaviorComponent* getBehaviorComponent();
+
 	void pushAction(Actions::Action* action);
 
 	void reproduce(GameObject* gameObject);
@@ -87,6 +91,7 @@ protected:
 	std::unique_ptr<Components::DrawingComponent> _drawingComponent;
 	Components::PhysicsComponent* _physicsComponent;
 	Components::ShooterComponent* _shooterComponent;
+	Components::BehaviorComponent* _behaviorComponent;
 	Collision::ColliderComponent* _colliderComponent;
 
 

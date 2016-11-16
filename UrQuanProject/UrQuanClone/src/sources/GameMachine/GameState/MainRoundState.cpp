@@ -123,14 +123,6 @@ void MainRoundState::onExit()
 
 void MainRoundState::doUpdate(const sf::Time& deltaTime)
 {
-
-	GameObjects::GameObject* playerOne = _goCollection.getNamedObject("shipPlayerOne");
-	if (nullptr != playerOne)
-	{
-		std::cout << "The current life of player1 is: " << std::to_string(playerOne->getHealth()) << std::endl;
-	}
-
-
 	if (_shipPlayerOne->isAlive() && _shipPlayerTwo->isAlive())
 		return;
 
