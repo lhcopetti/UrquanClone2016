@@ -65,9 +65,9 @@ First, the most important: *The grading part*.
 
 We are supposed to pinpoint where in our game the physics was handled. Mine, lives in:
 
-[PhysicsComponent](./UrQuanProject/UrQuanClone/src/sources/GameMachine/Components/PhysicsComponent.cpp)
+[PhysicsComponent.cpp](./UrQuanProject/UrQuanClone/src/sources/GameMachine/Components/PhysicsComponent.cpp)
 
-[SteeringBehavior](./UrQuanProject/UrQuanClone/src/includes/GameMachine/GameObjects/Behaviors/SteeringBehavior.cpp)
+[SteeringBehavior.cpp](./UrQuanProject/UrQuanClone/src/includes/GameMachine/GameObjects/Behaviors/SteeringBehavior.cpp)
 
 
 ### Component Approach
@@ -92,7 +92,7 @@ It was actually really cool to implement the vector operations myself, although 
 
 This is another "framework" that I implemented that really paid off. It worked amazingly well, and it is hard to imagine any future game where I will not use even a slightly varition of this technique. For example, instead of calling GameObject::getHit(int damage), I am able to push an action on it called DamageAction. The most amazing thing for me is that it works like a messaging system, but the message is also executed in the context of the receiving gameObject. Testing each implementation would be extremely easy, but for some reason I was not into that back then.
 
-![alt-text][[game-actions]
+![alt-text][game-actions]
 
 Another example: The 'output' of the BehaviorComponent is a force that should be applied to the GameObject so that it reroutes its course in favor of some direction (maybe to chase another ship). Instead of the behavior checking for the physicsComponent on the GameObject, it simply pushes an ApplyForce action that takes the responsibility of checking these kind of prerequisites and applying the force in the end.
 
@@ -129,7 +129,7 @@ To ease the declaration of these bindings I also came up with a simple DSL build
 [game-winner]: https://github.com/lhcopetti/UrquanClone2016/blob/develop/DOC/Clone_Credits.png
 
 [game-actions]: https://github.com/lhcopetti/UrquanClone2016/blob/develop/DOC/Actions.PNG
-[game-state]: 
-[game-behavior]:
-[game-input-binding]:
-[game-input-acting]:
+[game-state]: https://github.com/lhcopetti/UrquanClone2016/blob/develop/DOC/Clone_GameState.PNG
+[game-behavior]: https://github.com/lhcopetti/UrquanClone2016/blob/develop/DOC/Clone_BehaviorForce.PNG
+[game-input-binding]: https://github.com/lhcopetti/UrquanClone2016/blob/develop/DOC/Clone_CreditsBindEscape.PNG
+[game-input-acting]: https://github.com/lhcopetti/UrquanClone2016/blob/develop/DOC/Clone_CreditsActUponEscape.PNG
